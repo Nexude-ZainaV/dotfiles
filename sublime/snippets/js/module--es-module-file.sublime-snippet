@@ -1,0 +1,17 @@
+<snippet>
+	<content><![CDATA[/**
+ * ${1:module-name}.js
+ * ${2:What this module is responsible for.}
+ */
+
+// ---- constants ----
+const ${3:DEFAULT_LIMIT} = ${4:20};
+
+// ---- public API ----
+export function ${5:doWork}(${6:input}) {
+	${0}
+}]]></content>
+	<tabTrigger>module</tabTrigger>
+	<scope>source.js, source.ts, source.jsx, source.tsx</scope>
+	<description>ES module file</description>
+</snippet>

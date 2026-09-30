@@ -1,0 +1,13 @@
+<snippet>
+	<content><![CDATA[#include <time.h>
+// clock() measures CPU time used by this process (not wall-clock time)
+clock_t ${1:start} = clock();
+
+${0}
+
+double ${2:elapsed_ms} = (double)(clock() - ${1}) * 1000.0 / CLOCKS_PER_SEC;
+printf("elapsed: %.3f ms\\n", ${2});]]></content>
+	<tabTrigger>timer</tabTrigger>
+	<scope>source.c</scope>
+	<description>measure elapsed time</description>
+</snippet>

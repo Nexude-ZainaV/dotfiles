@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[-- OFFSET is simple but slows down on deep pages (the DB still reads the skipped rows):
+SELECT * FROM ${1:posts} ORDER BY id LIMIT ${2:20} OFFSET ${3:40};
+
+-- Keyset pagination stays fast at any depth: pass the last id you saw
+SELECT * FROM ${1} WHERE id > ${4:last_seen_id} ORDER BY id LIMIT ${2};${0}]]></content>
+	<tabTrigger>page</tabTrigger>
+	<scope>source.sql</scope>
+	<description>Pagination (offset vs keyset)</description>
+</snippet>

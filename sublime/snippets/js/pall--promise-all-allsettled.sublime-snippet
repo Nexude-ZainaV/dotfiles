@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[// Promise.all fails fast on the first rejection; allSettled waits for every result
+const [${1:users}, ${2:posts}] = await Promise.all([${3:getUsers}(), ${4:getPosts}()]);
+const results = await Promise.allSettled([${5:taskA}(), ${6:taskB}()]);
+const failed = results.filter((r) => r.status === "rejected");${0}]]></content>
+	<tabTrigger>pall</tabTrigger>
+	<scope>source.js, source.ts, source.jsx, source.tsx</scope>
+	<description>Promise.all / allSettled</description>
+</snippet>

@@ -1,0 +1,13 @@
+<snippet>
+	<content><![CDATA[// elseif chain (one word in PHP): first true branch wins
+if (${1:\$score} >= ${2:90}) {
+	${3}
+} elseif (${1} >= ${4:75}) {
+	${5}
+} else {
+	${0}
+}]]></content>
+	<tabTrigger>elif</tabTrigger>
+	<scope>embedding.php, source.php</scope>
+	<description>if / elseif / else</description>
+</snippet>

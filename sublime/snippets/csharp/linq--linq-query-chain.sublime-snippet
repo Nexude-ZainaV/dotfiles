@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[// LINQ is lazy: nothing runs until ToList / First / Count / foreach
+var ${1:result} = ${2:orders}
+	.Where(o => o.${3:Total} > ${4:100})
+	.OrderByDescending(o => o.${3})
+	.Select(o => new { o.Id, o.${3} })
+	.ToList();${0}]]></content>
+	<tabTrigger>linq</tabTrigger>
+	<scope>source.cs</scope>
+	<description>LINQ query chain</description>
+</snippet>

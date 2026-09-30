@@ -1,0 +1,13 @@
+<snippet>
+	<content><![CDATA[// debounce: wait until calls stop for `wait` ms, then run once (search boxes, resize)
+function debounce(fn, wait = ${1:300}) {
+	let timer;
+	return (...args) => {
+		clearTimeout(timer);
+		timer = setTimeout(() => fn(...args), wait);
+	};
+}${0}]]></content>
+	<tabTrigger>debounce</tabTrigger>
+	<scope>source.js, source.ts, source.jsx, source.tsx</scope>
+	<description>debounce</description>
+</snippet>

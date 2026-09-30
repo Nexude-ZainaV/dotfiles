@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[-- WHERE filters rows before grouping; HAVING filters the groups after aggregation
+SELECT ${1:customer_id}, COUNT(*) AS order_count, SUM(${2:total}) AS revenue
+FROM ${3:orders}
+WHERE ${4:status} = 'paid'
+GROUP BY ${1}
+HAVING COUNT(*) >= ${5:3}
+ORDER BY revenue DESC;${0}]]></content>
+	<tabTrigger>grp</tabTrigger>
+	<scope>source.sql</scope>
+	<description>GROUP BY / HAVING</description>
+</snippet>

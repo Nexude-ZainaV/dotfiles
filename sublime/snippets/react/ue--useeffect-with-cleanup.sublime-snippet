@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[// useEffect: runs after render. Return a cleanup to undo subscriptions, timers, listeners.
+useEffect(() => {
+	${1}
+	return () => {
+		${2}
+	};
+}, [${3:dependency}]);   // re-runs when a dependency changes${0}]]></content>
+	<tabTrigger>ue</tabTrigger>
+	<scope>source.jsx, source.tsx, source.js, source.ts</scope>
+	<description>useEffect with cleanup</description>
+</snippet>

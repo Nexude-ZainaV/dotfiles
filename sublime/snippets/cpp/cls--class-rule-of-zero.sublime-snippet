@@ -1,0 +1,17 @@
+<snippet>
+	<content><![CDATA[// Rule of zero: members manage their own resources, so no custom copy/move/dtor needed
+class ${1:Name} {
+public:
+	${1}() = default;
+	explicit ${1}(${2:int} ${3:value}) : ${3}_{${3}} {}
+
+	[[nodiscard]] ${2} ${3}() const noexcept { return ${3}_; }
+	void set_${3}(${2} v) { ${3}_ = v; }
+
+private:
+	${2} ${3}_{};   // brace-init guarantees a value, never garbage
+};${0}]]></content>
+	<tabTrigger>cls</tabTrigger>
+	<scope>source.c++</scope>
+	<description>class (rule of zero)</description>
+</snippet>

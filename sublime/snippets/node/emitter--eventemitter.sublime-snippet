@@ -1,0 +1,13 @@
+<snippet>
+	<content><![CDATA[import { EventEmitter } from "node:events";
+
+// Publish/subscribe inside one process
+const ${1:bus} = new EventEmitter();
+${1}.on("${2:order:created}", (payload) => {
+	${0}
+});
+${1}.emit("${2}", { id: 1 });]]></content>
+	<tabTrigger>emitter</tabTrigger>
+	<scope>source.js, source.ts</scope>
+	<description>EventEmitter</description>
+</snippet>

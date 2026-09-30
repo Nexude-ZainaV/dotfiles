@@ -1,0 +1,17 @@
+<snippet>
+	<content><![CDATA[/* Hidden visually but still read by screen readers (never use display:none for this) */
+.visually-hidden {
+	position: absolute !important;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+	border: 0;
+}${0}]]></content>
+	<tabTrigger>srtext</tabTrigger>
+	<scope>source.css, source.scss, source.less</scope>
+	<description>Visually hidden (screen-reader only)</description>
+</snippet>

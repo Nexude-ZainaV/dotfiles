@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[/* auto-fit + minmax: as many columns as fit, each at least ${1:16rem} wide.
+   The grid reflows from 1 column on phones to 3-4 on desktop by itself. */
+.${2:grid} {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(${1}, 100%), 1fr));
+	gap: ${3:1.5rem};${0}
+}]]></content>
+	<tabTrigger>grid</tabTrigger>
+	<scope>source.css, source.scss, source.less</scope>
+	<description>Responsive grid (no media queries)</description>
+</snippet>

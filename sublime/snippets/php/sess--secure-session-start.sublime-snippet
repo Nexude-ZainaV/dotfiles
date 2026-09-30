@@ -1,0 +1,15 @@
+<snippet>
+	<content><![CDATA[// Harden the session cookie before starting the session
+session_set_cookie_params([
+	'lifetime' => 0,
+	'path' => '/',
+	'secure' => ${1:true},     // HTTPS only
+	'httponly' => true,       // JavaScript cannot read it (limits XSS damage)
+	'samesite' => 'Lax',      // basic CSRF protection
+]);
+session_start();
+// After login: session_regenerate_id(true); to prevent session fixation${0}]]></content>
+	<tabTrigger>sess</tabTrigger>
+	<scope>embedding.php, source.php</scope>
+	<description>secure session start</description>
+</snippet>

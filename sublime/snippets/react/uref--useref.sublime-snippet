@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[// useRef: a mutable box that survives renders without causing one (DOM nodes, timer ids)
+const ${1:inputRef} = useRef<${2:HTMLInputElement}>(null);
+// <input ref={${1}} />  then  ${1}.current?.focus();${0}]]></content>
+	<tabTrigger>uref</tabTrigger>
+	<scope>source.jsx, source.tsx, source.js, source.ts</scope>
+	<description>useRef</description>
+</snippet>

@@ -1,0 +1,16 @@
+<snippet>
+	<content><![CDATA[// switch uses strict equality (===). Forgetting `break` falls into the next case.
+switch (${1:action}.type) {
+	case ${2:"add"}:
+		${3}
+		break;
+	case ${4:"remove"}:
+		${5}
+		break;
+	default:
+		${0}
+}]]></content>
+	<tabTrigger>sw</tabTrigger>
+	<scope>source.js, source.ts, source.jsx, source.tsx</scope>
+	<description>switch statement</description>
+</snippet>

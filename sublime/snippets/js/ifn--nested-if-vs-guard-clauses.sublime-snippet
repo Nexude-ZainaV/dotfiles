@@ -1,0 +1,13 @@
+<snippet>
+	<content><![CDATA[// Nested if: the inner check only runs when the outer one passed
+if (${1:user}) {
+	if (${1}.${2:isActive}) {
+		${0}
+	}
+}
+// Cleaner alternative (guard clauses):  if (!${1}) return;  if (!${1}.${2}) return;
+// Or optional chaining:                 if (${1}?.${2}) { ... }]]></content>
+	<tabTrigger>ifn</tabTrigger>
+	<scope>source.js, source.ts, source.jsx, source.tsx</scope>
+	<description>Nested if vs guard clauses</description>
+</snippet>

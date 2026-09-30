@@ -1,0 +1,20 @@
+<snippet>
+	<content><![CDATA[// proxy.ts at the project root (Next.js 16+; called middleware.ts in older versions).
+// Runs before a request is routed: redirects, rewrites, auth gates, headers.
+import { NextResponse, type NextRequest } from "next/server";
+
+export function proxy(request: NextRequest) {
+	const token = request.cookies.get("${1:session}")?.value;
+	if (!token) {
+		return NextResponse.redirect(new URL("/${2:login}", request.url));
+	}
+	${0}
+	return NextResponse.next();
+}
+
+// Only run on the paths that need it
+export const config = { matcher: ["/${3:dashboard}/:path*"] };]]></content>
+	<tabTrigger>nproxy</tabTrigger>
+	<scope>source.tsx, source.ts, source.jsx, source.js</scope>
+	<description>Next.js proxy (middleware)</description>
+</snippet>

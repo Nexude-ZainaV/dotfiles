@@ -1,0 +1,24 @@
+<snippet>
+	<content><![CDATA[<?php
+
+declare(strict_types=1);   // no silent type juggling: '5' is not accepted where int is expected
+
+namespace ${1:App\\Service};
+
+use ${2:App\\Repository\\UserRepository};
+
+/**
+ * ${3:What this class is responsible for.}
+ */
+final class ${4:UserService}
+{
+	public function __construct(
+		private readonly ${5:UserRepository} \$${6:users},   // constructor property promotion
+	) {
+	}
+	${0}
+}]]></content>
+	<tabTrigger>phpclass</tabTrigger>
+	<scope>embedding.php, source.php</scope>
+	<description>PHP class file</description>
+</snippet>

@@ -1,0 +1,226 @@
+{
+  "HTML5 responsive page": {
+    "scope": "html,php",
+    "prefix": "html5",
+    "body": [
+      "<!doctype html>",
+      "<html lang=\"en\">",
+      "<head>",
+      "\t<meta charset=\"utf-8\">",
+      "\t<!-- Responsive: without this, phones render a zoomed-out desktop page -->",
+      "\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">",
+      "\t<title>${1:Page title}</title>",
+      "\t<meta name=\"description\" content=\"${2:150-160 characters that appear under the title in search results}\">",
+      "",
+      "\t<!-- Open Graph: the preview card when the link is shared -->",
+      "\t<meta property=\"og:title\" content=\"${1}\">",
+      "\t<meta property=\"og:description\" content=\"${2}\">",
+      "\t<meta property=\"og:image\" content=\"${3:/og-image.png}\">",
+      "",
+      "\t<link rel=\"icon\" href=\"/favicon.svg\" type=\"image/svg+xml\">",
+      "\t<link rel=\"stylesheet\" href=\"${4:css/styles.css}\">",
+      "\t<!-- defer: download in parallel, run after the HTML is parsed -->",
+      "\t<script src=\"${5:js/main.js}\" defer></script>",
+      "</head>",
+      "<body>",
+      "\t<a class=\"skip-link\" href=\"#main\">Skip to content</a>",
+      "\t<header></header>",
+      "\t<main id=\"main\">",
+      "\t\t${0}",
+      "\t</main>",
+      "\t<footer></footer>",
+      "</body>",
+      "</html>"
+    ],
+    "description": "HTML5 responsive page (guided)",
+    "isFileTemplate": true
+  },
+  "viewport meta": {
+    "scope": "html,php",
+    "prefix": "vp",
+    "body": [
+      "<!-- Required for responsive layouts on mobile -->",
+      "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">${0}"
+    ],
+    "description": "viewport meta (guided)"
+  },
+  "Semantic page layout": {
+    "scope": "html,php",
+    "prefix": "layout",
+    "body": [
+      "<!-- Semantic landmarks let screen readers jump straight to each region -->",
+      "<header class=\"site-header\">",
+      "\t<nav aria-label=\"Main\">${1}</nav>",
+      "</header>",
+      "<main id=\"main\">",
+      "\t<section aria-labelledby=\"${2:intro}-title\">",
+      "\t\t<h1 id=\"${2}-title\">${3:Heading}</h1>",
+      "\t\t${0}",
+      "\t</section>",
+      "</main>",
+      "<aside aria-label=\"Related\"></aside>",
+      "<footer class=\"site-footer\"></footer>"
+    ],
+    "description": "Semantic page layout (guided)"
+  },
+  "Responsive nav with toggle": {
+    "scope": "html,php",
+    "prefix": "nav",
+    "body": [
+      "<!-- Mobile: button toggles the menu. Desktop: CSS shows the list and hides the button. -->",
+      "<nav class=\"nav\" aria-label=\"Main\">",
+      "\t<a class=\"nav__brand\" href=\"/\">${1:Brand}</a>",
+      "\t<button class=\"nav__toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"nav-menu\">",
+      "\t\t<span class=\"visually-hidden\">Menu</span>☰",
+      "\t</button>",
+      "\t<ul class=\"nav__menu\" id=\"nav-menu\">",
+      "\t\t<li><a href=\"/\" aria-current=\"page\">Home</a></li>",
+      "\t\t<li><a href=\"/${2:about}\">${3:About}</a></li>",
+      "\t\t${0}",
+      "\t</ul>",
+      "</nav>",
+      "<script>",
+      "\t// Keep aria-expanded in sync so assistive tech announces the menu state",
+      "\tconst toggle = document.querySelector(\".nav__toggle\");",
+      "\ttoggle.addEventListener(\"click\", () => {",
+      "\t\tconst open = toggle.getAttribute(\"aria-expanded\") === \"true\";",
+      "\t\ttoggle.setAttribute(\"aria-expanded\", String(!open));",
+      "\t\tdocument.getElementById(\"nav-menu\").classList.toggle(\"is-open\", !open);",
+      "\t});",
+      "</script>"
+    ],
+    "description": "Responsive nav with toggle (guided)"
+  },
+  "Accessible form": {
+    "scope": "html,php",
+    "prefix": "form",
+    "body": [
+      "<!-- Every input has a <label for>; required + type give free browser validation -->",
+      "<form action=\"${1:/contact}\" method=\"post\" novalidate>",
+      "\t<div class=\"field\">",
+      "\t\t<label for=\"${2:email}\">Email</label>",
+      "\t\t<input id=\"${2}\" name=\"${2}\" type=\"email\" autocomplete=\"email\" required>",
+      "\t</div>",
+      "\t<div class=\"field\">",
+      "\t\t<label for=\"${3:message}\">Message</label>",
+      "\t\t<textarea id=\"${3}\" name=\"${3}\" rows=\"5\" required></textarea>",
+      "\t</div>",
+      "\t<button type=\"submit\">${4:Send}</button>",
+      "\t<p class=\"form-status\" role=\"status\" aria-live=\"polite\"></p>",
+      "\t${0}",
+      "</form>"
+    ],
+    "description": "Accessible form (guided)"
+  },
+  "Form submitted with AJAX (fetch)": {
+    "scope": "html,php",
+    "prefix": "ajaxform",
+    "body": [
+      "<form id=\"${1:signup}-form\" action=\"${2:/api/signup}\" method=\"post\">",
+      "\t<label for=\"${1}-email\">Email</label>",
+      "\t<input id=\"${1}-email\" name=\"email\" type=\"email\" required>",
+      "\t<button type=\"submit\">Sign up</button>",
+      "\t<p class=\"form-status\" role=\"status\" aria-live=\"polite\"></p>",
+      "</form>",
+      "<script>",
+      "\t// Works without JS (normal POST); with JS it submits in place and reports status",
+      "\tconst form = document.getElementById(\"${1}-form\");",
+      "\tconst status = form.querySelector(\".form-status\");",
+      "\tform.addEventListener(\"submit\", async (event) => {",
+      "\t\tevent.preventDefault();",
+      "\t\tstatus.textContent = \"Sending...\";",
+      "\t\ttry {",
+      "\t\t\tconst res = await fetch(form.action, { method: \"POST\", body: new FormData(form) });",
+      "\t\t\tif (!res.ok) throw new Error(`HTTP \\${res.status}`);",
+      "\t\t\tstatus.textContent = \"${3:Thanks, you're signed up!}\";",
+      "\t\t\tform.reset();",
+      "\t\t} catch (err) {",
+      "\t\t\tstatus.textContent = \"Something went wrong. Please try again.\";",
+      "\t\t}",
+      "\t});${0}",
+      "</script>"
+    ],
+    "description": "Form submitted with AJAX (fetch) (guided)"
+  },
+  "Responsive image (srcset + sizes)": {
+    "scope": "html,php",
+    "prefix": "img",
+    "body": [
+      "<!-- srcset lists files by width; sizes tells the browser how wide the image will display,",
+      "\t so a phone downloads the 480w file and a desktop the 1200w one. -->",
+      "<img",
+      "\tsrc=\"${1:photo}-800.jpg\"",
+      "\tsrcset=\"${1}-480.jpg 480w, ${1}-800.jpg 800w, ${1}-1200.jpg 1200w\"",
+      "\tsizes=\"(min-width: 1024px) 800px, 100vw\"",
+      "\twidth=\"800\" height=\"533\"",
+      "\talt=\"${2:Describe what the image shows}\"",
+      "\tloading=\"lazy\" decoding=\"async\">${0}"
+    ],
+    "description": "Responsive image (srcset + sizes) (guided)"
+  },
+  "Art-directed <picture>": {
+    "scope": "html,php",
+    "prefix": "pic",
+    "body": [
+      "<!-- <picture>: a different crop per screen size (art direction) plus modern formats -->",
+      "<picture>",
+      "\t<source media=\"(min-width: 1024px)\" srcset=\"${1:hero}-wide.avif\" type=\"image/avif\">",
+      "\t<source media=\"(min-width: 1024px)\" srcset=\"${1}-wide.jpg\">",
+      "\t<source srcset=\"${1}-square.avif\" type=\"image/avif\">",
+      "\t<img src=\"${1}-square.jpg\" alt=\"${2:Describe the image}\" width=\"800\" height=\"800\">",
+      "</picture>${0}"
+    ],
+    "description": "Art-directed <picture> (guided)"
+  },
+  "Accessible data table": {
+    "scope": "html,php",
+    "prefix": "table",
+    "body": [
+      "<!-- caption + th scope let screen readers announce which header each cell belongs to -->",
+      "<div class=\"table-wrap\" role=\"region\" aria-label=\"${1:Orders}\" tabindex=\"0\">  <!-- scrolls on small screens -->",
+      "\t<table>",
+      "\t\t<caption>${1}</caption>",
+      "\t\t<thead>",
+      "\t\t\t<tr><th scope=\"col\">${2:Name}</th><th scope=\"col\">${3:Total}</th></tr>",
+      "\t\t</thead>",
+      "\t\t<tbody>",
+      "\t\t\t<tr><td>${0}</td><td></td></tr>",
+      "\t\t</tbody>",
+      "\t</table>",
+      "</div>"
+    ],
+    "description": "Accessible data table (guided)"
+  },
+  "Content card": {
+    "scope": "html,php",
+    "prefix": "card",
+    "body": [
+      "<article class=\"card\">",
+      "\t<img class=\"card__media\" src=\"${1:image.jpg}\" alt=\"\" width=\"400\" height=\"225\" loading=\"lazy\">",
+      "\t<div class=\"card__body\">",
+      "\t\t<h3 class=\"card__title\"><a href=\"${2:#}\">${3:Card title}</a></h3>",
+      "\t\t<p>${4:Short summary of the content.}</p>",
+      "\t\t${0}",
+      "\t</div>",
+      "</article>"
+    ],
+    "description": "Content card (guided)"
+  },
+  "Native <dialog> modal": {
+    "scope": "html,php",
+    "prefix": "dialog",
+    "body": [
+      "<!-- Native <dialog>: focus trapping, Esc to close and a backdrop come built in -->",
+      "<button type=\"button\" onclick=\"document.getElementById('${1:confirm}').showModal()\">${2:Open}</button>",
+      "<dialog id=\"${1}\" aria-labelledby=\"${1}-title\">",
+      "\t<h2 id=\"${1}-title\">${3:Are you sure?}</h2>",
+      "\t<form method=\"dialog\">   <!-- method=\"dialog\" closes it and sets returnValue -->",
+      "\t\t<button value=\"cancel\">Cancel</button>",
+      "\t\t<button value=\"confirm\">Confirm</button>",
+      "\t</form>",
+      "\t${0}",
+      "</dialog>"
+    ],
+    "description": "Native <dialog> modal (guided)"
+  }
+}

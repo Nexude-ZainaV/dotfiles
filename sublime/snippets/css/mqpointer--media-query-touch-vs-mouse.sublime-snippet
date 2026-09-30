@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[/* Target the input device, not the screen size */
+@media (hover: hover) and (pointer: fine) {   /* mouse / trackpad */
+	${1:.card}:hover { ${0} }
+}
+@media (pointer: coarse) {                     /* touch: bigger tap targets (44x44px minimum) */
+	button, a { min-height: 44px; }
+}]]></content>
+	<tabTrigger>mqpointer</tabTrigger>
+	<scope>source.css, source.scss, source.less</scope>
+	<description>Media query: touch vs mouse</description>
+</snippet>

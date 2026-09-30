@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[/* Centered, readable max width with side padding that grows on larger screens */
+.${1:container} {
+	width: min(100% - 2rem, ${2:72rem});
+	margin-inline: auto;${0}
+}]]></content>
+	<tabTrigger>container</tabTrigger>
+	<scope>source.css, source.scss, source.less</scope>
+	<description>Responsive page container</description>
+</snippet>

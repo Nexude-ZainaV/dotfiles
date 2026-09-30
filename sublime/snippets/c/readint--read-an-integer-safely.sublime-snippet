@@ -1,0 +1,16 @@
+<snippet>
+	<content><![CDATA[// Read a whole line with fgets, then parse it. Safer than scanf("%d") on bad input.
+char ${1:buf}[64];
+long ${2:number} = 0;
+if (fgets(${1}, sizeof ${1}, stdin) != NULL) {
+	char *end = NULL;
+	errno = 0;
+	${2} = strtol(${1}, &end, 10);
+	if (errno != 0 || end == ${1}) {
+		fprintf(stderr, "not a number\\n");
+	}
+}${0}]]></content>
+	<tabTrigger>readint</tabTrigger>
+	<scope>source.c</scope>
+	<description>read an integer safely</description>
+</snippet>

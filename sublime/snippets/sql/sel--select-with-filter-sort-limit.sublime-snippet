@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[-- Logical evaluation order: FROM -> WHERE -> GROUP BY -> HAVING -> SELECT -> ORDER BY -> LIMIT
+SELECT ${1:id}, ${2:name}
+FROM ${3:customers}
+WHERE ${4:status = 'active'}
+ORDER BY ${5:created_at} DESC
+LIMIT ${6:20};${0}]]></content>
+	<tabTrigger>sel</tabTrigger>
+	<scope>source.sql</scope>
+	<description>SELECT with filter, sort, limit</description>
+</snippet>

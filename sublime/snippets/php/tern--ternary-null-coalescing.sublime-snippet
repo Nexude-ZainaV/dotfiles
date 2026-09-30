@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[// ternary: condition ? if_true : if_false
+\$${1:label} = ${2:\$count > 0} ? '${3:has items}' : '${4:empty}';
+// ?? returns the right side when the left is null OR undefined (no notice raised)
+\$${5:page} = (int) (\$_GET['${6:page}'] ?? 1);${0}]]></content>
+	<tabTrigger>tern</tabTrigger>
+	<scope>embedding.php, source.php</scope>
+	<description>Ternary / null coalescing</description>
+</snippet>

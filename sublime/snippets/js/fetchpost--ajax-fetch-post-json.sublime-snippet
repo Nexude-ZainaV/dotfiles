@@ -1,0 +1,18 @@
+<snippet>
+	<content><![CDATA[// POST JSON: set Content-Type and stringify the body yourself
+async function ${1:createItem}(${2:payload}) {
+	const res = await fetch(${3:"/api/items"}, {
+		method: "POST",
+		headers: { "Content-Type": "application/json", Accept: "application/json" },
+		body: JSON.stringify(${2}),
+	});
+	if (!res.ok) {
+		const detail = await res.text();
+		throw new Error(`POST failed (\${res.status}): \${detail}`);
+	}
+	return res.json();
+}${0}]]></content>
+	<tabTrigger>fetchpost</tabTrigger>
+	<scope>source.js, source.ts, source.jsx, source.tsx</scope>
+	<description>AJAX: fetch POST (JSON)</description>
+</snippet>

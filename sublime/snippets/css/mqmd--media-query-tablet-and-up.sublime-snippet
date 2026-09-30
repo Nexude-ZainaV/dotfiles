@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[@media (min-width: 768px) {   /* md: iPad Mini portrait (768px) and wider */
+	${0}
+}]]></content>
+	<tabTrigger>mqmd</tabTrigger>
+	<scope>source.css, source.scss, source.less</scope>
+	<description>Media query: tablet and up</description>
+</snippet>

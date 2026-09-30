@@ -1,0 +1,14 @@
+<snippet>
+	<content><![CDATA[/* Respect users who turned on "reduce motion" in their OS (vestibular disorders) */
+@media (prefers-reduced-motion: reduce) {
+	*, *::before, *::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}${0}]]></content>
+	<tabTrigger>mqmotion</tabTrigger>
+	<scope>source.css, source.scss, source.less</scope>
+	<description>Media query: reduced motion</description>
+</snippet>

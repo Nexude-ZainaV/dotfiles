@@ -1,0 +1,18 @@
+<snippet>
+	<content><![CDATA[// class: # fields are truly private (not reachable from outside)
+class ${1:Name} {
+	#${2:value};
+
+	constructor(${2}) {
+		this.#${2} = ${2};
+	}
+
+	get ${2}() {
+		return this.#${2};
+	}
+	${0}
+}]]></content>
+	<tabTrigger>cls</tabTrigger>
+	<scope>source.js, source.ts, source.jsx, source.tsx</scope>
+	<description>class</description>
+</snippet>

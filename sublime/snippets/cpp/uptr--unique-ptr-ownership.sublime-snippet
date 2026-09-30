@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[// unique_ptr: single owner, freed automatically when it goes out of scope (RAII)
+auto ${1:obj} = std::make_unique<${2:Type}>(${3});
+${0}
+// Transfer ownership with std::move(${1}); never call delete yourself]]></content>
+	<tabTrigger>uptr</tabTrigger>
+	<scope>source.c++</scope>
+	<description>unique_ptr ownership</description>
+</snippet>

@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[-- Run the WHERE as a SELECT first to see exactly which rows will change.
+-- An UPDATE without WHERE changes every row in the table.
+UPDATE ${1:products}
+SET ${2:price} = ${3:price * 0.9}
+WHERE ${4:category_id = 3};${0}]]></content>
+	<tabTrigger>upd</tabTrigger>
+	<scope>source.sql</scope>
+	<description>UPDATE (safe)</description>
+</snippet>

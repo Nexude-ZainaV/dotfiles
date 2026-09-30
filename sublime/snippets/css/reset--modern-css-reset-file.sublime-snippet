@@ -1,0 +1,15 @@
+<snippet>
+	<content><![CDATA[/* reset.css: a small modern reset. Import before your own styles. */
+*, *::before, *::after { box-sizing: border-box; }   /* width includes padding and border */
+* { margin: 0; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { min-height: 100dvh; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+img, picture, video, canvas, svg { display: block; max-width: 100%; }   /* media never overflows */
+input, button, textarea, select { font: inherit; }                       /* forms use the page font */
+p, h1, h2, h3, h4, h5, h6 { overflow-wrap: break-word; }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; } /* keyboard focus stays visible */
+${0}]]></content>
+	<tabTrigger>reset</tabTrigger>
+	<scope>source.css, source.scss, source.less</scope>
+	<description>Modern CSS reset file</description>
+</snippet>

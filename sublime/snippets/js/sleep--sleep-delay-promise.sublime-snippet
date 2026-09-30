@@ -1,0 +1,7 @@
+<snippet>
+	<content><![CDATA[// Promise-based delay: `await sleep(500)` inside an async function
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));${0}]]></content>
+	<tabTrigger>sleep</tabTrigger>
+	<scope>source.js, source.ts, source.jsx, source.tsx</scope>
+	<description>sleep / delay promise</description>
+</snippet>

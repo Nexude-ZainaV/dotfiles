@@ -1,0 +1,15 @@
+<snippet>
+	<content><![CDATA[<!-- Native <dialog>: focus trapping, Esc to close and a backdrop come built in -->
+<button type="button" onclick="document.getElementById('${1:confirm}').showModal()">${2:Open}</button>
+<dialog id="${1}" aria-labelledby="${1}-title">
+	<h2 id="${1}-title">${3:Are you sure?}</h2>
+	<form method="dialog">   <!-- method="dialog" closes it and sets returnValue -->
+		<button value="cancel">Cancel</button>
+		<button value="confirm">Confirm</button>
+	</form>
+	${0}
+</dialog>]]></content>
+	<tabTrigger>dialog</tabTrigger>
+	<scope>text.html</scope>
+	<description>Native <dialog> modal</description>
+</snippet>

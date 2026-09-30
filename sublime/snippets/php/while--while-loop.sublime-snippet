@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[// while: checks the condition before each pass
+while (${1:\$row = \$stmt->fetch()}) {
+	${0}
+}]]></content>
+	<tabTrigger>while</tabTrigger>
+	<scope>embedding.php, source.php</scope>
+	<description>while loop</description>
+</snippet>

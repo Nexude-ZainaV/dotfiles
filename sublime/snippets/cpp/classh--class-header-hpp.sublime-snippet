@@ -1,0 +1,22 @@
+<snippet>
+	<content><![CDATA[// #pragma once: include guard supported by every major compiler
+#pragma once
+
+#include <string>
+
+// ${1:Account}: ${2:what this type represents}
+class ${1} {
+public:
+	explicit ${1}(std::string ${3:name});   // explicit: no silent conversions from string
+
+	// Accessors are const: they promise not to modify the object
+	[[nodiscard]] const std::string& ${3}() const noexcept { return ${3}_; }
+
+private:
+	std::string ${3}_;   // trailing underscore marks a member variable
+};
+${0}]]></content>
+	<tabTrigger>classh</tabTrigger>
+	<scope>source.c++</scope>
+	<description>Class header (.hpp)</description>
+</snippet>

@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[// async functions always return a Promise; await pauses only this function, not the page
+async function ${1:loadData}(${2:id}) {
+	${0}
+}]]></content>
+	<tabTrigger>asyncfn</tabTrigger>
+	<scope>source.js, source.ts, source.jsx, source.tsx</scope>
+	<description>async function</description>
+</snippet>

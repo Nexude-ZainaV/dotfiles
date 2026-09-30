@@ -1,0 +1,42 @@
+<snippet>
+	<content><![CDATA[/* ============================================================
+   Breakpoint reference (mobile-first, Tailwind-compatible)
+   ------------------------------------------------------------
+   base   0-639px   phones portrait    iPhone SE 375x667, iPhone 15 393x852,
+									   Pixel 8 412x915, Galaxy S24 360x780
+   sm   >= 640px    phones landscape / small tablets
+   md   >= 768px    tablets portrait   iPad Mini 768x1024, iPad 820x1180
+   lg   >= 1024px   tablets landscape, small laptops   iPad Pro 1024x1366
+   xl   >= 1280px   laptops            1280x800, 1366x768, 1440x900
+   2xl  >= 1536px   desktops           1536x864, 1920x1080, 2560x1440
+   Design for content, not devices: add a breakpoint where the layout breaks.
+   ============================================================ */
+
+/* Base styles (no query) target phones. Each min-width query ADDS to them. */
+${1:.selector} {
+	${0}
+}
+
+@media (min-width: 640px) {   /* sm: large phones landscape */
+	${1} { }
+}
+
+@media (min-width: 768px) {   /* md: tablets portrait */
+	${1} { }
+}
+
+@media (min-width: 1024px) {  /* lg: tablets landscape, small laptops */
+	${1} { }
+}
+
+@media (min-width: 1280px) {  /* xl: laptops and desktops */
+	${1} { }
+}
+
+@media (min-width: 1536px) {  /* 2xl: large desktops */
+	${1} { }
+}]]></content>
+	<tabTrigger>mq</tabTrigger>
+	<scope>source.css, source.scss, source.less</scope>
+	<description>Mobile-first media query set</description>
+</snippet>

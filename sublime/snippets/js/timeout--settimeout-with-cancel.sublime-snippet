@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[// setTimeout runs once after the delay; keep the id so you can cancel it
+const ${1:timerId} = setTimeout(() => {
+	${0}
+}, ${2:1000});   // milliseconds
+// clearTimeout(${1});  // cancel before it fires (e.g. component unmount)]]></content>
+	<tabTrigger>timeout</tabTrigger>
+	<scope>source.js, source.ts, source.jsx, source.tsx</scope>
+	<description>setTimeout with cancel</description>
+</snippet>

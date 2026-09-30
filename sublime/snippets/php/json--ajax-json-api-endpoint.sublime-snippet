@@ -1,0 +1,29 @@
+<snippet>
+	<content><![CDATA[<?php
+// api/${1:items}.php: a JSON endpoint called by fetch() / \$.ajax from the front end
+declare(strict_types=1);
+
+header('Content-Type: application/json; charset=utf-8');
+
+function respond(int \$status, array \$payload): never
+{
+	http_response_code(\$status);
+	echo json_encode(\$payload, JSON_THROW_ON_ERROR);
+	exit;
+}
+
+if (\$_SERVER['REQUEST_METHOD'] !== '${2:POST}') {
+	respond(405, ['error' => 'Method not allowed']);
+}
+
+// fetch() sends JSON in the body, which \$_POST does not parse
+\$input = json_decode(file_get_contents('php://input') ?: '', true);
+if (!is_array(\$input) || trim((string) (\$input['${3:name}'] ?? '')) === '') {
+	respond(422, ['error' => '${3} is required']);
+}
+${0}
+respond(201, ['ok' => true]);]]></content>
+	<tabTrigger>json</tabTrigger>
+	<scope>embedding.php, source.php</scope>
+	<description>AJAX: JSON API endpoint</description>
+</snippet>

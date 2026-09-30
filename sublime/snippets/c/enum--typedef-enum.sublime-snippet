@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[// Named integer constants: clearer than magic numbers in a switch
+typedef enum {
+	${1:STATE_IDLE},
+	${2:STATE_RUNNING},
+	${3:STATE_DONE}
+} ${4:State};${0}]]></content>
+	<tabTrigger>enum</tabTrigger>
+	<scope>source.c</scope>
+	<description>typedef enum</description>
+</snippet>

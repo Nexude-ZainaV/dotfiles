@@ -1,0 +1,253 @@
+{
+  "Next.js page (server component)": {
+    "scope": "typescriptreact,typescript,javascriptreact,javascript",
+    "prefix": "npage",
+    "body": [
+      "// app/${1:dashboard}/page.tsx: Server Component by default (runs on the server, no JS shipped)",
+      "import type { Metadata } from \"next\";",
+      "",
+      "export const metadata: Metadata = {",
+      "\ttitle: \"${2:Dashboard}\",",
+      "\tdescription: \"${3:What this page is for}\",",
+      "};",
+      "",
+      "export default async function ${4:Dashboard}Page() {",
+      "\t// You can await data directly in a server component",
+      "\t${0}",
+      "\treturn (",
+      "\t\t<main className=\"mx-auto max-w-5xl p-4 md:p-8\">",
+      "\t\t\t<h1 className=\"text-2xl font-semibold md:text-3xl\">${2}</h1>",
+      "\t\t</main>",
+      "\t);",
+      "}"
+    ],
+    "description": "Next.js page (server component) (guided)",
+    "isFileTemplate": true
+  },
+  "Next.js dynamic route page": {
+    "scope": "typescriptreact,typescript,javascriptreact,javascript",
+    "prefix": "ndynamic",
+    "body": [
+      "// app/${1:posts}/[${2:slug}]/page.tsx. Next 15+: params is a Promise, so await it.",
+      "import { notFound } from \"next/navigation\";",
+      "",
+      "type Props = { params: Promise<{ ${2}: string }> };",
+      "",
+      "export default async function ${3:Post}Page({ params }: Props) {",
+      "\tconst { ${2} } = await params;",
+      "\tconst item = await ${4:getBySlug}(${2});",
+      "\tif (!item) notFound();   // renders not-found.tsx and returns a 404",
+      "\t${0}",
+      "\treturn <article>{item.title}</article>;",
+      "}"
+    ],
+    "description": "Next.js dynamic route page (guided)",
+    "isFileTemplate": true
+  },
+  "Next.js layout": {
+    "scope": "typescriptreact,typescript,javascriptreact,javascript",
+    "prefix": "nlayout",
+    "body": [
+      "// app/layout.tsx: wraps every page beneath it and persists between navigations",
+      "import type { Metadata, Viewport } from \"next\";",
+      "import \"./globals.css\";",
+      "",
+      "export const metadata: Metadata = {",
+      "\ttitle: { default: \"${1:My App}\", template: \"%s | ${1}\" },",
+      "\tdescription: \"${2:Short description for search and social previews}\",",
+      "};",
+      "",
+      "// Responsive: width=device-width so mobile browsers do not zoom out a desktop layout",
+      "export const viewport: Viewport = { width: \"device-width\", initialScale: 1 };",
+      "",
+      "export default function RootLayout({ children }: { children: React.ReactNode }) {",
+      "\treturn (",
+      "\t\t<html lang=\"en\">",
+      "\t\t\t<body className=\"min-h-dvh antialiased\">${0}{children}</body>",
+      "\t\t</html>",
+      "\t);",
+      "}"
+    ],
+    "description": "Next.js layout (guided)",
+    "isFileTemplate": true
+  },
+  "Next.js client component": {
+    "scope": "typescriptreact,typescript,javascriptreact,javascript",
+    "prefix": "nclient",
+    "body": [
+      "\"use client\";",
+      "// \"use client\" marks the boundary: this file and its imports ship to the browser.",
+      "// Needed for state, effects, event handlers and browser APIs. Keep these small.",
+      "import { useState } from \"react\";",
+      "",
+      "export function ${1:Counter}() {",
+      "\tconst [count, setCount] = useState(0);",
+      "\treturn (",
+      "\t\t<button type=\"button\" onClick={() => setCount((c) => c + 1)}>",
+      "\t\t\t${0}Clicked {count} times",
+      "\t\t</button>",
+      "\t);",
+      "}"
+    ],
+    "description": "Next.js client component (guided)",
+    "isFileTemplate": true
+  },
+  "Next.js route handler (API)": {
+    "scope": "typescriptreact,typescript,javascriptreact,javascript",
+    "prefix": "nroute",
+    "body": [
+      "// app/api/${1:items}/route.ts: REST endpoint. Export one function per HTTP method.",
+      "import { NextResponse, type NextRequest } from \"next/server\";",
+      "import { z } from \"zod\";",
+      "",
+      "// Validate input at the boundary: never trust the request body",
+      "const Create${2:Item} = z.object({",
+      "\t${3:name}: z.string().min(1).max(100),",
+      "});",
+      "",
+      "export async function GET(request: NextRequest) {",
+      "\tconst page = Number(request.nextUrl.searchParams.get(\"page\") ?? \"1\");",
+      "\t${0}",
+      "\treturn NextResponse.json({ page, items: [] });",
+      "}",
+      "",
+      "export async function POST(request: NextRequest) {",
+      "\tconst parsed = Create${2}.safeParse(await request.json().catch(() => null));",
+      "\tif (!parsed.success) {",
+      "\t\treturn NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });",
+      "\t}",
+      "\treturn NextResponse.json({ ok: true, data: parsed.data }, { status: 201 });",
+      "}"
+    ],
+    "description": "Next.js route handler (API) (guided)",
+    "isFileTemplate": true
+  },
+  "Next.js server action": {
+    "scope": "typescriptreact,typescript,javascriptreact,javascript",
+    "prefix": "naction",
+    "body": [
+      "\"use server\";",
+      "// Server actions run on the server but can be called from a <form action={...}>.",
+      "// Always validate and authorize here: they are public HTTP endpoints under the hood.",
+      "import { revalidatePath } from \"next/cache\";",
+      "import { z } from \"zod\";",
+      "",
+      "const Schema = z.object({ ${1:title}: z.string().min(1) });",
+      "",
+      "export async function ${2:createPost}(formData: FormData) {",
+      "\tconst parsed = Schema.safeParse({ ${1}: formData.get(\"${1}\") });",
+      "\tif (!parsed.success) return { error: \"${3:Title is required}\" };",
+      "\t${0}",
+      "\trevalidatePath(\"/${4:posts}\");   // refresh cached pages that show this data",
+      "\treturn { ok: true };",
+      "}"
+    ],
+    "description": "Next.js server action (guided)"
+  },
+  "Next.js loading.tsx": {
+    "scope": "typescriptreact,typescript,javascriptreact,javascript",
+    "prefix": "nloading",
+    "body": [
+      "// loading.tsx: shown instantly while the page's server data loads (a Suspense fallback)",
+      "export default function Loading() {",
+      "\treturn (",
+      "\t\t<div role=\"status\" aria-live=\"polite\" className=\"animate-pulse p-8\">",
+      "\t\t\t${0}Loading...",
+      "\t\t</div>",
+      "\t);",
+      "}"
+    ],
+    "description": "Next.js loading.tsx (guided)",
+    "isFileTemplate": true
+  },
+  "Next.js error.tsx": {
+    "scope": "typescriptreact,typescript,javascriptreact,javascript",
+    "prefix": "nerror",
+    "body": [
+      "\"use client\";",
+      "// error.tsx must be a client component. It catches errors thrown while rendering this segment.",
+      "export default function Error({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {",
+      "\treturn (",
+      "\t\t<div role=\"alert\" className=\"p-8\">",
+      "\t\t\t<h2>Something went wrong.</h2>",
+      "\t\t\t<button type=\"button\" onClick={() => reset()}>Try again</button>",
+      "\t\t\t${0}",
+      "\t\t</div>",
+      "\t);",
+      "}"
+    ],
+    "description": "Next.js error.tsx (guided)",
+    "isFileTemplate": true
+  },
+  "generateMetadata": {
+    "scope": "typescriptreact,typescript,javascriptreact,javascript",
+    "prefix": "nmeta",
+    "body": [
+      "// Dynamic SEO metadata per page (title, description, Open Graph)",
+      "export async function generateMetadata({ params }: { params: Promise<{ ${1:slug}: string }> }) {",
+      "\tconst { ${1} } = await params;",
+      "\tconst item = await ${2:getBySlug}(${1});",
+      "\treturn {",
+      "\t\ttitle: item?.title ?? \"Not found\",",
+      "\t\tdescription: item?.summary,",
+      "\t\topenGraph: { images: item?.image ? [item.image] : [] },",
+      "\t};",
+      "}${0}"
+    ],
+    "description": "generateMetadata (guided)"
+  },
+  "Server-side fetch with caching": {
+    "scope": "typescriptreact,typescript,javascriptreact,javascript",
+    "prefix": "nfetch",
+    "body": [
+      "// In server components, fetch results can be cached and revalidated on a timer",
+      "const res = await fetch(\"${1:https://api.example.com/items}\", {",
+      "\tnext: { revalidate: ${2:60} },   // seconds; use cache: \"no-store\" for always-fresh data",
+      "});",
+      "if (!res.ok) throw new Error(`Failed to load: \\${res.status}`);",
+      "const ${3:items} = await res.json();${0}"
+    ],
+    "description": "Server-side fetch with caching (guided)"
+  },
+  "Next.js proxy (middleware)": {
+    "scope": "typescriptreact,typescript,javascriptreact,javascript",
+    "prefix": "nproxy",
+    "body": [
+      "// proxy.ts at the project root (Next.js 16+; called middleware.ts in older versions).",
+      "// Runs before a request is routed: redirects, rewrites, auth gates, headers.",
+      "import { NextResponse, type NextRequest } from \"next/server\";",
+      "",
+      "export function proxy(request: NextRequest) {",
+      "\tconst token = request.cookies.get(\"${1:session}\")?.value;",
+      "\tif (!token) {",
+      "\t\treturn NextResponse.redirect(new URL(\"/${2:login}\", request.url));",
+      "\t}",
+      "\t${0}",
+      "\treturn NextResponse.next();",
+      "}",
+      "",
+      "// Only run on the paths that need it",
+      "export const config = { matcher: [\"/${3:dashboard}/:path*\"] };"
+    ],
+    "description": "Next.js proxy (middleware) (guided)",
+    "isFileTemplate": true
+  },
+  "next/image responsive": {
+    "scope": "typescriptreact,typescript,javascriptreact,javascript",
+    "prefix": "nimg",
+    "body": [
+      "import Image from \"next/image\";",
+      "",
+      "{/* sizes tells the browser which width to download at each breakpoint */}",
+      "<Image",
+      "\tsrc=\"${1:/hero.jpg}\"",
+      "\talt=\"${2:Describe the image for screen readers}\"",
+      "\twidth={${3:1200}}",
+      "\theight={${4:630}}",
+      "\tsizes=\"(min-width: 1024px) 960px, 100vw\"",
+      "\tpriority${0}",
+      "/>"
+    ],
+    "description": "next/image responsive (guided)"
+  }
+}

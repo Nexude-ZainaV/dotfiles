@@ -1,0 +1,13 @@
+<snippet>
+	<content><![CDATA[// Pattern matching null-check + type test in one step, then a nested condition
+if (${1:input} is ${2:Order} ${3:order})
+{
+	if (${3}.${4:Total} > ${5:0})
+	{
+		${0}
+	}
+}]]></content>
+	<tabTrigger>ifn</tabTrigger>
+	<scope>source.cs</scope>
+	<description>Nested if with pattern matching</description>
+</snippet>

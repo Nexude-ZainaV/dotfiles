@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[// hrtime(true): monotonic nanoseconds, the right clock for durations
+\$${1:start} = hrtime(true);
+${0}
+\$ms = (hrtime(true) - \$${1}) / 1e6;
+error_log(sprintf('elapsed: %.2f ms', \$ms));]]></content>
+	<tabTrigger>timer</tabTrigger>
+	<scope>embedding.php, source.php</scope>
+	<description>measure elapsed time</description>
+</snippet>

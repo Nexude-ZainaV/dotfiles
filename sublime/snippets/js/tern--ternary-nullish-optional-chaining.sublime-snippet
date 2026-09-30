@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[// ternary: condition ? whenTrue : whenFalse (an expression, so it can be assigned)
+const ${1:label} = ${2:count} > 0 ? ${3:"has items"} : ${4:"empty"};
+// ?? falls back only on null/undefined (unlike ||, which also replaces 0 and "")
+const ${5:name} = ${6:input}?.${7:name} ?? ${8:"anonymous"};${0}]]></content>
+	<tabTrigger>tern</tabTrigger>
+	<scope>source.js, source.ts, source.jsx, source.tsx</scope>
+	<description>Ternary / nullish / optional chaining</description>
+</snippet>

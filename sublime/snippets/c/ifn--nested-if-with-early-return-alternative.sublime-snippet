@@ -1,0 +1,13 @@
+<snippet>
+	<content><![CDATA[// Nested if: the inner check only runs when the outer one passed
+if (${1:ptr} != NULL) {
+	if (${2:ptr->count > 0}) {
+		${0}
+	}
+}
+// Tip: deep nesting reads badly. Prefer guard clauses:
+// if (ptr == NULL) return; if (!(ptr->count > 0)) return;]]></content>
+	<tabTrigger>ifn</tabTrigger>
+	<scope>source.c</scope>
+	<description>Nested if with early-return alternative</description>
+</snippet>

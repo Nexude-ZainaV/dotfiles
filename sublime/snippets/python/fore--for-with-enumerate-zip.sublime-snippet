@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[# enumerate gives (index, value); zip pairs up two iterables, strict=True catches length bugs
+for ${1:i}, ${2:item} in enumerate(${3:items}, start=1):
+	${4}
+for ${5:name}, ${6:score} in zip(${7:names}, ${8:scores}, strict=True):
+	${0}]]></content>
+	<tabTrigger>fore</tabTrigger>
+	<scope>source.python</scope>
+	<description>for with enumerate / zip</description>
+</snippet>

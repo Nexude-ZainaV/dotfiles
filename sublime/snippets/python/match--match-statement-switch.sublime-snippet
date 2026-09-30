@@ -1,0 +1,15 @@
+<snippet>
+	<content><![CDATA[# match (3.10+): Python's switch, with structural pattern matching
+match ${1:command}:
+	case "${2:start}":
+		${3}
+	case "${4:stop}" | "${5:quit}":   # | matches either value
+		${6}
+	case {"action": action, "id": int(item_id)}:   # destructure a dict
+		${7:pass}
+	case _:   # default: matches anything
+		${0}]]></content>
+	<tabTrigger>match</tabTrigger>
+	<scope>source.python</scope>
+	<description>match statement (switch)</description>
+</snippet>

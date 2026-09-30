@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[// unordered_map: hash map. operator[] inserts a default value if the key is missing.
+std::unordered_map<${1:std::string}, ${2:int}> ${3:counts};
+${3}[${4:key}]++;                       // insert-or-increment
+if (auto it = ${3}.find(${4}); it != ${3}.end()) {   // lookup without inserting
+	${0}
+}]]></content>
+	<tabTrigger>umap</tabTrigger>
+	<scope>source.c++</scope>
+	<description>unordered_map usage</description>
+</snippet>

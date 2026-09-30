@@ -1,0 +1,286 @@
+{
+  "React component (TSX)": {
+    "scope": "javascriptreact,typescriptreact",
+    "prefix": "rfc",
+    "body": [
+      "// ${1:Card}.tsx: one component per file, named after the file (PascalCase)",
+      "type ${1}Props = {",
+      "\t${2:title}: string;",
+      "\tchildren?: React.ReactNode;",
+      "};",
+      "",
+      "export function ${1}({ ${2}, children }: ${1}Props) {",
+      "\treturn (",
+      "\t\t<section className=\"${3:card}\">",
+      "\t\t\t<h2>{${2}}</h2>",
+      "\t\t\t{children}",
+      "\t\t\t${0}",
+      "\t\t</section>",
+      "\t);",
+      "}"
+    ],
+    "description": "React component (TSX) (guided)",
+    "isFileTemplate": true
+  },
+  "Component with state + effect": {
+    "scope": "javascriptreact,typescriptreact",
+    "prefix": "rfcs",
+    "body": [
+      "import { useEffect, useState } from \"react\";",
+      "",
+      "// State holds what the UI shows; effects sync with things outside React (APIs, timers)",
+      "export function ${1:UserList}() {",
+      "\tconst [${2:items}, set${3:Items}] = useState<${4:string}[]>([]);",
+      "\tconst [loading, setLoading] = useState(true);",
+      "\tconst [error, setError] = useState<string | null>(null);",
+      "",
+      "\tuseEffect(() => {",
+      "\t\tconst controller = new AbortController();   // cancel the request on unmount",
+      "\t\tfetch(\"${5:/api/users}\", { signal: controller.signal })",
+      "\t\t\t.then((res) => {",
+      "\t\t\t\tif (!res.ok) throw new Error(`HTTP \\${res.status}`);",
+      "\t\t\t\treturn res.json();",
+      "\t\t\t})",
+      "\t\t\t.then(set${3})",
+      "\t\t\t.catch((err) => {",
+      "\t\t\t\tif (err.name !== \"AbortError\") setError(err.message);",
+      "\t\t\t})",
+      "\t\t\t.finally(() => setLoading(false));",
+      "\t\treturn () => controller.abort();",
+      "\t}, []);   // [] = run once after the first render",
+      "",
+      "\tif (loading) return <p>Loading...</p>;",
+      "\tif (error) return <p role=\"alert\">Error: {error}</p>;",
+      "\treturn (",
+      "\t\t<ul>",
+      "\t\t\t{${2}.map((item) => (",
+      "\t\t\t\t<li key={item}>{item}</li>   // key must be stable and unique",
+      "\t\t\t))}",
+      "\t\t\t${0}",
+      "\t\t</ul>",
+      "\t);",
+      "}"
+    ],
+    "description": "Component with state + effect (guided)",
+    "isFileTemplate": true
+  },
+  "useState": {
+    "scope": "javascriptreact,typescriptreact",
+    "prefix": "us",
+    "body": [
+      "// useState: [value, setter]. Use the updater form when the new value depends on the old.",
+      "const [${1:count}, set${2:Count}] = useState<${3:number}>(${4:0});",
+      "// set${2}((prev) => prev + 1);${0}"
+    ],
+    "description": "useState (guided)"
+  },
+  "useEffect with cleanup": {
+    "scope": "javascriptreact,typescriptreact",
+    "prefix": "ue",
+    "body": [
+      "// useEffect: runs after render. Return a cleanup to undo subscriptions, timers, listeners.",
+      "useEffect(() => {",
+      "\t${1}",
+      "\treturn () => {",
+      "\t\t${2}",
+      "\t};",
+      "}, [${3:dependency}]);   // re-runs when a dependency changes${0}"
+    ],
+    "description": "useEffect with cleanup (guided)"
+  },
+  "useRef": {
+    "scope": "javascriptreact,typescriptreact",
+    "prefix": "uref",
+    "body": [
+      "// useRef: a mutable box that survives renders without causing one (DOM nodes, timer ids)",
+      "const ${1:inputRef} = useRef<${2:HTMLInputElement}>(null);",
+      "// <input ref={${1}} />  then  ${1}.current?.focus();${0}"
+    ],
+    "description": "useRef (guided)"
+  },
+  "useMemo / useCallback": {
+    "scope": "javascriptreact,typescriptreact",
+    "prefix": "umemo",
+    "body": [
+      "// useMemo caches a computed VALUE, useCallback caches a FUNCTION, both between renders.",
+      "// Only reach for them when profiling shows a cost, or a child relies on stable props.",
+      "const ${1:sorted} = useMemo(() => [...${2:items}].sort(), [${2}]);",
+      "const ${3:handleClick} = useCallback(() => {",
+      "\t${0}",
+      "}, []);"
+    ],
+    "description": "useMemo / useCallback (guided)"
+  },
+  "useReducer": {
+    "scope": "javascriptreact,typescriptreact",
+    "prefix": "ured",
+    "body": [
+      "// useReducer: when several state values change together, or next state follows rules",
+      "type State = { ${1:count}: number };",
+      "type Action = { type: \"increment\" } | { type: \"decrement\" } | { type: \"reset\" };",
+      "",
+      "function reducer(state: State, action: Action): State {",
+      "\tswitch (action.type) {",
+      "\t\tcase \"increment\":",
+      "\t\t\treturn { ${1}: state.${1} + 1 };",
+      "\t\tcase \"decrement\":",
+      "\t\t\treturn { ${1}: state.${1} - 1 };",
+      "\t\tcase \"reset\":",
+      "\t\t\treturn { ${1}: 0 };",
+      "\t}",
+      "}",
+      "",
+      "const [state, dispatch] = useReducer(reducer, { ${1}: 0 });${0}"
+    ],
+    "description": "useReducer (guided)"
+  },
+  "Context + provider + hook": {
+    "scope": "javascriptreact,typescriptreact",
+    "prefix": "uctx",
+    "body": [
+      "import { createContext, useContext, useState } from \"react\";",
+      "",
+      "// Context: share a value with a whole subtree without passing props at every level",
+      "type ${1:Theme}ContextValue = { ${2:theme}: string; set${3:Theme}: (t: string) => void };",
+      "",
+      "const ${1}Context = createContext<${1}ContextValue | null>(null);",
+      "",
+      "export function ${1}Provider({ children }: { children: React.ReactNode }) {",
+      "\tconst [${2}, set${3}] = useState(\"${4:light}\");",
+      "\treturn <${1}Context.Provider value={{ ${2}, set${3} }}>{children}</${1}Context.Provider>;",
+      "}",
+      "",
+      "// Custom hook: throws a clear error if used outside the provider",
+      "export function use${1}() {",
+      "\tconst ctx = useContext(${1}Context);",
+      "\tif (!ctx) throw new Error(\"use${1} must be used inside <${1}Provider>\");",
+      "\treturn ctx;",
+      "}${0}"
+    ],
+    "description": "Context + provider + hook (guided)",
+    "isFileTemplate": true
+  },
+  "Custom hook: useFetch": {
+    "scope": "javascriptreact,typescriptreact",
+    "prefix": "hookfetch",
+    "body": [
+      "import { useEffect, useState } from \"react\";",
+      "",
+      "// A custom hook is a function starting with `use` that reuses stateful logic",
+      "export function useFetch<T>(url: string) {",
+      "\tconst [data, setData] = useState<T | null>(null);",
+      "\tconst [error, setError] = useState<string | null>(null);",
+      "\tconst [loading, setLoading] = useState(true);",
+      "",
+      "\tuseEffect(() => {",
+      "\t\tconst controller = new AbortController();",
+      "\t\tsetLoading(true);",
+      "\t\tfetch(url, { signal: controller.signal })",
+      "\t\t\t.then((res) => {",
+      "\t\t\t\tif (!res.ok) throw new Error(`HTTP \\${res.status}`);",
+      "\t\t\t\treturn res.json() as Promise<T>;",
+      "\t\t\t})",
+      "\t\t\t.then(setData)",
+      "\t\t\t.catch((err) => err.name !== \"AbortError\" && setError(err.message))",
+      "\t\t\t.finally(() => setLoading(false));",
+      "\t\treturn () => controller.abort();   // a new url cancels the old request",
+      "\t}, [url]);",
+      "",
+      "\treturn { data, error, loading };",
+      "}${0}"
+    ],
+    "description": "Custom hook: useFetch (guided)",
+    "isFileTemplate": true
+  },
+  "Responsive: useMediaQuery hook": {
+    "scope": "javascriptreact,typescriptreact",
+    "prefix": "umq",
+    "body": [
+      "import { useSyncExternalStore } from \"react\";",
+      "",
+      "// Subscribes to a CSS media query. Breakpoints match Tailwind: sm 640, md 768, lg 1024, xl 1280.",
+      "export function useMediaQuery(query: string): boolean {",
+      "\treturn useSyncExternalStore(",
+      "\t\t(onChange) => {",
+      "\t\t\tconst mql = window.matchMedia(query);",
+      "\t\t\tmql.addEventListener(\"change\", onChange);",
+      "\t\t\treturn () => mql.removeEventListener(\"change\", onChange);",
+      "\t\t},",
+      "\t\t() => window.matchMedia(query).matches,",
+      "\t\t() => false,   // server render: assume mobile-first (no match)",
+      "\t);",
+      "}",
+      "",
+      "// const isDesktop = useMediaQuery(\"(min-width: ${1:1024}px)\");${0}"
+    ],
+    "description": "Responsive: useMediaQuery hook (guided)"
+  },
+  "Conditional rendering": {
+    "scope": "javascriptreact,typescriptreact",
+    "prefix": "cond",
+    "body": [
+      "{/* && renders the right side only when the left is truthy. Careful: {0 && x} renders \"0\". */}",
+      "{${1:isLoggedIn} && <${2:Dashboard} />}",
+      "{/* ternary for either/or */}",
+      "{${3:loading} ? <p>Loading...</p> : <${4:Content} />}${0}"
+    ],
+    "description": "Conditional rendering (guided)"
+  },
+  "Render a list": {
+    "scope": "javascriptreact,typescriptreact",
+    "prefix": "listmap",
+    "body": [
+      "{/* Every list item needs a stable, unique key (an id, never the array index if items reorder) */}",
+      "<ul>",
+      "\t{${1:items}.map((${2:item}) => (",
+      "\t\t<li key={${2}.${3:id}}>{${2}.${4:name}}</li>",
+      "\t))}",
+      "</ul>${0}"
+    ],
+    "description": "Render a list (guided)"
+  },
+  "Controlled form": {
+    "scope": "javascriptreact,typescriptreact",
+    "prefix": "form",
+    "body": [
+      "// Controlled inputs: React state is the single source of truth for each field",
+      "const [values, setValues] = useState({ ${1:email}: \"\", ${2:password}: \"\" });",
+      "",
+      "function handleChange(e: React.ChangeEvent<HTMLInputElement>) {",
+      "\tsetValues((v) => ({ ...v, [e.target.name]: e.target.value }));",
+      "}",
+      "",
+      "function handleSubmit(e: React.FormEvent) {",
+      "\te.preventDefault();   // stop the full-page reload",
+      "\t${0}",
+      "}",
+      "",
+      "// <form onSubmit={handleSubmit}>",
+      "//     <label htmlFor=\"${1}\">Email</label>",
+      "//     <input id=\"${1}\" name=\"${1}\" type=\"email\" value={values.${1}} onChange={handleChange} required />",
+      "// </form>"
+    ],
+    "description": "Controlled form (guided)"
+  },
+  "React Testing Library test": {
+    "scope": "javascriptreact,typescriptreact",
+    "prefix": "rtest",
+    "body": [
+      "import { render, screen } from \"@testing-library/react\";",
+      "import userEvent from \"@testing-library/user-event\";",
+      "import { describe, expect, it } from \"vitest\";",
+      "import { ${1:Counter} } from \"./${1}\";",
+      "",
+      "// Test what the user sees and does, not implementation details",
+      "describe(\"${1}\", () => {",
+      "\tit(\"${2:increments when clicked}\", async () => {",
+      "\t\trender(<${1} />);",
+      "\t\tawait userEvent.click(screen.getByRole(\"button\", { name: /${3:increment}/i }));",
+      "\t\texpect(screen.getByText(${4:\"1\"})).toBeInTheDocument();",
+      "\t});${0}",
+      "});"
+    ],
+    "description": "React Testing Library test (guided)",
+    "isFileTemplate": true
+  }
+}

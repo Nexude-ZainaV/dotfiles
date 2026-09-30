@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[// Error-handling middleware is recognised by its 4 parameters; register it LAST
+export function errorHandler(err, req, res, _next) {
+	const status = err.status ?? 500;
+	if (status >= 500) console.error(err);   // log server faults, not client mistakes
+	res.status(status).json({ error: status >= 500 ? "Internal server error" : err.message });${0}
+}]]></content>
+	<tabTrigger>errmw</tabTrigger>
+	<scope>source.js, source.ts</scope>
+	<description>Express error handler</description>
+</snippet>

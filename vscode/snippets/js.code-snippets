@@ -1,0 +1,532 @@
+{
+  "Import block (ordered)": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "imp",
+    "body": [
+      "// Import order (industry convention, enforced by eslint-plugin-import / Biome):",
+      "// 1. Node built-ins  2. external packages  3. internal aliases (@/...)  4. relative  5. styles",
+      "import { ${1:readFile} } from \"node:${2:fs/promises}\";",
+      "",
+      "import ${3:React} from \"${4:react}\";",
+      "",
+      "import { ${5:helper} } from \"@/${6:lib/helper}\";",
+      "",
+      "import { ${7:thing} } from \"./${8:thing}\";",
+      "${0}"
+    ],
+    "description": "Import block (ordered) (guided)"
+  },
+  "ES module file": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "module",
+    "body": [
+      "/**",
+      " * ${1:module-name}.js",
+      " * ${2:What this module is responsible for.}",
+      " */",
+      "",
+      "// ---- constants ----",
+      "const ${3:DEFAULT_LIMIT} = ${4:20};",
+      "",
+      "// ---- public API ----",
+      "export function ${5:doWork}(${6:input}) {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "ES module file (guided)",
+    "isFileTemplate": true
+  },
+  "if statement": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "if",
+    "body": [
+      "// if: runs when the condition is truthy (not false, 0, \"\", null, undefined, NaN)",
+      "if (${1:condition}) {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "if statement (guided)"
+  },
+  "if / else": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "ife",
+    "body": [
+      "// if / else: exactly one branch runs",
+      "if (${1:condition}) {",
+      "\t${2}",
+      "} else {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "if / else (guided)"
+  },
+  "else-if chain": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "elif",
+    "body": [
+      "// else-if chain: first truthy branch wins; order from most to least specific",
+      "if (${1:status} === ${2:\"success\"}) {",
+      "\t${3}",
+      "} else if (${1} === ${4:\"pending\"}) {",
+      "\t${5}",
+      "} else {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "else-if chain (guided)"
+  },
+  "Nested if vs guard clauses": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "ifn",
+    "body": [
+      "// Nested if: the inner check only runs when the outer one passed",
+      "if (${1:user}) {",
+      "\tif (${1}.${2:isActive}) {",
+      "\t\t${0}",
+      "\t}",
+      "}",
+      "// Cleaner alternative (guard clauses):  if (!${1}) return;  if (!${1}.${2}) return;",
+      "// Or optional chaining:                 if (${1}?.${2}) { ... }"
+    ],
+    "description": "Nested if vs guard clauses (guided)"
+  },
+  "Ternary / nullish / optional chaining": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "tern",
+    "body": [
+      "// ternary: condition ? whenTrue : whenFalse (an expression, so it can be assigned)",
+      "const ${1:label} = ${2:count} > 0 ? ${3:\"has items\"} : ${4:\"empty\"};",
+      "// ?? falls back only on null/undefined (unlike ||, which also replaces 0 and \"\")",
+      "const ${5:name} = ${6:input}?.${7:name} ?? ${8:\"anonymous\"};${0}"
+    ],
+    "description": "Ternary / nullish / optional chaining (guided)"
+  },
+  "switch statement": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "sw",
+    "body": [
+      "// switch uses strict equality (===). Forgetting `break` falls into the next case.",
+      "switch (${1:action}.type) {",
+      "\tcase ${2:\"add\"}:",
+      "\t\t${3}",
+      "\t\tbreak;",
+      "\tcase ${4:\"remove\"}:",
+      "\t\t${5}",
+      "\t\tbreak;",
+      "\tdefault:",
+      "\t\t${0}",
+      "}"
+    ],
+    "description": "switch statement (guided)"
+  },
+  "for loop": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "for",
+    "body": [
+      "// Classic for: use when you need the index or to step by more than 1",
+      "for (let ${1:i} = 0; ${1} < ${2:items}.length; ${1}++) {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "for loop (guided)"
+  },
+  "for...of loop": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "forof",
+    "body": [
+      "// for...of: iterates VALUES of arrays, strings, Maps, Sets (works with await/break)",
+      "for (const ${1:item} of ${2:items}) {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "for...of loop (guided)"
+  },
+  "for...in loop": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "forin",
+    "body": [
+      "// for...in: iterates object KEYS. Prefer Object.entries(obj) for key + value.",
+      "for (const [${1:key}, ${2:value}] of Object.entries(${3:obj})) {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "for...in loop (guided)"
+  },
+  "forEach": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "fore",
+    "body": [
+      "// forEach: cannot break early or await; use for...of when you need either",
+      "${1:items}.forEach((${2:item}, ${3:index}) => {",
+      "\t${0}",
+      "});"
+    ],
+    "description": "forEach (guided)"
+  },
+  "while loop": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "while",
+    "body": [
+      "// while: checks before each pass; make sure something changes the condition",
+      "while (${1:condition}) {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "while loop (guided)"
+  },
+  "do-while loop": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "dowhile",
+    "body": [
+      "// do-while: body runs at least once",
+      "do {",
+      "\t${0}",
+      "} while (${1:condition});"
+    ],
+    "description": "do-while loop (guided)"
+  },
+  "try / catch / finally": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "try",
+    "body": [
+      "// catch receives `unknown` in TS: narrow before using it",
+      "try {",
+      "\t${1}",
+      "} catch (err) {",
+      "\tconsole.error(\"${2:operation failed}:\", err instanceof Error ? err.message : err);",
+      "} finally {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "try / catch / finally (guided)"
+  },
+  "function with JSDoc": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "fn",
+    "body": [
+      "/**",
+      " * ${2:What the function does.}",
+      " * @param {${3:string}} ${4:value} ${5:what it means}",
+      " * @returns {${6:boolean}} ${7:what comes back}",
+      " */",
+      "function ${1:name}(${4}) {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "function with JSDoc (guided)"
+  },
+  "arrow function": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "afn",
+    "body": [
+      "// Arrow functions keep the outer `this`; implicit return when the body is one expression",
+      "const ${1:name} = (${2:args}) => {",
+      "\t${0}",
+      "};"
+    ],
+    "description": "arrow function (guided)"
+  },
+  "async function": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "asyncfn",
+    "body": [
+      "// async functions always return a Promise; await pauses only this function, not the page",
+      "async function ${1:loadData}(${2:id}) {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "async function (guided)"
+  },
+  "class": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "cls",
+    "body": [
+      "// class: # fields are truly private (not reachable from outside)",
+      "class ${1:Name} {",
+      "\t#${2:value};",
+      "",
+      "\tconstructor(${2}) {",
+      "\t\tthis.#${2} = ${2};",
+      "\t}",
+      "",
+      "\tget ${2}() {",
+      "\t\treturn this.#${2};",
+      "\t}",
+      "\t${0}",
+      "}"
+    ],
+    "description": "class (guided)"
+  },
+  "destructuring": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "destr",
+    "body": [
+      "// Destructuring with defaults and renaming",
+      "const { ${1:id}, ${2:name}: ${3:displayName}, ${4:role} = ${5:\"user\"} } = ${6:obj};",
+      "const [${7:first}, ...${8:rest}] = ${9:list};${0}"
+    ],
+    "description": "destructuring (guided)"
+  },
+  "map / filter / reduce": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "mfr",
+    "body": [
+      "// Chain: filter (keep), map (transform), reduce (combine to one value)",
+      "const ${1:total} = ${2:orders}",
+      "\t.filter((o) => o.${3:paid})",
+      "\t.map((o) => o.${4:amount})",
+      "\t.reduce((sum, amount) => sum + amount, 0);${0}"
+    ],
+    "description": "map / filter / reduce (guided)"
+  },
+  "setTimeout with cancel": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "timeout",
+    "body": [
+      "// setTimeout runs once after the delay; keep the id so you can cancel it",
+      "const ${1:timerId} = setTimeout(() => {",
+      "\t${0}",
+      "}, ${2:1000});   // milliseconds",
+      "// clearTimeout(${1});  // cancel before it fires (e.g. component unmount)"
+    ],
+    "description": "setTimeout with cancel (guided)"
+  },
+  "setInterval with cancel": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "interval",
+    "body": [
+      "// setInterval repeats every N ms until cleared. Always clear it, or it leaks.",
+      "const ${1:intervalId} = setInterval(() => {",
+      "\t${0}",
+      "}, ${2:1000});",
+      "// clearInterval(${1});"
+    ],
+    "description": "setInterval with cancel (guided)"
+  },
+  "sleep / delay promise": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "sleep",
+    "body": [
+      "// Promise-based delay: `await sleep(500)` inside an async function",
+      "const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));${0}"
+    ],
+    "description": "sleep / delay promise (guided)"
+  },
+  "debounce": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "debounce",
+    "body": [
+      "// debounce: wait until calls stop for `wait` ms, then run once (search boxes, resize)",
+      "function debounce(fn, wait = ${1:300}) {",
+      "\tlet timer;",
+      "\treturn (...args) => {",
+      "\t\tclearTimeout(timer);",
+      "\t\ttimer = setTimeout(() => fn(...args), wait);",
+      "\t};",
+      "}${0}"
+    ],
+    "description": "debounce (guided)"
+  },
+  "throttle": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "throttle",
+    "body": [
+      "// throttle: run at most once per `limit` ms (scroll and mousemove handlers)",
+      "function throttle(fn, limit = ${1:200}) {",
+      "\tlet waiting = false;",
+      "\treturn (...args) => {",
+      "\t\tif (waiting) return;",
+      "\t\tfn(...args);",
+      "\t\twaiting = true;",
+      "\t\tsetTimeout(() => (waiting = false), limit);",
+      "\t};",
+      "}${0}"
+    ],
+    "description": "throttle (guided)"
+  },
+  "Promise.all / allSettled": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "pall",
+    "body": [
+      "// Promise.all fails fast on the first rejection; allSettled waits for every result",
+      "const [${1:users}, ${2:posts}] = await Promise.all([${3:getUsers}(), ${4:getPosts}()]);",
+      "const results = await Promise.allSettled([${5:taskA}(), ${6:taskB}()]);",
+      "const failed = results.filter((r) => r.status === \"rejected\");${0}"
+    ],
+    "description": "Promise.all / allSettled (guided)"
+  },
+  "AJAX: fetch GET (JSON)": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "fetchget",
+    "body": [
+      "// fetch only rejects on NETWORK errors. HTTP 404/500 still resolve: check res.ok.",
+      "async function ${1:getData}() {",
+      "\tconst res = await fetch(${2:\"/api/items\"}, {",
+      "\t\theaders: { Accept: \"application/json\" },",
+      "\t});",
+      "\tif (!res.ok) {",
+      "\t\tthrow new Error(`Request failed: \\${res.status} \\${res.statusText}`);",
+      "\t}",
+      "\treturn res.json();",
+      "}${0}"
+    ],
+    "description": "AJAX: fetch GET (JSON) (guided)"
+  },
+  "AJAX: fetch POST (JSON)": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "fetchpost",
+    "body": [
+      "// POST JSON: set Content-Type and stringify the body yourself",
+      "async function ${1:createItem}(${2:payload}) {",
+      "\tconst res = await fetch(${3:\"/api/items\"}, {",
+      "\t\tmethod: \"POST\",",
+      "\t\theaders: { \"Content-Type\": \"application/json\", Accept: \"application/json\" },",
+      "\t\tbody: JSON.stringify(${2}),",
+      "\t});",
+      "\tif (!res.ok) {",
+      "\t\tconst detail = await res.text();",
+      "\t\tthrow new Error(`POST failed (\\${res.status}): \\${detail}`);",
+      "\t}",
+      "\treturn res.json();",
+      "}${0}"
+    ],
+    "description": "AJAX: fetch POST (JSON) (guided)"
+  },
+  "AJAX: fetch with timeout / abort": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "fetchtimeout",
+    "body": [
+      "// AbortSignal.timeout cancels slow requests. Use an AbortController to cancel manually",
+      "// (e.g. when the user types again or a React component unmounts).",
+      "async function ${1:getWithTimeout}(url, ms = ${2:8000}) {",
+      "\ttry {",
+      "\t\tconst res = await fetch(url, { signal: AbortSignal.timeout(ms) });",
+      "\t\tif (!res.ok) throw new Error(`HTTP \\${res.status}`);",
+      "\t\treturn await res.json();",
+      "\t} catch (err) {",
+      "\t\tif (err.name === \"TimeoutError\") throw new Error(`Timed out after \\${ms} ms`);",
+      "\t\tthrow err;",
+      "\t}",
+      "}${0}"
+    ],
+    "description": "AJAX: fetch with timeout / abort (guided)"
+  },
+  "AJAX: submit a form with fetch": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "fetchform",
+    "body": [
+      "// Progressive enhancement: the form still works without JS; with JS it submits in place",
+      "const ${1:form} = document.querySelector(${2:\"#contact-form\"});",
+      "${1}.addEventListener(\"submit\", async (event) => {",
+      "\tevent.preventDefault();",
+      "\tconst button = ${1}.querySelector(\"[type=submit]\");",
+      "\tbutton.disabled = true;   // prevent double submits",
+      "\ttry {",
+      "\t\tconst res = await fetch(${1}.action, { method: ${1}.method, body: new FormData(${1}) });",
+      "\t\tif (!res.ok) throw new Error(`HTTP \\${res.status}`);",
+      "\t\t${1}.reset();",
+      "\t\t${0}",
+      "\t} catch (err) {",
+      "\t\tconsole.error(err);",
+      "\t} finally {",
+      "\t\tbutton.disabled = false;",
+      "\t}",
+      "});"
+    ],
+    "description": "AJAX: submit a form with fetch (guided)"
+  },
+  "AJAX: XMLHttpRequest (legacy)": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "xhr",
+    "body": [
+      "// XMLHttpRequest: the original AJAX API. You will meet it in older codebases.",
+      "const xhr = new XMLHttpRequest();",
+      "xhr.open(${1:\"GET\"}, ${2:\"/api/items\"});",
+      "xhr.responseType = \"json\";",
+      "xhr.onload = () => {",
+      "\tif (xhr.status >= 200 && xhr.status < 300) {",
+      "\t\t${0}console.log(xhr.response);",
+      "\t} else {",
+      "\t\tconsole.error(`HTTP \\${xhr.status}`);",
+      "\t}",
+      "};",
+      "xhr.onerror = () => console.error(\"network error\");",
+      "xhr.send();"
+    ],
+    "description": "AJAX: XMLHttpRequest (legacy) (guided)"
+  },
+  "AJAX: jQuery $.ajax": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "jqajax",
+    "body": [
+      "// jQuery AJAX (common in WordPress/legacy PHP sites). dataType \"json\" parses the reply.",
+      "\\$.ajax({",
+      "\turl: ${1:\"/api/items\"},",
+      "\tmethod: ${2:\"POST\"},",
+      "\tcontentType: \"application/json\",",
+      "\tdata: JSON.stringify(${3:payload}),",
+      "\tdataType: \"json\",",
+      "})",
+      "\t.done((data) => {",
+      "\t\t${0}",
+      "\t})",
+      "\t.fail((xhr, status, error) => console.error(status, error));"
+    ],
+    "description": "AJAX: jQuery $.ajax (guided)"
+  },
+  "AJAX: axios instance": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "axios",
+    "body": [
+      "import axios from \"axios\";",
+      "",
+      "// One configured instance per API: base URL, timeout and auth in one place",
+      "export const ${1:api} = axios.create({",
+      "\tbaseURL: ${2:\"https://api.example.com\"},",
+      "\ttimeout: ${3:10000},",
+      "});",
+      "",
+      "// Interceptors run before every request / after every response",
+      "${1}.interceptors.request.use((config) => {",
+      "\tconst token = localStorage.getItem(\"token\");",
+      "\tif (token) config.headers.Authorization = `Bearer \\${token}`;",
+      "\treturn config;",
+      "});",
+      "${1}.interceptors.response.use(",
+      "\t(res) => res,",
+      "\t(err) => Promise.reject(err.response?.data ?? err),",
+      ");${0}"
+    ],
+    "description": "AJAX: axios instance (guided)"
+  },
+  "Responsive: matchMedia breakpoints": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "mq",
+    "body": [
+      "// Mobile-first breakpoints (same values as Tailwind): mirror your CSS in JS",
+      "const BREAKPOINTS = {",
+      "\tsm: \"(min-width: 640px)\",   // large phones landscape",
+      "\tmd: \"(min-width: 768px)\",   // tablets portrait (iPad Mini 768x1024)",
+      "\tlg: \"(min-width: 1024px)\",  // tablets landscape / small laptops",
+      "\txl: \"(min-width: 1280px)\",  // laptops and desktops",
+      "};",
+      "",
+      "const ${1:mql} = window.matchMedia(BREAKPOINTS.${2:md});",
+      "const ${3:onChange} = (e) => {",
+      "\t// e.matches is true when the viewport is at or above the breakpoint",
+      "\t${0}",
+      "};",
+      "${1}.addEventListener(\"change\", ${3});",
+      "${3}(${1});   // run once for the current size"
+    ],
+    "description": "Responsive: matchMedia breakpoints (guided)"
+  },
+  "labelled console.log": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "clog",
+    "body": [
+      "console.log(\"${1:label}:\", ${2:value});${0}"
+    ],
+    "description": "labelled console.log (guided)"
+  }
+}

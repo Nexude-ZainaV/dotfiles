@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[// filter_input validates/normalises instead of reading \$_GET/\$_POST raw
+\$${1:id} = filter_input(INPUT_GET, '${1}', FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]);
+if (\$${1} === false || \$${1} === null) {
+	http_response_code(400);
+	exit('Invalid ${1}');
+}${0}]]></content>
+	<tabTrigger>input</tabTrigger>
+	<scope>embedding.php, source.php</scope>
+	<description>read request input safely</description>
+</snippet>

@@ -1,0 +1,33 @@
+<snippet>
+	<content><![CDATA[<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<!-- Responsive: without this, phones render a zoomed-out desktop page -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>${1:Page title}</title>
+	<meta name="description" content="${2:150-160 characters that appear under the title in search results}">
+
+	<!-- Open Graph: the preview card when the link is shared -->
+	<meta property="og:title" content="${1}">
+	<meta property="og:description" content="${2}">
+	<meta property="og:image" content="${3:/og-image.png}">
+
+	<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+	<link rel="stylesheet" href="${4:css/styles.css}">
+	<!-- defer: download in parallel, run after the HTML is parsed -->
+	<script src="${5:js/main.js}" defer></script>
+</head>
+<body>
+	<a class="skip-link" href="#main">Skip to content</a>
+	<header></header>
+	<main id="main">
+		${0}
+	</main>
+	<footer></footer>
+</body>
+</html>]]></content>
+	<tabTrigger>html5</tabTrigger>
+	<scope>text.html</scope>
+	<description>HTML5 responsive page</description>
+</snippet>

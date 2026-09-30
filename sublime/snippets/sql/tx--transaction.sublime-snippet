@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[-- All-or-nothing: if any statement fails, ROLLBACK leaves the data untouched
+BEGIN;   -- MySQL: START TRANSACTION;
+
+UPDATE accounts SET balance = balance - ${1:100} WHERE id = ${2:1};
+UPDATE accounts SET balance = balance + ${1} WHERE id = ${3:2};
+${0}
+COMMIT;   -- or ROLLBACK; to undo]]></content>
+	<tabTrigger>tx</tabTrigger>
+	<scope>source.sql</scope>
+	<description>Transaction</description>
+</snippet>

@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[-- Always list the columns: the statement keeps working if columns are added later
+INSERT INTO ${1:products} (${2:name}, ${3:price})
+VALUES
+	(${4:'Keyboard'}, ${5:49.99}),
+	(${6:'Mouse'}, ${7:19.99});${0}]]></content>
+	<tabTrigger>ins</tabTrigger>
+	<scope>source.sql</scope>
+	<description>INSERT (multi-row)</description>
+</snippet>

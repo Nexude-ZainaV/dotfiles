@@ -1,0 +1,16 @@
+<snippet>
+	<content><![CDATA[// PDO works with MySQL, SQLite, PostgreSQL... Configure it once, reuse the object.
+\$pdo = new PDO(
+	${1:'mysql:host=127.0.0.1;dbname=app;charset=utf8mb4'},   // or 'sqlite:' . __DIR__ . '/app.db'
+	${2:getenv('DB_USER') ?: 'root'},
+	${3:getenv('DB_PASS') ?: ''},
+	[
+		PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,        // throw on SQL errors
+		PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,   // rows as ['column' => value]
+		PDO::ATTR_EMULATE_PREPARES => false,                // real prepared statements
+	],
+);${0}]]></content>
+	<tabTrigger>pdo</tabTrigger>
+	<scope>embedding.php, source.php</scope>
+	<description>PDO connection</description>
+</snippet>

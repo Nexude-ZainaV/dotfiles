@@ -1,0 +1,26 @@
+<snippet>
+	<content><![CDATA[<!-- Mobile: button toggles the menu. Desktop: CSS shows the list and hides the button. -->
+<nav class="nav" aria-label="Main">
+	<a class="nav__brand" href="/">${1:Brand}</a>
+	<button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
+		<span class="visually-hidden">Menu</span>☰
+	</button>
+	<ul class="nav__menu" id="nav-menu">
+		<li><a href="/" aria-current="page">Home</a></li>
+		<li><a href="/${2:about}">${3:About}</a></li>
+		${0}
+	</ul>
+</nav>
+<script>
+	// Keep aria-expanded in sync so assistive tech announces the menu state
+	const toggle = document.querySelector(".nav__toggle");
+	toggle.addEventListener("click", () => {
+		const open = toggle.getAttribute("aria-expanded") === "true";
+		toggle.setAttribute("aria-expanded", String(!open));
+		document.getElementById("nav-menu").classList.toggle("is-open", !open);
+	});
+</script>]]></content>
+	<tabTrigger>nav</tabTrigger>
+	<scope>text.html</scope>
+	<description>Responsive nav with toggle</description>
+</snippet>

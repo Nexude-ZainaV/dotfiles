@@ -1,0 +1,17 @@
+<snippet>
+	<content><![CDATA[// switch uses loose comparison (==); prefer match below for strict comparison
+switch (${1:\$action}) {
+	case '${2:create}':
+		${3}
+		break;
+	case '${4:delete}':
+		${5}
+		break;
+	default:
+		${0}
+		break;
+}]]></content>
+	<tabTrigger>sw</tabTrigger>
+	<scope>embedding.php, source.php</scope>
+	<description>switch statement</description>
+</snippet>

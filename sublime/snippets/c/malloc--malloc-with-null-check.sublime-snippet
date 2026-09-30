@@ -1,0 +1,14 @@
+<snippet>
+	<content><![CDATA[// malloc can fail: always check for NULL, and free exactly once when done
+${1:int} *${2:buffer} = malloc(${3:count} * sizeof *${2});
+if (${2} == NULL) {
+	perror("malloc");
+	return EXIT_FAILURE;
+}
+${0}
+free(${2});
+${2} = NULL;   // avoid a dangling pointer being used after free]]></content>
+	<tabTrigger>malloc</tabTrigger>
+	<scope>source.c</scope>
+	<description>malloc with NULL check</description>
+</snippet>

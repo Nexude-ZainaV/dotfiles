@@ -1,0 +1,13 @@
+<snippet>
+	<content><![CDATA[// Catch by const reference; most specific exception types first
+try {
+	${1}
+} catch (const std::invalid_argument& e) {
+	std::cerr << "bad input: " << e.what() << '\\n';
+} catch (const std::exception& e) {
+	std::cerr << "error: " << e.what() << '\\n';
+}${0}]]></content>
+	<tabTrigger>try</tabTrigger>
+	<scope>source.c++</scope>
+	<description>try / catch</description>
+</snippet>

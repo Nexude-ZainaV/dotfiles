@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[// Stopwatch: high-resolution elapsed time for measuring code
+var ${1:sw} = System.Diagnostics.Stopwatch.StartNew();
+${0}
+${1}.Stop();
+Console.WriteLine(\$"elapsed: {${1}.ElapsedMilliseconds} ms");]]></content>
+	<tabTrigger>timer</tabTrigger>
+	<scope>source.cs</scope>
+	<description>Stopwatch timing</description>
+</snippet>

@@ -1,0 +1,21 @@
+<snippet>
+	<content><![CDATA[// useReducer: when several state values change together, or next state follows rules
+type State = { ${1:count}: number };
+type Action = { type: "increment" } | { type: "decrement" } | { type: "reset" };
+
+function reducer(state: State, action: Action): State {
+	switch (action.type) {
+		case "increment":
+			return { ${1}: state.${1} + 1 };
+		case "decrement":
+			return { ${1}: state.${1} - 1 };
+		case "reset":
+			return { ${1}: 0 };
+	}
+}
+
+const [state, dispatch] = useReducer(reducer, { ${1}: 0 });${0}]]></content>
+	<tabTrigger>ured</tabTrigger>
+	<scope>source.jsx, source.tsx, source.js, source.ts</scope>
+	<description>useReducer</description>
+</snippet>

@@ -1,0 +1,17 @@
+<snippet>
+	<content><![CDATA[// app/${1:posts}/[${2:slug}]/page.tsx. Next 15+: params is a Promise, so await it.
+import { notFound } from "next/navigation";
+
+type Props = { params: Promise<{ ${2}: string }> };
+
+export default async function ${3:Post}Page({ params }: Props) {
+	const { ${2} } = await params;
+	const item = await ${4:getBySlug}(${2});
+	if (!item) notFound();   // renders not-found.tsx and returns a 404
+	${0}
+	return <article>{item.title}</article>;
+}]]></content>
+	<tabTrigger>ndynamic</tabTrigger>
+	<scope>source.tsx, source.ts, source.jsx, source.js</scope>
+	<description>Next.js dynamic route page</description>
+</snippet>

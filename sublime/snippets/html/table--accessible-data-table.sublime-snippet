@@ -1,0 +1,17 @@
+<snippet>
+	<content><![CDATA[<!-- caption + th scope let screen readers announce which header each cell belongs to -->
+<div class="table-wrap" role="region" aria-label="${1:Orders}" tabindex="0">  <!-- scrolls on small screens -->
+	<table>
+		<caption>${1}</caption>
+		<thead>
+			<tr><th scope="col">${2:Name}</th><th scope="col">${3:Total}</th></tr>
+		</thead>
+		<tbody>
+			<tr><td>${0}</td><td></td></tr>
+		</tbody>
+	</table>
+</div>]]></content>
+	<tabTrigger>table</tabTrigger>
+	<scope>text.html</scope>
+	<description>Accessible data table</description>
+</snippet>

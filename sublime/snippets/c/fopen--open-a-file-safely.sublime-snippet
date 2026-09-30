@@ -1,0 +1,18 @@
+<snippet>
+	<content><![CDATA[// fopen returns NULL on failure; perror prints the reason from errno
+FILE *${1:fp} = fopen(${2:"data.txt"}, ${3:"r"});
+if (${1} == NULL) {
+	perror(${2});
+	return EXIT_FAILURE;
+}
+
+char ${4:line}[256];
+while (fgets(${4}, sizeof ${4}, ${1}) != NULL) {   // fgets is bounded, unlike gets
+	${0}
+}
+
+fclose(${1});]]></content>
+	<tabTrigger>fopen</tabTrigger>
+	<scope>source.c</scope>
+	<description>open a file safely</description>
+</snippet>

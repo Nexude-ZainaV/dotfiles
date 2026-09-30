@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[// forEach: cannot break early or await; use for...of when you need either
+${1:items}.forEach((${2:item}, ${3:index}) => {
+	${0}
+});]]></content>
+	<tabTrigger>fore</tabTrigger>
+	<scope>source.js, source.ts, source.jsx, source.tsx</scope>
+	<description>forEach</description>
+</snippet>

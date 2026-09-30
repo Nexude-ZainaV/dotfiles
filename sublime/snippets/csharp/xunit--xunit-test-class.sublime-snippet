@@ -1,0 +1,20 @@
+<snippet>
+	<content><![CDATA[namespace ${1:MyApp.Tests};
+
+public class ${2:CalculatorTests}
+{
+	[Fact]
+	public void ${3:Add_ReturnsSum}()
+	{
+		// Arrange - Act - Assert keeps every test readable
+		var sut = new ${4:Calculator}();
+
+		var result = sut.${5:Add}(2, 3);
+
+		Assert.Equal(5, result);
+	}${0}
+}]]></content>
+	<tabTrigger>xunit</tabTrigger>
+	<scope>source.cs</scope>
+	<description>xUnit test class</description>
+</snippet>

@@ -1,0 +1,15 @@
+<snippet>
+	<content><![CDATA[class ${1:Account}:
+	"""${2:What this class represents.}"""
+
+	def __init__(self, ${3:owner}: str) -> None:
+		self.${3} = ${3}
+		self._balance = 0   # leading underscore: internal by convention
+
+	def __repr__(self) -> str:   # shown in the debugger and REPL
+		return f"${1}(${3}={self.${3}!r})"
+	${0}]]></content>
+	<tabTrigger>cls</tabTrigger>
+	<scope>source.python</scope>
+	<description>class</description>
+</snippet>

@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[# range(start, stop, step): stop is exclusive
+for ${1:i} in range(${2:0}, ${3:10}):
+	${0}]]></content>
+	<tabTrigger>forr</tabTrigger>
+	<scope>source.python</scope>
+	<description>for over range</description>
+</snippet>

@@ -1,0 +1,15 @@
+<snippet>
+	<content><![CDATA[// Include guard: stops this header being pasted twice into one translation unit
+#ifndef ${1:MODULE}_H
+#define ${1}_H
+
+#include <stddef.h>
+
+// Public API of ${1}: only declarations here, definitions live in the .c file
+${0}
+
+#endif // ${1}_H]]></content>
+	<tabTrigger>header</tabTrigger>
+	<scope>source.c</scope>
+	<description>Header file with include guard</description>
+</snippet>

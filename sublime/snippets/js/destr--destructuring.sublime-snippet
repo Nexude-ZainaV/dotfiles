@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[// Destructuring with defaults and renaming
+const { ${1:id}, ${2:name}: ${3:displayName}, ${4:role} = ${5:"user"} } = ${6:obj};
+const [${7:first}, ...${8:rest}] = ${9:list};${0}]]></content>
+	<tabTrigger>destr</tabTrigger>
+	<scope>source.js, source.ts, source.jsx, source.tsx</scope>
+	<description>destructuring</description>
+</snippet>

@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[// .NET 6+ projects enable ImplicitUsings (System, System.Linq, System.Collections.Generic,
+// System.Threading.Tasks ...). Add only what is not already implicit:
+using System.Diagnostics;        // Stopwatch, Debug
+using System.Text.Json;          // JsonSerializer
+using System.ComponentModel.DataAnnotations;  // [Required], [Range] validation attributes
+${0}]]></content>
+	<tabTrigger>usings</tabTrigger>
+	<scope>source.cs</scope>
+	<description>Common usings</description>
+</snippet>

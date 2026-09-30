@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[import csv
+
+# DictReader maps each row to {column_name: value}; newline="" is required by the csv module
+with open(${1:"data.csv"}, newline="", encoding="utf-8") as fh:
+	for ${2:row} in csv.DictReader(fh):
+		${0}]]></content>
+	<tabTrigger>readcsv</tabTrigger>
+	<scope>source.python</scope>
+	<description>read a CSV file</description>
+</snippet>

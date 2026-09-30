@@ -1,0 +1,19 @@
+<snippet>
+	<content><![CDATA[/* Container queries: a component responds to ITS container's width, not the viewport,
+   so the same card works in a sidebar and in the main column. */
+.${1:card}-wrap {
+	container-type: inline-size;
+	container-name: ${1};
+}
+
+@container ${1} (min-width: ${2:420px}) {
+	.${1} {
+		display: grid;
+		grid-template-columns: 160px 1fr;
+		${0}
+	}
+}]]></content>
+	<tabTrigger>cq</tabTrigger>
+	<scope>source.css, source.scss, source.less</scope>
+	<description>Container query</description>
+</snippet>

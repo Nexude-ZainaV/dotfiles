@@ -1,0 +1,15 @@
+<snippet>
+	<content><![CDATA[// Dynamic SEO metadata per page (title, description, Open Graph)
+export async function generateMetadata({ params }: { params: Promise<{ ${1:slug}: string }> }) {
+	const { ${1} } = await params;
+	const item = await ${2:getBySlug}(${1});
+	return {
+		title: item?.title ?? "Not found",
+		description: item?.summary,
+		openGraph: { images: item?.image ? [item.image] : [] },
+	};
+}${0}]]></content>
+	<tabTrigger>nmeta</tabTrigger>
+	<scope>source.tsx, source.ts, source.jsx, source.js</scope>
+	<description>generateMetadata</description>
+</snippet>

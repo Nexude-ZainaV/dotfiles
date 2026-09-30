@@ -1,0 +1,13 @@
+<snippet>
+	<content><![CDATA[-- CASE is SQL's if/else inside an expression
+SELECT ${1:name},
+	CASE
+		WHEN ${2:total} >= ${3:1000} THEN 'gold'
+		WHEN ${2} >= ${4:500} THEN 'silver'
+		ELSE 'bronze'
+	END AS ${5:tier}
+FROM ${6:customers};${0}]]></content>
+	<tabTrigger>case</tabTrigger>
+	<scope>source.sql</scope>
+	<description>CASE expression</description>
+</snippet>

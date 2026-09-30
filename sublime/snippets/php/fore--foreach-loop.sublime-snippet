@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[// foreach: iterate arrays (key => value). Use &\$value only if you must modify in place.
+foreach (${1:\$items} as ${2:\$key} => ${3:\$value}) {
+	${0}
+}]]></content>
+	<tabTrigger>fore</tabTrigger>
+	<scope>embedding.php, source.php</scope>
+	<description>foreach loop</description>
+</snippet>

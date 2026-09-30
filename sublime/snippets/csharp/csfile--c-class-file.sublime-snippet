@@ -1,0 +1,14 @@
+<snippet>
+	<content><![CDATA[namespace ${1:MyApp.Services};   // file-scoped namespace (C# 10+): one less indent level
+
+/// <summary>
+/// ${2:What this class is responsible for.}
+/// </summary>
+public sealed class ${3:MyService}
+{
+	${0}
+}]]></content>
+	<tabTrigger>csfile</tabTrigger>
+	<scope>source.cs</scope>
+	<description>C# class file</description>
+</snippet>

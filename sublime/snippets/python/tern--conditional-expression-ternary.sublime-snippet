@@ -1,0 +1,7 @@
+<snippet>
+	<content><![CDATA[# Python's ternary: value_if_true if condition else value_if_false
+${1:label} = ${2:"adult"} if ${3:age >= 18} else ${4:"minor"}${0}]]></content>
+	<tabTrigger>tern</tabTrigger>
+	<scope>source.python</scope>
+	<description>Conditional expression (ternary)</description>
+</snippet>

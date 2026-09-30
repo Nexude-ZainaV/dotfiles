@@ -1,0 +1,15 @@
+<snippet>
+	<content><![CDATA[def ${1:name}(${2:value}: ${3:int}) -> ${4:bool}:
+	"""${5:One line on what it does.}
+
+	Args:
+		${2}: ${6:what it means}
+
+	Returns:
+		${7:what comes back}
+	"""
+	${0}]]></content>
+	<tabTrigger>def</tabTrigger>
+	<scope>source.python</scope>
+	<description>typed function with docstring</description>
+</snippet>

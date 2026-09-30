@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[-- Index columns used in WHERE / JOIN / ORDER BY. Composite index column order matters:
+-- (a, b) serves queries on a, and on a + b, but not on b alone.
+CREATE INDEX idx_${1:orders}_${2:status_created} ON ${1} (${3:status}, ${4:created_at});${0}]]></content>
+	<tabTrigger>idx</tabTrigger>
+	<scope>source.sql</scope>
+	<description>CREATE INDEX</description>
+</snippet>

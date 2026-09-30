@@ -1,0 +1,21 @@
+<snippet>
+	<content><![CDATA[// Controlled inputs: React state is the single source of truth for each field
+const [values, setValues] = useState({ ${1:email}: "", ${2:password}: "" });
+
+function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+	setValues((v) => ({ ...v, [e.target.name]: e.target.value }));
+}
+
+function handleSubmit(e: React.FormEvent) {
+	e.preventDefault();   // stop the full-page reload
+	${0}
+}
+
+// <form onSubmit={handleSubmit}>
+//     <label htmlFor="${1}">Email</label>
+//     <input id="${1}" name="${1}" type="email" value={values.${1}} onChange={handleChange} required />
+// </form>]]></content>
+	<tabTrigger>form</tabTrigger>
+	<scope>source.jsx, source.tsx, source.js, source.ts</scope>
+	<description>Controlled form</description>
+</snippet>

@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[// useMemo caches a computed VALUE, useCallback caches a FUNCTION, both between renders.
+// Only reach for them when profiling shows a cost, or a child relies on stable props.
+const ${1:sorted} = useMemo(() => [...${2:items}].sort(), [${2}]);
+const ${3:handleClick} = useCallback(() => {
+	${0}
+}, []);]]></content>
+	<tabTrigger>umemo</tabTrigger>
+	<scope>source.jsx, source.tsx, source.js, source.ts</scope>
+	<description>useMemo / useCallback</description>
+</snippet>

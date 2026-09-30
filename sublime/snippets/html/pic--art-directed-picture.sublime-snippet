@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[<!-- <picture>: a different crop per screen size (art direction) plus modern formats -->
+<picture>
+	<source media="(min-width: 1024px)" srcset="${1:hero}-wide.avif" type="image/avif">
+	<source media="(min-width: 1024px)" srcset="${1}-wide.jpg">
+	<source srcset="${1}-square.avif" type="image/avif">
+	<img src="${1}-square.jpg" alt="${2:Describe the image}" width="800" height="800">
+</picture>${0}]]></content>
+	<tabTrigger>pic</tabTrigger>
+	<scope>text.html</scope>
+	<description>Art-directed <picture></description>
+</snippet>

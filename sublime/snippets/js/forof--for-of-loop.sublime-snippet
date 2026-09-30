@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[// for...of: iterates VALUES of arrays, strings, Maps, Sets (works with await/break)
+for (const ${1:item} of ${2:items}) {
+	${0}
+}]]></content>
+	<tabTrigger>forof</tabTrigger>
+	<scope>source.js, source.ts, source.jsx, source.tsx</scope>
+	<description>for...of loop</description>
+</snippet>

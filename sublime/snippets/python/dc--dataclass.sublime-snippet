@@ -1,0 +1,16 @@
+<snippet>
+	<content><![CDATA[from dataclasses import dataclass, field
+
+
+@dataclass(slots=True)
+class ${1:Item}:
+	"""${2:A plain data record: __init__, __repr__ and __eq__ are generated.}"""
+
+	${3:name}: str
+	${4:price}: float = 0.0
+	tags: list[str] = field(default_factory=list)   # never use a mutable default directly
+${0}]]></content>
+	<tabTrigger>dc</tabTrigger>
+	<scope>source.python</scope>
+	<description>dataclass</description>
+</snippet>

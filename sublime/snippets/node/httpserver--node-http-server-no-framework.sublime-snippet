@@ -1,0 +1,18 @@
+<snippet>
+	<content><![CDATA[import { createServer } from "node:http";
+
+// Plain Node HTTP server: what Express is built on
+const server = createServer((req, res) => {
+	if (req.method === "GET" && req.url === "/${1:health}") {
+		res.writeHead(200, { "Content-Type": "application/json" });
+		return res.end(JSON.stringify({ status: "ok" }));
+	}
+	${0}
+	res.writeHead(404).end();
+});
+
+server.listen(${2:3000});]]></content>
+	<tabTrigger>httpserver</tabTrigger>
+	<scope>source.js, source.ts</scope>
+	<description>node:http server (no framework)</description>
+</snippet>

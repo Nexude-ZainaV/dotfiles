@@ -1,0 +1,17 @@
+<snippet>
+	<content><![CDATA[// switch on an integral or enum value. [[fallthrough]] documents intentional fall-through.
+switch (${1:value}) {
+	case ${2:1}:
+		${3}
+		break;
+	case ${4:2}:
+		${5}
+		break;
+	default:
+		${0}
+		break;
+}]]></content>
+	<tabTrigger>sw</tabTrigger>
+	<scope>source.c++</scope>
+	<description>switch statement</description>
+</snippet>

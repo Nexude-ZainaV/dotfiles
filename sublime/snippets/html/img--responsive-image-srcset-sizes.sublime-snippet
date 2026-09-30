@@ -1,0 +1,14 @@
+<snippet>
+	<content><![CDATA[<!-- srcset lists files by width; sizes tells the browser how wide the image will display,
+	 so a phone downloads the 480w file and a desktop the 1200w one. -->
+<img
+	src="${1:photo}-800.jpg"
+	srcset="${1}-480.jpg 480w, ${1}-800.jpg 800w, ${1}-1200.jpg 1200w"
+	sizes="(min-width: 1024px) 800px, 100vw"
+	width="800" height="533"
+	alt="${2:Describe what the image shows}"
+	loading="lazy" decoding="async">${0}]]></content>
+	<tabTrigger>img</tabTrigger>
+	<scope>text.html</scope>
+	<description>Responsive image (srcset + sizes)</description>
+</snippet>

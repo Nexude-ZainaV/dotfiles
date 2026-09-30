@@ -1,0 +1,18 @@
+<snippet>
+	<content><![CDATA[/* ============================================================
+   Breakpoint reference (mobile-first, Tailwind-compatible)
+   ------------------------------------------------------------
+   base   0-639px   phones portrait    iPhone SE 375x667, iPhone 15 393x852,
+									   Pixel 8 412x915, Galaxy S24 360x780
+   sm   >= 640px    phones landscape / small tablets
+   md   >= 768px    tablets portrait   iPad Mini 768x1024, iPad 820x1180
+   lg   >= 1024px   tablets landscape, small laptops   iPad Pro 1024x1366
+   xl   >= 1280px   laptops            1280x800, 1366x768, 1440x900
+   2xl  >= 1536px   desktops           1536x864, 1920x1080, 2560x1440
+   Design for content, not devices: add a breakpoint where the layout breaks.
+   ============================================================ */
+${0}]]></content>
+	<tabTrigger>bp</tabTrigger>
+	<scope>source.css, source.scss, source.less</scope>
+	<description>Breakpoint and device reference</description>
+</snippet>

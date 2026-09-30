@@ -1,0 +1,23 @@
+<snippet>
+	<content><![CDATA[// Program.cs: ASP.NET Core minimal API
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddProblemDetails();   // RFC 7807 error responses
+
+var app = builder.Build();
+app.UseExceptionHandler();
+
+// Group related endpoints under one prefix
+var ${1:items} = app.MapGroup("/api/${1}");
+${1}.MapGet("/", () => Results.Ok(Array.Empty<object>()));
+${1}.MapGet("/{id:int}", (int id) => Results.NotFound());
+${1}.MapPost("/", (object body) => Results.Created(\$"/api/${1}/1", body));
+${0}
+app.Run();
+
+public partial class Program;   // lets integration tests reference the app]]></content>
+	<tabTrigger>minapi</tabTrigger>
+	<scope>source.cs</scope>
+	<description>ASP.NET Core minimal API</description>
+</snippet>

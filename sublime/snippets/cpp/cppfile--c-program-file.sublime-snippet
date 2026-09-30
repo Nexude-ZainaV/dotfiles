@@ -1,0 +1,17 @@
+<snippet>
+	<content><![CDATA[// ${1:main}.cpp
+// Purpose: ${2:one line on what this program does}
+// Build:   g++ -std=c++20 -Wall -Wextra -O2 -o ${1} ${1}.cpp
+#include <iostream>
+#include <string>
+#include <vector>
+
+int main()
+{
+	${0}
+	return 0;
+}]]></content>
+	<tabTrigger>cppfile</tabTrigger>
+	<scope>source.c++</scope>
+	<description>C++ program file</description>
+</snippet>

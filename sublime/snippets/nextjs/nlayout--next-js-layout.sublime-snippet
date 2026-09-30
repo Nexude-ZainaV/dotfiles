@@ -1,0 +1,24 @@
+<snippet>
+	<content><![CDATA[// app/layout.tsx: wraps every page beneath it and persists between navigations
+import type { Metadata, Viewport } from "next";
+import "./globals.css";
+
+export const metadata: Metadata = {
+	title: { default: "${1:My App}", template: "%s | ${1}" },
+	description: "${2:Short description for search and social previews}",
+};
+
+// Responsive: width=device-width so mobile browsers do not zoom out a desktop layout
+export const viewport: Viewport = { width: "device-width", initialScale: 1 };
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+	return (
+		<html lang="en">
+			<body className="min-h-dvh antialiased">${0}{children}</body>
+		</html>
+	);
+}]]></content>
+	<tabTrigger>nlayout</tabTrigger>
+	<scope>source.tsx, source.ts, source.jsx, source.js</scope>
+	<description>Next.js layout</description>
+</snippet>

@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[/* clamp(MIN, PREFERRED, MAX): scales with the viewport, never below MIN or above MAX.
+   rem-based min/max keep user font-size preferences working. */
+${1:h1} {
+	font-size: clamp(${2:1.75rem}, ${3:1.2rem + 2.5vw}, ${4:3rem});${0}
+}]]></content>
+	<tabTrigger>clamp</tabTrigger>
+	<scope>source.css, source.scss, source.less</scope>
+	<description>Fluid typography with clamp()</description>
+</snippet>

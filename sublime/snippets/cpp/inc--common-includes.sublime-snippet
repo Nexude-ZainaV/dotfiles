@@ -1,0 +1,14 @@
+<snippet>
+	<content><![CDATA[// ---- Standard library headers ----
+#include <iostream>       // std::cout, std::cerr
+#include <string>         // std::string
+#include <vector>         // std::vector (dynamic array)
+#include <unordered_map>  // hash map, average O(1) lookup
+#include <memory>         // std::unique_ptr, std::make_unique
+#include <algorithm>      // std::sort, std::find_if, std::transform
+#include <stdexcept>      // std::runtime_error, std::invalid_argument
+${0}]]></content>
+	<tabTrigger>inc</tabTrigger>
+	<scope>source.c++</scope>
+	<description>Common includes</description>
+</snippet>

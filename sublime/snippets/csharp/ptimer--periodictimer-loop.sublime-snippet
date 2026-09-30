@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[// PeriodicTimer (.NET 6+): async-friendly repeating timer, stops with the token
+using var ${1:timer} = new PeriodicTimer(TimeSpan.FromSeconds(${2:5}));
+while (await ${1}.WaitForNextTickAsync(${3:ct}))
+{
+	${0}
+}]]></content>
+	<tabTrigger>ptimer</tabTrigger>
+	<scope>source.cs</scope>
+	<description>PeriodicTimer loop</description>
+</snippet>

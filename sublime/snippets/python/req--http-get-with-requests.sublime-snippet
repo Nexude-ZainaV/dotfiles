@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[import requests
+
+# Always set a timeout: without one a hung server blocks forever
+resp = requests.get(${1:"https://api.example.com/items"}, params={${2:"page": 1}}, timeout=${3:10})
+resp.raise_for_status()   # turn 4xx/5xx into an exception
+${4:data} = resp.json()${0}]]></content>
+	<tabTrigger>req</tabTrigger>
+	<scope>source.python</scope>
+	<description>HTTP GET with requests</description>
+</snippet>

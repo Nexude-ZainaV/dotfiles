@@ -1,0 +1,20 @@
+<snippet>
+	<content><![CDATA[// Mobile-first breakpoints (same values as Tailwind): mirror your CSS in JS
+const BREAKPOINTS = {
+	sm: "(min-width: 640px)",   // large phones landscape
+	md: "(min-width: 768px)",   // tablets portrait (iPad Mini 768x1024)
+	lg: "(min-width: 1024px)",  // tablets landscape / small laptops
+	xl: "(min-width: 1280px)",  // laptops and desktops
+};
+
+const ${1:mql} = window.matchMedia(BREAKPOINTS.${2:md});
+const ${3:onChange} = (e) => {
+	// e.matches is true when the viewport is at or above the breakpoint
+	${0}
+};
+${1}.addEventListener("change", ${3});
+${3}(${1});   // run once for the current size]]></content>
+	<tabTrigger>mq</tabTrigger>
+	<scope>source.js, source.ts, source.jsx, source.tsx</scope>
+	<description>Responsive: matchMedia breakpoints</description>
+</snippet>

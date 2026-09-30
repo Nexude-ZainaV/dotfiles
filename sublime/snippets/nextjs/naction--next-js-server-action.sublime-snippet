@@ -1,0 +1,20 @@
+<snippet>
+	<content><![CDATA["use server";
+// Server actions run on the server but can be called from a <form action={...}>.
+// Always validate and authorize here: they are public HTTP endpoints under the hood.
+import { revalidatePath } from "next/cache";
+import { z } from "zod";
+
+const Schema = z.object({ ${1:title}: z.string().min(1) });
+
+export async function ${2:createPost}(formData: FormData) {
+	const parsed = Schema.safeParse({ ${1}: formData.get("${1}") });
+	if (!parsed.success) return { error: "${3:Title is required}" };
+	${0}
+	revalidatePath("/${4:posts}");   // refresh cached pages that show this data
+	return { ok: true };
+}]]></content>
+	<tabTrigger>naction</tabTrigger>
+	<scope>source.tsx, source.ts, source.jsx, source.js</scope>
+	<description>Next.js server action</description>
+</snippet>

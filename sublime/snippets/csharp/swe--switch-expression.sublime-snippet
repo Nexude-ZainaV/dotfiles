@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[// Switch expression (C# 8+): returns a value; `_` is the catch-all
+var ${1:result} = ${2:status} switch
+{
+	${3:Status.Active} => ${4:"active"},
+	${5:Status.Closed} => ${6:"closed"},
+	_ => throw new ArgumentOutOfRangeException(nameof(${2}), ${2}, null)
+};${0}]]></content>
+	<tabTrigger>swe</tabTrigger>
+	<scope>source.cs</scope>
+	<description>switch expression</description>
+</snippet>

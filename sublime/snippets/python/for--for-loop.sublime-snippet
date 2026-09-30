@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[# for iterates over any iterable directly: no index needed
+for ${1:item} in ${2:items}:
+	${0}]]></content>
+	<tabTrigger>for</tabTrigger>
+	<scope>source.python</scope>
+	<description>for loop</description>
+</snippet>

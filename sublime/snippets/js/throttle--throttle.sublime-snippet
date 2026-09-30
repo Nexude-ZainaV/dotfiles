@@ -1,0 +1,15 @@
+<snippet>
+	<content><![CDATA[// throttle: run at most once per `limit` ms (scroll and mousemove handlers)
+function throttle(fn, limit = ${1:200}) {
+	let waiting = false;
+	return (...args) => {
+		if (waiting) return;
+		fn(...args);
+		waiting = true;
+		setTimeout(() => (waiting = false), limit);
+	};
+}${0}]]></content>
+	<tabTrigger>throttle</tabTrigger>
+	<scope>source.js, source.ts, source.jsx, source.tsx</scope>
+	<description>throttle</description>
+</snippet>

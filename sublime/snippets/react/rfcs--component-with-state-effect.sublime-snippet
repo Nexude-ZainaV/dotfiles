@@ -1,0 +1,39 @@
+<snippet>
+	<content><![CDATA[import { useEffect, useState } from "react";
+
+// State holds what the UI shows; effects sync with things outside React (APIs, timers)
+export function ${1:UserList}() {
+	const [${2:items}, set${3:Items}] = useState<${4:string}[]>([]);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState<string | null>(null);
+
+	useEffect(() => {
+		const controller = new AbortController();   // cancel the request on unmount
+		fetch("${5:/api/users}", { signal: controller.signal })
+			.then((res) => {
+				if (!res.ok) throw new Error(`HTTP \${res.status}`);
+				return res.json();
+			})
+			.then(set${3})
+			.catch((err) => {
+				if (err.name !== "AbortError") setError(err.message);
+			})
+			.finally(() => setLoading(false));
+		return () => controller.abort();
+	}, []);   // [] = run once after the first render
+
+	if (loading) return <p>Loading...</p>;
+	if (error) return <p role="alert">Error: {error}</p>;
+	return (
+		<ul>
+			{${2}.map((item) => (
+				<li key={item}>{item}</li>   // key must be stable and unique
+			))}
+			${0}
+		</ul>
+	);
+}]]></content>
+	<tabTrigger>rfcs</tabTrigger>
+	<scope>source.jsx, source.tsx, source.js, source.ts</scope>
+	<description>Component with state + effect</description>
+</snippet>

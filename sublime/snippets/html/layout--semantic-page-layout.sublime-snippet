@@ -1,0 +1,17 @@
+<snippet>
+	<content><![CDATA[<!-- Semantic landmarks let screen readers jump straight to each region -->
+<header class="site-header">
+	<nav aria-label="Main">${1}</nav>
+</header>
+<main id="main">
+	<section aria-labelledby="${2:intro}-title">
+		<h1 id="${2}-title">${3:Heading}</h1>
+		${0}
+	</section>
+</main>
+<aside aria-label="Related"></aside>
+<footer class="site-footer"></footer>]]></content>
+	<tabTrigger>layout</tabTrigger>
+	<scope>text.html</scope>
+	<description>Semantic page layout</description>
+</snippet>

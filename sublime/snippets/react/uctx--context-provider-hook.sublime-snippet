@@ -1,0 +1,23 @@
+<snippet>
+	<content><![CDATA[import { createContext, useContext, useState } from "react";
+
+// Context: share a value with a whole subtree without passing props at every level
+type ${1:Theme}ContextValue = { ${2:theme}: string; set${3:Theme}: (t: string) => void };
+
+const ${1}Context = createContext<${1}ContextValue | null>(null);
+
+export function ${1}Provider({ children }: { children: React.ReactNode }) {
+	const [${2}, set${3}] = useState("${4:light}");
+	return <${1}Context.Provider value={{ ${2}, set${3} }}>{children}</${1}Context.Provider>;
+}
+
+// Custom hook: throws a clear error if used outside the provider
+export function use${1}() {
+	const ctx = useContext(${1}Context);
+	if (!ctx) throw new Error("use${1} must be used inside <${1}Provider>");
+	return ctx;
+}${0}]]></content>
+	<tabTrigger>uctx</tabTrigger>
+	<scope>source.jsx, source.tsx, source.js, source.ts</scope>
+	<description>Context + provider + hook</description>
+</snippet>

@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[/**
+ * ${2:What the function does.}
+ */
+function ${1:name}(${3:int} \$${4:value}): ${5:bool}
+{
+	${0}
+}]]></content>
+	<tabTrigger>fn</tabTrigger>
+	<scope>embedding.php, source.php</scope>
+	<description>typed function with docblock</description>
+</snippet>

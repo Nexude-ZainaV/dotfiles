@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[// Function template: the compiler generates one version per type used
+template <typename T>
+[[nodiscard]] T ${1:clamp_value}(T v, T lo, T hi)
+{
+	return v < lo ? lo : (hi < v ? hi : v);
+}${0}]]></content>
+	<tabTrigger>tmpl</tabTrigger>
+	<scope>source.c++</scope>
+	<description>function template</description>
+</snippet>

@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[// In server components, fetch results can be cached and revalidated on a timer
+const res = await fetch("${1:https://api.example.com/items}", {
+	next: { revalidate: ${2:60} },   // seconds; use cache: "no-store" for always-fresh data
+});
+if (!res.ok) throw new Error(`Failed to load: \${res.status}`);
+const ${3:items} = await res.json();${0}]]></content>
+	<tabTrigger>nfetch</tabTrigger>
+	<scope>source.tsx, source.ts, source.jsx, source.js</scope>
+	<description>Server-side fetch with caching</description>
+</snippet>

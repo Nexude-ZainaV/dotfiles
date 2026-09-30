@@ -1,0 +1,358 @@
+{
+  "Common usings": {
+    "scope": "csharp",
+    "prefix": "usings",
+    "body": [
+      "// .NET 6+ projects enable ImplicitUsings (System, System.Linq, System.Collections.Generic,",
+      "// System.Threading.Tasks ...). Add only what is not already implicit:",
+      "using System.Diagnostics;        // Stopwatch, Debug",
+      "using System.Text.Json;          // JsonSerializer",
+      "using System.ComponentModel.DataAnnotations;  // [Required], [Range] validation attributes",
+      "${0}"
+    ],
+    "description": "Common usings (guided)"
+  },
+  "C# class file": {
+    "scope": "csharp",
+    "prefix": "csfile",
+    "body": [
+      "namespace ${1:MyApp.Services};   // file-scoped namespace (C# 10+): one less indent level",
+      "",
+      "/// <summary>",
+      "/// ${2:What this class is responsible for.}",
+      "/// </summary>",
+      "public sealed class ${3:MyService}",
+      "{",
+      "\t${0}",
+      "}"
+    ],
+    "description": "C# class file (guided)",
+    "isFileTemplate": true
+  },
+  "if statement": {
+    "scope": "csharp",
+    "prefix": "if",
+    "body": [
+      "// if: run the block only when the condition is true",
+      "if (${1:condition})",
+      "{",
+      "\t${0}",
+      "}"
+    ],
+    "description": "if statement (guided)"
+  },
+  "if / else": {
+    "scope": "csharp",
+    "prefix": "ife",
+    "body": [
+      "// if / else: exactly one of the two blocks runs",
+      "if (${1:condition})",
+      "{",
+      "\t${2}",
+      "}",
+      "else",
+      "{",
+      "\t${0}",
+      "}"
+    ],
+    "description": "if / else (guided)"
+  },
+  "else-if chain": {
+    "scope": "csharp",
+    "prefix": "elif",
+    "body": [
+      "// else-if chain: first true branch wins",
+      "if (${1:score} >= ${2:90})",
+      "{",
+      "\t${3}",
+      "}",
+      "else if (${1} >= ${4:75})",
+      "{",
+      "\t${5}",
+      "}",
+      "else",
+      "{",
+      "\t${0}",
+      "}"
+    ],
+    "description": "else-if chain (guided)"
+  },
+  "Nested if with pattern matching": {
+    "scope": "csharp",
+    "prefix": "ifn",
+    "body": [
+      "// Pattern matching null-check + type test in one step, then a nested condition",
+      "if (${1:input} is ${2:Order} ${3:order})",
+      "{",
+      "\tif (${3}.${4:Total} > ${5:0})",
+      "\t{",
+      "\t\t${0}",
+      "\t}",
+      "}"
+    ],
+    "description": "Nested if with pattern matching (guided)"
+  },
+  "Ternary and null-coalescing": {
+    "scope": "csharp",
+    "prefix": "tern",
+    "body": [
+      "// ternary: condition ? if_true : if_false",
+      "var ${1:label} = ${2:count} > 0 ? \"${3:has items}\" : \"${4:empty}\";",
+      "// ?? picks the right side when the left is null; ??= assigns only if null",
+      "var ${5:name} = ${6:input} ?? \"${7:default}\";${0}"
+    ],
+    "description": "Ternary and null-coalescing (guided)"
+  },
+  "switch statement": {
+    "scope": "csharp",
+    "prefix": "sw",
+    "body": [
+      "// switch statement: each section must end with break, return or throw",
+      "switch (${1:value})",
+      "{",
+      "\tcase ${2:1}:",
+      "\t\t${3}",
+      "\t\tbreak;",
+      "\tcase ${4:2}:",
+      "\t\t${5}",
+      "\t\tbreak;",
+      "\tdefault:",
+      "\t\t${0}",
+      "\t\tbreak;",
+      "}"
+    ],
+    "description": "switch statement (guided)"
+  },
+  "switch expression": {
+    "scope": "csharp",
+    "prefix": "swe",
+    "body": [
+      "// Switch expression (C# 8+): returns a value; `_` is the catch-all",
+      "var ${1:result} = ${2:status} switch",
+      "{",
+      "\t${3:Status.Active} => ${4:\"active\"},",
+      "\t${5:Status.Closed} => ${6:\"closed\"},",
+      "\t_ => throw new ArgumentOutOfRangeException(nameof(${2}), ${2}, null)",
+      "};${0}"
+    ],
+    "description": "switch expression (guided)"
+  },
+  "for loop": {
+    "scope": "csharp",
+    "prefix": "for",
+    "body": [
+      "// for: use when you need the index",
+      "for (var ${1:i} = 0; ${1} < ${2:items}.${3:Count}; ${1}++)",
+      "{",
+      "\t${0}",
+      "}"
+    ],
+    "description": "for loop (guided)"
+  },
+  "foreach loop": {
+    "scope": "csharp",
+    "prefix": "fore",
+    "body": [
+      "// foreach: read-only iteration over any IEnumerable",
+      "foreach (var ${1:item} in ${2:items})",
+      "{",
+      "\t${0}",
+      "}"
+    ],
+    "description": "foreach loop (guided)"
+  },
+  "while loop": {
+    "scope": "csharp",
+    "prefix": "while",
+    "body": [
+      "// while: condition checked before each pass",
+      "while (${1:condition})",
+      "{",
+      "\t${0}",
+      "}"
+    ],
+    "description": "while loop (guided)"
+  },
+  "do-while loop": {
+    "scope": "csharp",
+    "prefix": "dowhile",
+    "body": [
+      "// do-while: body runs at least once",
+      "do",
+      "{",
+      "\t${0}",
+      "} while (${1:condition});"
+    ],
+    "description": "do-while loop (guided)"
+  },
+  "try / catch / finally": {
+    "scope": "csharp",
+    "prefix": "try",
+    "body": [
+      "// Catch specific exceptions first; finally always runs (cleanup)",
+      "try",
+      "{",
+      "\t${1}",
+      "}",
+      "catch (${2:InvalidOperationException} ex)",
+      "{",
+      "\t${3:logger}.LogWarning(ex, \"${4:Operation failed}\");",
+      "}",
+      "finally",
+      "{",
+      "\t${0}",
+      "}"
+    ],
+    "description": "try / catch / finally (guided)"
+  },
+  "class with properties": {
+    "scope": "csharp",
+    "prefix": "cls",
+    "body": [
+      "/// <summary>${2:What this type represents.}</summary>",
+      "public class ${1:Customer}",
+      "{",
+      "\tpublic int Id { get; init; }                     // init: settable only when constructing",
+      "\tpublic required string ${3:Name} { get; set; }    // required: must be set by the caller",
+      "\tpublic DateTime CreatedAt { get; } = DateTime.UtcNow;",
+      "\t${0}",
+      "}"
+    ],
+    "description": "class with properties (guided)"
+  },
+  "record type": {
+    "scope": "csharp",
+    "prefix": "rec",
+    "body": [
+      "// record: immutable data type with value equality and a ToString for free",
+      "public sealed record ${1:ProductDto}(int Id, string ${2:Name}, decimal ${3:Price});${0}"
+    ],
+    "description": "record type (guided)"
+  },
+  "interface": {
+    "scope": "csharp",
+    "prefix": "iface",
+    "body": [
+      "// Interface: the contract a class promises to fulfil (great for testing with fakes)",
+      "public interface I${1:Repository}<T>",
+      "{",
+      "\tTask<T?> GetByIdAsync(int id, CancellationToken ct = default);",
+      "\tTask<IReadOnlyList<T>> ListAsync(CancellationToken ct = default);",
+      "\t${0}",
+      "}"
+    ],
+    "description": "interface (guided)"
+  },
+  "async method": {
+    "scope": "csharp",
+    "prefix": "async",
+    "body": [
+      "// async Task: always accept a CancellationToken and pass it down",
+      "public async Task<${1:string}> ${2:LoadAsync}(${3:int id}, CancellationToken ct = default)",
+      "{",
+      "\t${0}",
+      "\tawait Task.Delay(10, ct);",
+      "\treturn default!;",
+      "}"
+    ],
+    "description": "async method (guided)"
+  },
+  "LINQ query chain": {
+    "scope": "csharp",
+    "prefix": "linq",
+    "body": [
+      "// LINQ is lazy: nothing runs until ToList / First / Count / foreach",
+      "var ${1:result} = ${2:orders}",
+      "\t.Where(o => o.${3:Total} > ${4:100})",
+      "\t.OrderByDescending(o => o.${3})",
+      "\t.Select(o => new { o.Id, o.${3} })",
+      "\t.ToList();${0}"
+    ],
+    "description": "LINQ query chain (guided)"
+  },
+  "argument guard clauses": {
+    "scope": "csharp",
+    "prefix": "guard",
+    "body": [
+      "// Guard clauses: fail fast with a clear exception instead of a NullReference later",
+      "ArgumentNullException.ThrowIfNull(${1:input});",
+      "ArgumentException.ThrowIfNullOrWhiteSpace(${2:name});",
+      "ArgumentOutOfRangeException.ThrowIfNegative(${3:count});${0}"
+    ],
+    "description": "argument guard clauses (guided)"
+  },
+  "Stopwatch timing": {
+    "scope": "csharp",
+    "prefix": "timer",
+    "body": [
+      "// Stopwatch: high-resolution elapsed time for measuring code",
+      "var ${1:sw} = System.Diagnostics.Stopwatch.StartNew();",
+      "${0}",
+      "${1}.Stop();",
+      "Console.WriteLine(\\$\"elapsed: {${1}.ElapsedMilliseconds} ms\");"
+    ],
+    "description": "Stopwatch timing (guided)"
+  },
+  "PeriodicTimer loop": {
+    "scope": "csharp",
+    "prefix": "ptimer",
+    "body": [
+      "// PeriodicTimer (.NET 6+): async-friendly repeating timer, stops with the token",
+      "using var ${1:timer} = new PeriodicTimer(TimeSpan.FromSeconds(${2:5}));",
+      "while (await ${1}.WaitForNextTickAsync(${3:ct}))",
+      "{",
+      "\t${0}",
+      "}"
+    ],
+    "description": "PeriodicTimer loop (guided)"
+  },
+  "ASP.NET Core minimal API": {
+    "scope": "csharp",
+    "prefix": "minapi",
+    "body": [
+      "// Program.cs: ASP.NET Core minimal API",
+      "var builder = WebApplication.CreateBuilder(args);",
+      "",
+      "builder.Services.AddEndpointsApiExplorer();",
+      "builder.Services.AddProblemDetails();   // RFC 7807 error responses",
+      "",
+      "var app = builder.Build();",
+      "app.UseExceptionHandler();",
+      "",
+      "// Group related endpoints under one prefix",
+      "var ${1:items} = app.MapGroup(\"/api/${1}\");",
+      "${1}.MapGet(\"/\", () => Results.Ok(Array.Empty<object>()));",
+      "${1}.MapGet(\"/{id:int}\", (int id) => Results.NotFound());",
+      "${1}.MapPost(\"/\", (object body) => Results.Created(\\$\"/api/${1}/1\", body));",
+      "${0}",
+      "app.Run();",
+      "",
+      "public partial class Program;   // lets integration tests reference the app"
+    ],
+    "description": "ASP.NET Core minimal API (guided)",
+    "isFileTemplate": true
+  },
+  "xUnit test class": {
+    "scope": "csharp",
+    "prefix": "xunit",
+    "body": [
+      "namespace ${1:MyApp.Tests};",
+      "",
+      "public class ${2:CalculatorTests}",
+      "{",
+      "\t[Fact]",
+      "\tpublic void ${3:Add_ReturnsSum}()",
+      "\t{",
+      "\t\t// Arrange - Act - Assert keeps every test readable",
+      "\t\tvar sut = new ${4:Calculator}();",
+      "",
+      "\t\tvar result = sut.${5:Add}(2, 3);",
+      "",
+      "\t\tAssert.Equal(5, result);",
+      "\t}${0}",
+      "}"
+    ],
+    "description": "xUnit test class (guided)",
+    "isFileTemplate": true
+  }
+}

@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[// typedef struct: lets you write `${1:Item}` instead of `struct ${1}`
+typedef struct ${1} {
+	${2:int id;}
+	${3:char name[64];}
+} ${1};${0}]]></content>
+	<tabTrigger>struct</tabTrigger>
+	<scope>source.c</scope>
+	<description>typedef struct</description>
+</snippet>

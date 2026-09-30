@@ -1,0 +1,15 @@
+<snippet>
+	<content><![CDATA[// Entry point. argc = number of arguments, argv[0] = program name.
+int main(int argc, char *argv[])
+{
+	if (argc < ${1:2}) {
+		fprintf(stderr, "usage: %s ${2:<arg>}\\n", argv[0]);
+		return EXIT_FAILURE;   // non-zero exit tells the shell it failed
+	}
+	${0}
+	return EXIT_SUCCESS;
+}]]></content>
+	<tabTrigger>main</tabTrigger>
+	<scope>source.c</scope>
+	<description>main function</description>
+</snippet>

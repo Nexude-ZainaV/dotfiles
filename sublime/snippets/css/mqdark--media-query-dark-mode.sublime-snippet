@@ -1,0 +1,17 @@
+<snippet>
+	<content><![CDATA[/* Follow the OS colour scheme through custom properties */
+:root {
+	--bg: #ffffff;
+	--fg: #1a1a1a;
+}
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bg: #111418;
+		--fg: #e8eaed;
+	}
+}
+body { background: var(--bg); color: var(--fg); }${0}]]></content>
+	<tabTrigger>mqdark</tabTrigger>
+	<scope>source.css, source.scss, source.less</scope>
+	<description>Media query: dark mode</description>
+</snippet>

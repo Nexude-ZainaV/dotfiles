@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[def main() -> None:
+	${0}
+
+
+# True only when this file is run directly (python file.py), not when imported
+if __name__ == "__main__":
+	main()]]></content>
+	<tabTrigger>main</tabTrigger>
+	<scope>source.python</scope>
+	<description>main guard</description>
+</snippet>

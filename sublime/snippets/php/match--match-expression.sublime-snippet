@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[// match (PHP 8): strict (===), returns a value, no fall-through, throws if nothing matches
+\$${1:message} = match (${2:\$status}) {
+	${3:200}, ${4:201} => 'OK',
+	${5:404} => 'Not found',
+	default => 'Error',
+};${0}]]></content>
+	<tabTrigger>match</tabTrigger>
+	<scope>embedding.php, source.php</scope>
+	<description>match expression</description>
+</snippet>

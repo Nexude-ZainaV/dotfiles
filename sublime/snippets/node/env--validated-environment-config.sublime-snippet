@@ -1,0 +1,19 @@
+<snippet>
+	<content><![CDATA[// config.js: read env vars once, validate at startup, fail fast with a clear message
+import "dotenv/config";
+
+function required(name) {
+	const value = process.env[name];
+	if (!value) throw new Error(`Missing required environment variable: \${name}`);
+	return value;
+}
+
+export const config = {
+	port: Number(process.env.PORT ?? ${1:3000}),
+	databaseUrl: required("${2:DATABASE_URL}"),
+	nodeEnv: process.env.NODE_ENV ?? "development",
+};${0}]]></content>
+	<tabTrigger>env</tabTrigger>
+	<scope>source.js, source.ts</scope>
+	<description>Validated environment config</description>
+</snippet>

@@ -1,0 +1,14 @@
+<snippet>
+	<content><![CDATA[# except the narrowest exception you can handle; else runs only if nothing was raised
+try:
+	${1}
+except ${2:FileNotFoundError} as exc:
+	log.warning("${3:file missing}: %s", exc)
+else:
+	${4:pass}
+finally:
+	${0}]]></content>
+	<tabTrigger>try</tabTrigger>
+	<scope>source.python</scope>
+	<description>try / except / else / finally</description>
+</snippet>

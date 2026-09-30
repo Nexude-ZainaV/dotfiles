@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[// useState: [value, setter]. Use the updater form when the new value depends on the old.
+const [${1:count}, set${2:Count}] = useState<${3:number}>(${4:0});
+// set${2}((prev) => prev + 1);${0}]]></content>
+	<tabTrigger>us</tabTrigger>
+	<scope>source.jsx, source.tsx, source.js, source.ts</scope>
+	<description>useState</description>
+</snippet>

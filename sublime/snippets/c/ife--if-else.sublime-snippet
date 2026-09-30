@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[// if / else: exactly one of the two blocks runs
+if (${1:condition}) {
+	${2}
+} else {
+	${0}
+}]]></content>
+	<tabTrigger>ife</tabTrigger>
+	<scope>source.c</scope>
+	<description>if / else</description>
+</snippet>

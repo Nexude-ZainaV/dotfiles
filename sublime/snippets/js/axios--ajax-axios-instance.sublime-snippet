@@ -1,0 +1,23 @@
+<snippet>
+	<content><![CDATA[import axios from "axios";
+
+// One configured instance per API: base URL, timeout and auth in one place
+export const ${1:api} = axios.create({
+	baseURL: ${2:"https://api.example.com"},
+	timeout: ${3:10000},
+});
+
+// Interceptors run before every request / after every response
+${1}.interceptors.request.use((config) => {
+	const token = localStorage.getItem("token");
+	if (token) config.headers.Authorization = `Bearer \${token}`;
+	return config;
+});
+${1}.interceptors.response.use(
+	(res) => res,
+	(err) => Promise.reject(err.response?.data ?? err),
+);${0}]]></content>
+	<tabTrigger>axios</tabTrigger>
+	<scope>source.js, source.ts, source.jsx, source.tsx</scope>
+	<description>AJAX: axios instance</description>
+</snippet>

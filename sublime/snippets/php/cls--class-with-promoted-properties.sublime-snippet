@@ -1,0 +1,21 @@
+<snippet>
+	<content><![CDATA[final class ${1:Product}
+{
+	// PHP 8: declare, type and assign properties straight from the constructor
+	public function __construct(
+		public readonly int \$id,
+		public readonly string \$${2:name},
+		private float \$${3:price} = 0.0,
+	) {
+	}
+
+	public function ${3}(): float
+	{
+		return \$this->${3};
+	}
+	${0}
+}]]></content>
+	<tabTrigger>cls</tabTrigger>
+	<scope>embedding.php, source.php</scope>
+	<description>class with promoted properties</description>
+</snippet>

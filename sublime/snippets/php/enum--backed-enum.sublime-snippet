@@ -1,0 +1,17 @@
+<snippet>
+	<content><![CDATA[// Backed enum (8.1+): a fixed set of values, safer than string constants
+enum ${1:Status}: string
+{
+	case ${2:Active} = '${3:active}';
+	case ${4:Closed} = '${5:closed}';
+
+	public function label(): string
+	{
+		return ucfirst(\$this->value);
+	}
+}
+// ${1}::from('active') throws on bad input; ${1}::tryFrom() returns null instead${0}]]></content>
+	<tabTrigger>enum</tabTrigger>
+	<scope>embedding.php, source.php</scope>
+	<description>backed enum</description>
+</snippet>

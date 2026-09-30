@@ -1,0 +1,15 @@
+<snippet>
+	<content><![CDATA[// Built-in test runner: `node --test` (no Jest or Mocha required)
+import { describe, it } from "node:test";
+import assert from "node:assert/strict";
+import { ${1:add} } from "../src/${2:math}.js";
+
+describe("${1}", () => {
+	it("${3:adds two numbers}", () => {
+		assert.equal(${1}(2, 3), 5);
+	});${0}
+});]]></content>
+	<tabTrigger>ntest</tabTrigger>
+	<scope>source.js, source.ts</scope>
+	<description>node:test test file</description>
+</snippet>

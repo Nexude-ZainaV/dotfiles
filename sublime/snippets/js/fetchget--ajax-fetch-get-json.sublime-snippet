@@ -1,0 +1,15 @@
+<snippet>
+	<content><![CDATA[// fetch only rejects on NETWORK errors. HTTP 404/500 still resolve: check res.ok.
+async function ${1:getData}() {
+	const res = await fetch(${2:"/api/items"}, {
+		headers: { Accept: "application/json" },
+	});
+	if (!res.ok) {
+		throw new Error(`Request failed: \${res.status} \${res.statusText}`);
+	}
+	return res.json();
+}${0}]]></content>
+	<tabTrigger>fetchget</tabTrigger>
+	<scope>source.js, source.ts, source.jsx, source.tsx</scope>
+	<description>AJAX: fetch GET (JSON)</description>
+</snippet>

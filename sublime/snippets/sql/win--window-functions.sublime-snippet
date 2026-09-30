@@ -1,0 +1,13 @@
+<snippet>
+	<content><![CDATA[-- Window functions compute across related rows WITHOUT collapsing them (unlike GROUP BY)
+SELECT
+	${1:customer_id},
+	${2:total},
+	ROW_NUMBER() OVER (PARTITION BY ${1} ORDER BY ${3:created_at} DESC) AS rn,        -- latest = 1
+	SUM(${2})     OVER (PARTITION BY ${1} ORDER BY ${3})              AS running_total,
+	RANK()       OVER (ORDER BY ${2} DESC)                             AS overall_rank
+FROM ${4:orders};${0}]]></content>
+	<tabTrigger>win</tabTrigger>
+	<scope>source.sql</scope>
+	<description>Window functions</description>
+</snippet>

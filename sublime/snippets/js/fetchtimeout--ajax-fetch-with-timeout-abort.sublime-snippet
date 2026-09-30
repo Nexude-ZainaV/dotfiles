@@ -1,0 +1,17 @@
+<snippet>
+	<content><![CDATA[// AbortSignal.timeout cancels slow requests. Use an AbortController to cancel manually
+// (e.g. when the user types again or a React component unmounts).
+async function ${1:getWithTimeout}(url, ms = ${2:8000}) {
+	try {
+		const res = await fetch(url, { signal: AbortSignal.timeout(ms) });
+		if (!res.ok) throw new Error(`HTTP \${res.status}`);
+		return await res.json();
+	} catch (err) {
+		if (err.name === "TimeoutError") throw new Error(`Timed out after \${ms} ms`);
+		throw err;
+	}
+}${0}]]></content>
+	<tabTrigger>fetchtimeout</tabTrigger>
+	<scope>source.js, source.ts, source.jsx, source.tsx</scope>
+	<description>AJAX: fetch with timeout / abort</description>
+</snippet>

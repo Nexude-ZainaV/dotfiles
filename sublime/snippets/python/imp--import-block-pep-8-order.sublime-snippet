@@ -1,0 +1,17 @@
+<snippet>
+	<content><![CDATA[# PEP 8 import order, one blank line between groups (ruff/isort enforce this):
+# 1. standard library
+import json
+import logging
+from pathlib import Path
+
+# 2. third-party packages
+import ${1:requests}
+
+# 3. local application modules
+from ${2:app}.${3:services} import ${4:thing}
+${0}]]></content>
+	<tabTrigger>imp</tabTrigger>
+	<scope>source.python</scope>
+	<description>Import block (PEP 8 order)</description>
+</snippet>

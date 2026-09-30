@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[@media (min-width: 1024px) {  /* lg: iPad Pro / small laptops and wider */
+	${0}
+}]]></content>
+	<tabTrigger>mqlg</tabTrigger>
+	<scope>source.css, source.scss, source.less</scope>
+	<description>Media query: laptop and up</description>
+</snippet>

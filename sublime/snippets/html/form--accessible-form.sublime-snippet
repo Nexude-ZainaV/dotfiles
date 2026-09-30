@@ -1,0 +1,19 @@
+<snippet>
+	<content><![CDATA[<!-- Every input has a <label for>; required + type give free browser validation -->
+<form action="${1:/contact}" method="post" novalidate>
+	<div class="field">
+		<label for="${2:email}">Email</label>
+		<input id="${2}" name="${2}" type="email" autocomplete="email" required>
+	</div>
+	<div class="field">
+		<label for="${3:message}">Message</label>
+		<textarea id="${3}" name="${3}" rows="5" required></textarea>
+	</div>
+	<button type="submit">${4:Send}</button>
+	<p class="form-status" role="status" aria-live="polite"></p>
+	${0}
+</form>]]></content>
+	<tabTrigger>form</tabTrigger>
+	<scope>text.html</scope>
+	<description>Accessible form</description>
+</snippet>

@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[# List comprehension: [expression for item in iterable if condition]
+${1:squares} = [${2:x * x} for ${3:x} in ${4:numbers} if ${5:x % 2 == 0}]
+# Dict comprehension
+${6:by_id} = {${7:u}.id: ${7} for ${7} in ${8:users}}${0}]]></content>
+	<tabTrigger>lc</tabTrigger>
+	<scope>source.python</scope>
+	<description>comprehensions</description>
+</snippet>

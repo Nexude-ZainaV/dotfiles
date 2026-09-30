@@ -1,0 +1,13 @@
+<snippet>
+	<content><![CDATA[// ---- Standard library headers (C11) ----
+#include <stdio.h>    // printf, fprintf, fopen, fgets
+#include <stdlib.h>   // malloc, free, exit, EXIT_SUCCESS / EXIT_FAILURE
+#include <string.h>   // strlen, strncpy, strcmp, memset
+#include <stdbool.h>  // bool, true, false
+#include <stdint.h>   // fixed-width integers: int32_t, uint8_t
+#include <errno.h>    // errno is set by failing library calls
+${0}]]></content>
+	<tabTrigger>inc</tabTrigger>
+	<scope>source.c</scope>
+	<description>Standard includes</description>
+</snippet>

@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[# Nested if: the inner check only runs when the outer one passed
+if ${1:user} is not None:
+	if ${1}.${2:is_active}:
+		${0}
+# Flatter alternative (guard clause) inside a function:
+#     if ${1} is None or not ${1}.${2}:
+#         return]]></content>
+	<tabTrigger>ifn</tabTrigger>
+	<scope>source.python</scope>
+	<description>Nested if vs guard clause</description>
+</snippet>

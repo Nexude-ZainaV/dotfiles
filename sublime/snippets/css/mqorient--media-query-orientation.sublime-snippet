@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[/* Orientation: useful for full-screen layouts like games and galleries */
+@media (orientation: landscape) and (max-height: 500px) {   /* phone held sideways */
+	${0}
+}]]></content>
+	<tabTrigger>mqorient</tabTrigger>
+	<scope>source.css, source.scss, source.less</scope>
+	<description>Media query: orientation</description>
+</snippet>

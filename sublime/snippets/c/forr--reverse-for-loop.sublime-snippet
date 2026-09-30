@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[// Reverse loop with size_t: count down using i-- > 0 because size_t never goes negative
+for (size_t ${1:i} = ${2:count}; ${1}-- > 0; ) {
+	${0}
+}]]></content>
+	<tabTrigger>forr</tabTrigger>
+	<scope>source.c</scope>
+	<description>reverse for loop</description>
+</snippet>

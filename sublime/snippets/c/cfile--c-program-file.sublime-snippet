@@ -1,0 +1,29 @@
+<snippet>
+	<content><![CDATA[/*
+ * ${1:program}.c
+ * Purpose: ${2:one line on what this program does}
+ * Build:   gcc -std=c11 -Wall -Wextra -O2 -o ${1} ${1}.c
+ */
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
+
+// ---- Prototypes: declare before main so main reads top-down ----
+static void ${3:run}(void);
+
+int main(void)
+{
+	${3}();
+	return EXIT_SUCCESS;
+}
+
+// ---- Definitions ----
+static void ${3}(void)
+{
+	${0}
+}]]></content>
+	<tabTrigger>cfile</tabTrigger>
+	<scope>source.c</scope>
+	<description>C program file</description>
+</snippet>

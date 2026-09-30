@@ -1,0 +1,13 @@
+<snippet>
+	<content><![CDATA[/**
+ * ${2:What the function does.}
+ * @param {${3:string}} ${4:value} ${5:what it means}
+ * @returns {${6:boolean}} ${7:what comes back}
+ */
+function ${1:name}(${4}) {
+	${0}
+}]]></content>
+	<tabTrigger>fn</tabTrigger>
+	<scope>source.js, source.ts, source.jsx, source.tsx</scope>
+	<description>function with JSDoc</description>
+</snippet>

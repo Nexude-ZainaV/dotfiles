@@ -1,0 +1,212 @@
+{
+  "Express server": {
+    "scope": "javascript,typescript",
+    "prefix": "express",
+    "body": [
+      "// server.js: Express app with the usual production middleware",
+      "import express from \"express\";",
+      "import helmet from \"helmet\";",
+      "import cors from \"cors\";",
+      "",
+      "const app = express();",
+      "const PORT = Number(process.env.PORT) || ${1:3000};",
+      "",
+      "app.use(helmet());                          // secure HTTP headers",
+      "app.use(cors({ origin: process.env.CORS_ORIGIN?.split(\",\") ?? false }));",
+      "app.use(express.json({ limit: \"100kb\" }));  // parse JSON bodies, cap the size",
+      "",
+      "app.get(\"/health\", (_req, res) => res.json({ status: \"ok\" }));",
+      "${0}",
+      "",
+      "// 404 for anything not matched above",
+      "app.use((_req, res) => res.status(404).json({ error: \"Not found\" }));",
+      "",
+      "// Error handler: 4 arguments is what marks it as one",
+      "app.use((err, _req, res, _next) => {",
+      "\tconsole.error(err);",
+      "\tres.status(err.status ?? 500).json({ error: err.expose ? err.message : \"Internal error\" });",
+      "});",
+      "",
+      "app.listen(PORT, () => console.log(`listening on http://localhost:\\${PORT}`));"
+    ],
+    "description": "Express server (guided)",
+    "isFileTemplate": true
+  },
+  "Express router": {
+    "scope": "javascript,typescript",
+    "prefix": "router",
+    "body": [
+      "// routes/${1:items}.js: group related endpoints, mount with app.use(\"/api/${1}\", router)",
+      "import { Router } from \"express\";",
+      "",
+      "const router = Router();",
+      "",
+      "router.get(\"/\", async (req, res) => {",
+      "\tres.json([]);",
+      "});",
+      "",
+      "router.get(\"/:id\", async (req, res) => {",
+      "\tconst id = Number(req.params.id);",
+      "\tif (!Number.isInteger(id)) return res.status(400).json({ error: \"id must be an integer\" });",
+      "\t${0}",
+      "\tres.status(404).json({ error: \"Not found\" });",
+      "});",
+      "",
+      "router.post(\"/\", async (req, res) => {",
+      "\tres.status(201).json(req.body);",
+      "});",
+      "",
+      "export default router;"
+    ],
+    "description": "Express router (guided)",
+    "isFileTemplate": true
+  },
+  "Express middleware": {
+    "scope": "javascript,typescript",
+    "prefix": "mw",
+    "body": [
+      "// Middleware: (req, res, next). Call next() to continue, or send a response to stop.",
+      "export function ${1:requestLogger}(req, res, next) {",
+      "\tconst start = performance.now();",
+      "\tres.on(\"finish\", () => {",
+      "\t\tconst ms = (performance.now() - start).toFixed(1);",
+      "\t\tconsole.log(`\\${req.method} \\${req.originalUrl} \\${res.statusCode} \\${ms}ms`);",
+      "\t});",
+      "\t${0}",
+      "\tnext();",
+      "}"
+    ],
+    "description": "Express middleware (guided)"
+  },
+  "Express error handler": {
+    "scope": "javascript,typescript",
+    "prefix": "errmw",
+    "body": [
+      "// Error-handling middleware is recognised by its 4 parameters; register it LAST",
+      "export function errorHandler(err, req, res, _next) {",
+      "\tconst status = err.status ?? 500;",
+      "\tif (status >= 500) console.error(err);   // log server faults, not client mistakes",
+      "\tres.status(status).json({ error: status >= 500 ? \"Internal server error\" : err.message });${0}",
+      "}"
+    ],
+    "description": "Express error handler (guided)"
+  },
+  "fs/promises read and write": {
+    "scope": "javascript,typescript",
+    "prefix": "readfile",
+    "body": [
+      "import { readFile, writeFile, mkdir } from \"node:fs/promises\";",
+      "import path from \"node:path\";",
+      "",
+      "// Promise-based fs: never block the event loop with the *Sync versions in a server",
+      "const ${1:file} = path.join(import.meta.dirname, \"${2:data.json}\");",
+      "const ${3:data} = JSON.parse(await readFile(${1}, \"utf8\"));",
+      "await mkdir(path.dirname(${1}), { recursive: true });",
+      "await writeFile(${1}, JSON.stringify(${3}, null, 2) + \"\\\\n\");${0}"
+    ],
+    "description": "fs/promises read and write (guided)"
+  },
+  "Validated environment config": {
+    "scope": "javascript,typescript",
+    "prefix": "env",
+    "body": [
+      "// config.js: read env vars once, validate at startup, fail fast with a clear message",
+      "import \"dotenv/config\";",
+      "",
+      "function required(name) {",
+      "\tconst value = process.env[name];",
+      "\tif (!value) throw new Error(`Missing required environment variable: \\${name}`);",
+      "\treturn value;",
+      "}",
+      "",
+      "export const config = {",
+      "\tport: Number(process.env.PORT ?? ${1:3000}),",
+      "\tdatabaseUrl: required(\"${2:DATABASE_URL}\"),",
+      "\tnodeEnv: process.env.NODE_ENV ?? \"development\",",
+      "};${0}"
+    ],
+    "description": "Validated environment config (guided)",
+    "isFileTemplate": true
+  },
+  "node:http server (no framework)": {
+    "scope": "javascript,typescript",
+    "prefix": "httpserver",
+    "body": [
+      "import { createServer } from \"node:http\";",
+      "",
+      "// Plain Node HTTP server: what Express is built on",
+      "const server = createServer((req, res) => {",
+      "\tif (req.method === \"GET\" && req.url === \"/${1:health}\") {",
+      "\t\tres.writeHead(200, { \"Content-Type\": \"application/json\" });",
+      "\t\treturn res.end(JSON.stringify({ status: \"ok\" }));",
+      "\t}",
+      "\t${0}",
+      "\tres.writeHead(404).end();",
+      "});",
+      "",
+      "server.listen(${2:3000});"
+    ],
+    "description": "node:http server (no framework) (guided)"
+  },
+  "EventEmitter": {
+    "scope": "javascript,typescript",
+    "prefix": "emitter",
+    "body": [
+      "import { EventEmitter } from \"node:events\";",
+      "",
+      "// Publish/subscribe inside one process",
+      "const ${1:bus} = new EventEmitter();",
+      "${1}.on(\"${2:order:created}\", (payload) => {",
+      "\t${0}",
+      "});",
+      "${1}.emit(\"${2}\", { id: 1 });"
+    ],
+    "description": "EventEmitter (guided)"
+  },
+  "CLI script with parseArgs": {
+    "scope": "javascript,typescript",
+    "prefix": "cli",
+    "body": [
+      "#!/usr/bin/env node",
+      "// CLI entry point using the built-in argument parser (no dependency needed)",
+      "import { parseArgs } from \"node:util\";",
+      "",
+      "const { values, positionals } = parseArgs({",
+      "\toptions: {",
+      "\t\t${1:output}: { type: \"string\", short: \"o\" },",
+      "\t\tverbose: { type: \"boolean\", short: \"v\", default: false },",
+      "\t},",
+      "\tallowPositionals: true,",
+      "});",
+      "",
+      "async function main() {",
+      "\t${0}",
+      "}",
+      "",
+      "main().catch((err) => {",
+      "\tconsole.error(err.message);",
+      "\tprocess.exitCode = 1;   // set, do not call process.exit(), so pending output flushes",
+      "});"
+    ],
+    "description": "CLI script with parseArgs (guided)",
+    "isFileTemplate": true
+  },
+  "node:test test file": {
+    "scope": "javascript,typescript",
+    "prefix": "ntest",
+    "body": [
+      "// Built-in test runner: `node --test` (no Jest or Mocha required)",
+      "import { describe, it } from \"node:test\";",
+      "import assert from \"node:assert/strict\";",
+      "import { ${1:add} } from \"../src/${2:math}.js\";",
+      "",
+      "describe(\"${1}\", () => {",
+      "\tit(\"${3:adds two numbers}\", () => {",
+      "\t\tassert.equal(${1}(2, 3), 5);",
+      "\t});${0}",
+      "});"
+    ],
+    "description": "node:test test file (guided)",
+    "isFileTemplate": true
+  }
+}

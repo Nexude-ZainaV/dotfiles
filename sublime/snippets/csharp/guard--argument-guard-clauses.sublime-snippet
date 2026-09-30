@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[// Guard clauses: fail fast with a clear exception instead of a NullReference later
+ArgumentNullException.ThrowIfNull(${1:input});
+ArgumentException.ThrowIfNullOrWhiteSpace(${2:name});
+ArgumentOutOfRangeException.ThrowIfNegative(${3:count});${0}]]></content>
+	<tabTrigger>guard</tabTrigger>
+	<scope>source.cs</scope>
+	<description>argument guard clauses</description>
+</snippet>

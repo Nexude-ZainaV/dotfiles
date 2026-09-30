@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[// std::sort with a lambda: return true when a should come before b
+std::sort(${1:items}.begin(), ${1}.end(), [](const auto& a, const auto& b) {
+	return a.${2:score} > b.${2};   // > sorts descending
+});${0}]]></content>
+	<tabTrigger>sort</tabTrigger>
+	<scope>source.c++</scope>
+	<description>sort with lambda comparator</description>
+</snippet>

@@ -1,0 +1,400 @@
+{
+  "PHP class file": {
+    "scope": "php",
+    "prefix": "phpclass",
+    "body": [
+      "<?php",
+      "",
+      "declare(strict_types=1);   // no silent type juggling: '5' is not accepted where int is expected",
+      "",
+      "namespace ${1:App\\\\Service};",
+      "",
+      "use ${2:App\\\\Repository\\\\UserRepository};",
+      "",
+      "/**",
+      " * ${3:What this class is responsible for.}",
+      " */",
+      "final class ${4:UserService}",
+      "{",
+      "\tpublic function __construct(",
+      "\t\tprivate readonly ${5:UserRepository} \\$${6:users},   // constructor property promotion",
+      "\t) {",
+      "\t}",
+      "\t${0}",
+      "}"
+    ],
+    "description": "PHP class file (guided)",
+    "isFileTemplate": true
+  },
+  "class with promoted properties": {
+    "scope": "php",
+    "prefix": "cls",
+    "body": [
+      "final class ${1:Product}",
+      "{",
+      "\t// PHP 8: declare, type and assign properties straight from the constructor",
+      "\tpublic function __construct(",
+      "\t\tpublic readonly int \\$id,",
+      "\t\tpublic readonly string \\$${2:name},",
+      "\t\tprivate float \\$${3:price} = 0.0,",
+      "\t) {",
+      "\t}",
+      "",
+      "\tpublic function ${3}(): float",
+      "\t{",
+      "\t\treturn \\$this->${3};",
+      "\t}",
+      "\t${0}",
+      "}"
+    ],
+    "description": "class with promoted properties (guided)"
+  },
+  "backed enum": {
+    "scope": "php",
+    "prefix": "enum",
+    "body": [
+      "// Backed enum (8.1+): a fixed set of values, safer than string constants",
+      "enum ${1:Status}: string",
+      "{",
+      "\tcase ${2:Active} = '${3:active}';",
+      "\tcase ${4:Closed} = '${5:closed}';",
+      "",
+      "\tpublic function label(): string",
+      "\t{",
+      "\t\treturn ucfirst(\\$this->value);",
+      "\t}",
+      "}",
+      "// ${1}::from('active') throws on bad input; ${1}::tryFrom() returns null instead${0}"
+    ],
+    "description": "backed enum (guided)"
+  },
+  "if statement": {
+    "scope": "php",
+    "prefix": "if",
+    "body": [
+      "// if: runs when the condition is truthy. Use === to compare type and value.",
+      "if (${1:\\$condition}) {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "if statement (guided)"
+  },
+  "if / else": {
+    "scope": "php",
+    "prefix": "ife",
+    "body": [
+      "// if / else: exactly one branch runs",
+      "if (${1:\\$condition}) {",
+      "\t${2}",
+      "} else {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "if / else (guided)"
+  },
+  "if / elseif / else": {
+    "scope": "php",
+    "prefix": "elif",
+    "body": [
+      "// elseif chain (one word in PHP): first true branch wins",
+      "if (${1:\\$score} >= ${2:90}) {",
+      "\t${3}",
+      "} elseif (${1} >= ${4:75}) {",
+      "\t${5}",
+      "} else {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "if / elseif / else (guided)"
+  },
+  "Nested if / nullsafe": {
+    "scope": "php",
+    "prefix": "ifn",
+    "body": [
+      "// Nested if: the inner check only runs when the outer one passed",
+      "if (${1:\\$user} !== null) {",
+      "\tif (${1}->${2:isActive}()) {",
+      "\t\t${0}",
+      "\t}",
+      "}",
+      "// PHP 8 nullsafe alternative: if (${1}?->${2}()) { ... }"
+    ],
+    "description": "Nested if / nullsafe (guided)"
+  },
+  "Ternary / null coalescing": {
+    "scope": "php",
+    "prefix": "tern",
+    "body": [
+      "// ternary: condition ? if_true : if_false",
+      "\\$${1:label} = ${2:\\$count > 0} ? '${3:has items}' : '${4:empty}';",
+      "// ?? returns the right side when the left is null OR undefined (no notice raised)",
+      "\\$${5:page} = (int) (\\$_GET['${6:page}'] ?? 1);${0}"
+    ],
+    "description": "Ternary / null coalescing (guided)"
+  },
+  "switch statement": {
+    "scope": "php",
+    "prefix": "sw",
+    "body": [
+      "// switch uses loose comparison (==); prefer match below for strict comparison",
+      "switch (${1:\\$action}) {",
+      "\tcase '${2:create}':",
+      "\t\t${3}",
+      "\t\tbreak;",
+      "\tcase '${4:delete}':",
+      "\t\t${5}",
+      "\t\tbreak;",
+      "\tdefault:",
+      "\t\t${0}",
+      "\t\tbreak;",
+      "}"
+    ],
+    "description": "switch statement (guided)"
+  },
+  "match expression": {
+    "scope": "php",
+    "prefix": "match",
+    "body": [
+      "// match (PHP 8): strict (===), returns a value, no fall-through, throws if nothing matches",
+      "\\$${1:message} = match (${2:\\$status}) {",
+      "\t${3:200}, ${4:201} => 'OK',",
+      "\t${5:404} => 'Not found',",
+      "\tdefault => 'Error',",
+      "};${0}"
+    ],
+    "description": "match expression (guided)"
+  },
+  "for loop": {
+    "scope": "php",
+    "prefix": "for",
+    "body": [
+      "// for: use when you need the index",
+      "for (\\$${1:i} = 0; \\$${1} < ${2:count(\\$items)}; \\$${1}++) {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "for loop (guided)"
+  },
+  "foreach loop": {
+    "scope": "php",
+    "prefix": "fore",
+    "body": [
+      "// foreach: iterate arrays (key => value). Use &\\$value only if you must modify in place.",
+      "foreach (${1:\\$items} as ${2:\\$key} => ${3:\\$value}) {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "foreach loop (guided)"
+  },
+  "while loop": {
+    "scope": "php",
+    "prefix": "while",
+    "body": [
+      "// while: checks the condition before each pass",
+      "while (${1:\\$row = \\$stmt->fetch()}) {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "while loop (guided)"
+  },
+  "do-while loop": {
+    "scope": "php",
+    "prefix": "dowhile",
+    "body": [
+      "// do-while: body runs at least once",
+      "do {",
+      "\t${0}",
+      "} while (${1:\\$condition});"
+    ],
+    "description": "do-while loop (guided)"
+  },
+  "try / catch / finally": {
+    "scope": "php",
+    "prefix": "try",
+    "body": [
+      "// Catch specific exceptions first; \\\\Throwable catches everything including Errors",
+      "try {",
+      "\t${1}",
+      "} catch (${2:\\\\PDOException} \\$e) {",
+      "\terror_log(\\$e->getMessage());   // log details, never echo them to the user",
+      "} finally {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "try / catch / finally (guided)"
+  },
+  "typed function with docblock": {
+    "scope": "php",
+    "prefix": "fn",
+    "body": [
+      "/**",
+      " * ${2:What the function does.}",
+      " */",
+      "function ${1:name}(${3:int} \\$${4:value}): ${5:bool}",
+      "{",
+      "\t${0}",
+      "}"
+    ],
+    "description": "typed function with docblock (guided)"
+  },
+  "PDO connection": {
+    "scope": "php",
+    "prefix": "pdo",
+    "body": [
+      "// PDO works with MySQL, SQLite, PostgreSQL... Configure it once, reuse the object.",
+      "\\$pdo = new PDO(",
+      "\t${1:'mysql:host=127.0.0.1;dbname=app;charset=utf8mb4'},   // or 'sqlite:' . __DIR__ . '/app.db'",
+      "\t${2:getenv('DB_USER') ?: 'root'},",
+      "\t${3:getenv('DB_PASS') ?: ''},",
+      "\t[",
+      "\t\tPDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,        // throw on SQL errors",
+      "\t\tPDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,   // rows as ['column' => value]",
+      "\t\tPDO::ATTR_EMULATE_PREPARES => false,                // real prepared statements",
+      "\t],",
+      ");${0}"
+    ],
+    "description": "PDO connection (guided)"
+  },
+  "PDO prepared query": {
+    "scope": "php",
+    "prefix": "pdoq",
+    "body": [
+      "// Prepared statements keep data separate from SQL: this is what prevents SQL injection.",
+      "// NEVER concatenate user input into a query string.",
+      "\\$stmt = \\$pdo->prepare('SELECT ${1:id, name} FROM ${2:users} WHERE ${3:email} = :${3} LIMIT 1');",
+      "\\$stmt->execute(['${3}' => \\$${4:email}]);",
+      "\\$${5:user} = \\$stmt->fetch();   // false when no row matched${0}"
+    ],
+    "description": "PDO prepared query (guided)"
+  },
+  "AJAX: JSON API endpoint": {
+    "scope": "php",
+    "prefix": "json",
+    "body": [
+      "<?php",
+      "// api/${1:items}.php: a JSON endpoint called by fetch() / \\$.ajax from the front end",
+      "declare(strict_types=1);",
+      "",
+      "header('Content-Type: application/json; charset=utf-8');",
+      "",
+      "function respond(int \\$status, array \\$payload): never",
+      "{",
+      "\thttp_response_code(\\$status);",
+      "\techo json_encode(\\$payload, JSON_THROW_ON_ERROR);",
+      "\texit;",
+      "}",
+      "",
+      "if (\\$_SERVER['REQUEST_METHOD'] !== '${2:POST}') {",
+      "\trespond(405, ['error' => 'Method not allowed']);",
+      "}",
+      "",
+      "// fetch() sends JSON in the body, which \\$_POST does not parse",
+      "\\$input = json_decode(file_get_contents('php://input') ?: '', true);",
+      "if (!is_array(\\$input) || trim((string) (\\$input['${3:name}'] ?? '')) === '') {",
+      "\trespond(422, ['error' => '${3} is required']);",
+      "}",
+      "${0}",
+      "respond(201, ['ok' => true]);"
+    ],
+    "description": "AJAX: JSON API endpoint (guided)",
+    "isFileTemplate": true
+  },
+  "CSRF token": {
+    "scope": "php",
+    "prefix": "csrf",
+    "body": [
+      "// CSRF protection: every state-changing form carries a secret token tied to the session",
+      "session_start();",
+      "\\$_SESSION['csrf'] ??= bin2hex(random_bytes(32));",
+      "",
+      "// In the form:  <input type=\"hidden\" name=\"csrf\" value=\"<?= e(\\$_SESSION['csrf']) ?>\">",
+      "// On submit: hash_equals is a constant-time compare (resists timing attacks)",
+      "if (!hash_equals(\\$_SESSION['csrf'], (string) (\\$_POST['csrf'] ?? ''))) {",
+      "\thttp_response_code(403);",
+      "\texit('Invalid CSRF token');",
+      "}${0}"
+    ],
+    "description": "CSRF token (guided)"
+  },
+  "HTML escape helper": {
+    "scope": "php",
+    "prefix": "esc",
+    "body": [
+      "// Escape everything you echo into HTML: this is what prevents XSS",
+      "function e(?string \\$value): string",
+      "{",
+      "\treturn htmlspecialchars(\\$value ?? '', ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');",
+      "}",
+      "// <p><?= e(\\$${1:comment}) ?></p>${0}"
+    ],
+    "description": "HTML escape helper (guided)"
+  },
+  "secure session start": {
+    "scope": "php",
+    "prefix": "sess",
+    "body": [
+      "// Harden the session cookie before starting the session",
+      "session_set_cookie_params([",
+      "\t'lifetime' => 0,",
+      "\t'path' => '/',",
+      "\t'secure' => ${1:true},     // HTTPS only",
+      "\t'httponly' => true,       // JavaScript cannot read it (limits XSS damage)",
+      "\t'samesite' => 'Lax',      // basic CSRF protection",
+      "]);",
+      "session_start();",
+      "// After login: session_regenerate_id(true); to prevent session fixation${0}"
+    ],
+    "description": "secure session start (guided)"
+  },
+  "read request input safely": {
+    "scope": "php",
+    "prefix": "input",
+    "body": [
+      "// filter_input validates/normalises instead of reading \\$_GET/\\$_POST raw",
+      "\\$${1:id} = filter_input(INPUT_GET, '${1}', FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]);",
+      "if (\\$${1} === false || \\$${1} === null) {",
+      "\thttp_response_code(400);",
+      "\texit('Invalid ${1}');",
+      "}${0}"
+    ],
+    "description": "read request input safely (guided)"
+  },
+  "measure elapsed time": {
+    "scope": "php",
+    "prefix": "timer",
+    "body": [
+      "// hrtime(true): monotonic nanoseconds, the right clock for durations",
+      "\\$${1:start} = hrtime(true);",
+      "${0}",
+      "\\$ms = (hrtime(true) - \\$${1}) / 1e6;",
+      "error_log(sprintf('elapsed: %.2f ms', \\$ms));"
+    ],
+    "description": "measure elapsed time (guided)"
+  },
+  "PHPUnit test class": {
+    "scope": "php",
+    "prefix": "phpunit",
+    "body": [
+      "<?php",
+      "",
+      "declare(strict_types=1);",
+      "",
+      "namespace ${1:Tests};",
+      "",
+      "use PHPUnit\\\\Framework\\\\TestCase;",
+      "",
+      "final class ${2:CalculatorTest} extends TestCase",
+      "{",
+      "\tpublic function test${3:AddsTwoNumbers}(): void",
+      "\t{",
+      "\t\t// Arrange, act, assert",
+      "\t\t\\$sut = new ${4:\\\\App\\\\Calculator}();",
+      "\t\tself::assertSame(5, \\$sut->add(2, 3));",
+      "\t}",
+      "\t${0}",
+      "}"
+    ],
+    "description": "PHPUnit test class (guided)",
+    "isFileTemplate": true
+  }
+}

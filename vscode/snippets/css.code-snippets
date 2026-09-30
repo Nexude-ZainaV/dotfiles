@@ -1,0 +1,363 @@
+{
+  "Breakpoint and device reference": {
+    "scope": "css,scss,less",
+    "prefix": "bp",
+    "body": [
+      "/* ============================================================",
+      "   Breakpoint reference (mobile-first, Tailwind-compatible)",
+      "   ------------------------------------------------------------",
+      "   base   0-639px   phones portrait    iPhone SE 375x667, iPhone 15 393x852,",
+      "\t\t\t\t\t\t\t\t\t   Pixel 8 412x915, Galaxy S24 360x780",
+      "   sm   >= 640px    phones landscape / small tablets",
+      "   md   >= 768px    tablets portrait   iPad Mini 768x1024, iPad 820x1180",
+      "   lg   >= 1024px   tablets landscape, small laptops   iPad Pro 1024x1366",
+      "   xl   >= 1280px   laptops            1280x800, 1366x768, 1440x900",
+      "   2xl  >= 1536px   desktops           1536x864, 1920x1080, 2560x1440",
+      "   Design for content, not devices: add a breakpoint where the layout breaks.",
+      "   ============================================================ */",
+      "${0}"
+    ],
+    "description": "Breakpoint and device reference (guided)"
+  },
+  "Mobile-first media query set": {
+    "scope": "css,scss,less",
+    "prefix": "mq",
+    "body": [
+      "/* ============================================================",
+      "   Breakpoint reference (mobile-first, Tailwind-compatible)",
+      "   ------------------------------------------------------------",
+      "   base   0-639px   phones portrait    iPhone SE 375x667, iPhone 15 393x852,",
+      "\t\t\t\t\t\t\t\t\t   Pixel 8 412x915, Galaxy S24 360x780",
+      "   sm   >= 640px    phones landscape / small tablets",
+      "   md   >= 768px    tablets portrait   iPad Mini 768x1024, iPad 820x1180",
+      "   lg   >= 1024px   tablets landscape, small laptops   iPad Pro 1024x1366",
+      "   xl   >= 1280px   laptops            1280x800, 1366x768, 1440x900",
+      "   2xl  >= 1536px   desktops           1536x864, 1920x1080, 2560x1440",
+      "   Design for content, not devices: add a breakpoint where the layout breaks.",
+      "   ============================================================ */",
+      "",
+      "/* Base styles (no query) target phones. Each min-width query ADDS to them. */",
+      "${1:.selector} {",
+      "\t${0}",
+      "}",
+      "",
+      "@media (min-width: 640px) {   /* sm: large phones landscape */",
+      "\t${1} { }",
+      "}",
+      "",
+      "@media (min-width: 768px) {   /* md: tablets portrait */",
+      "\t${1} { }",
+      "}",
+      "",
+      "@media (min-width: 1024px) {  /* lg: tablets landscape, small laptops */",
+      "\t${1} { }",
+      "}",
+      "",
+      "@media (min-width: 1280px) {  /* xl: laptops and desktops */",
+      "\t${1} { }",
+      "}",
+      "",
+      "@media (min-width: 1536px) {  /* 2xl: large desktops */",
+      "\t${1} { }",
+      "}"
+    ],
+    "description": "Mobile-first media query set (guided)"
+  },
+  "Desktop-first media query set": {
+    "scope": "css,scss,less",
+    "prefix": "mqmax",
+    "body": [
+      "/* Desktop-first: base styles target large screens, max-width queries override downward.",
+      "   Mobile-first (min-width) is usually preferred; use this when retrofitting a desktop site. */",
+      "${1:.selector} { ${0} }",
+      "",
+      "@media (max-width: 1279.98px) { ${1} { } }   /* below xl: laptops */",
+      "@media (max-width: 1023.98px) { ${1} { } }   /* below lg: tablets */",
+      "@media (max-width: 767.98px)  { ${1} { } }   /* below md: phones  */",
+      "/* .98 avoids a 1px overlap with min-width queries at the exact breakpoint */"
+    ],
+    "description": "Desktop-first media query set (guided)"
+  },
+  "Media query: tablet and up": {
+    "scope": "css,scss,less",
+    "prefix": "mqmd",
+    "body": [
+      "@media (min-width: 768px) {   /* md: iPad Mini portrait (768px) and wider */",
+      "\t${0}",
+      "}"
+    ],
+    "description": "Media query: tablet and up (guided)"
+  },
+  "Media query: laptop and up": {
+    "scope": "css,scss,less",
+    "prefix": "mqlg",
+    "body": [
+      "@media (min-width: 1024px) {  /* lg: iPad Pro / small laptops and wider */",
+      "\t${0}",
+      "}"
+    ],
+    "description": "Media query: laptop and up (guided)"
+  },
+  "Media query: range syntax": {
+    "scope": "css,scss,less",
+    "prefix": "mqrange",
+    "body": [
+      "/* Media Queries Level 4 range syntax (all modern browsers): reads like maths */",
+      "@media (${1:768px} <= width < ${2:1024px}) {   /* tablets only */",
+      "\t${0}",
+      "}"
+    ],
+    "description": "Media query: range syntax (guided)"
+  },
+  "Media query: touch vs mouse": {
+    "scope": "css,scss,less",
+    "prefix": "mqpointer",
+    "body": [
+      "/* Target the input device, not the screen size */",
+      "@media (hover: hover) and (pointer: fine) {   /* mouse / trackpad */",
+      "\t${1:.card}:hover { ${0} }",
+      "}",
+      "@media (pointer: coarse) {                     /* touch: bigger tap targets (44x44px minimum) */",
+      "\tbutton, a { min-height: 44px; }",
+      "}"
+    ],
+    "description": "Media query: touch vs mouse (guided)"
+  },
+  "Media query: reduced motion": {
+    "scope": "css,scss,less",
+    "prefix": "mqmotion",
+    "body": [
+      "/* Respect users who turned on \"reduce motion\" in their OS (vestibular disorders) */",
+      "@media (prefers-reduced-motion: reduce) {",
+      "\t*, *::before, *::after {",
+      "\t\tanimation-duration: 0.01ms !important;",
+      "\t\tanimation-iteration-count: 1 !important;",
+      "\t\ttransition-duration: 0.01ms !important;",
+      "\t\tscroll-behavior: auto !important;",
+      "\t}",
+      "}${0}"
+    ],
+    "description": "Media query: reduced motion (guided)"
+  },
+  "Media query: dark mode": {
+    "scope": "css,scss,less",
+    "prefix": "mqdark",
+    "body": [
+      "/* Follow the OS colour scheme through custom properties */",
+      ":root {",
+      "\t--bg: #ffffff;",
+      "\t--fg: #1a1a1a;",
+      "}",
+      "@media (prefers-color-scheme: dark) {",
+      "\t:root {",
+      "\t\t--bg: #111418;",
+      "\t\t--fg: #e8eaed;",
+      "\t}",
+      "}",
+      "body { background: var(--bg); color: var(--fg); }${0}"
+    ],
+    "description": "Media query: dark mode (guided)"
+  },
+  "Media query: orientation": {
+    "scope": "css,scss,less",
+    "prefix": "mqorient",
+    "body": [
+      "/* Orientation: useful for full-screen layouts like games and galleries */",
+      "@media (orientation: landscape) and (max-height: 500px) {   /* phone held sideways */",
+      "\t${0}",
+      "}"
+    ],
+    "description": "Media query: orientation (guided)"
+  },
+  "Container query": {
+    "scope": "css,scss,less",
+    "prefix": "cq",
+    "body": [
+      "/* Container queries: a component responds to ITS container's width, not the viewport,",
+      "   so the same card works in a sidebar and in the main column. */",
+      ".${1:card}-wrap {",
+      "\tcontainer-type: inline-size;",
+      "\tcontainer-name: ${1};",
+      "}",
+      "",
+      "@container ${1} (min-width: ${2:420px}) {",
+      "\t.${1} {",
+      "\t\tdisplay: grid;",
+      "\t\tgrid-template-columns: 160px 1fr;",
+      "\t\t${0}",
+      "\t}",
+      "}"
+    ],
+    "description": "Container query (guided)"
+  },
+  "Fluid typography with clamp()": {
+    "scope": "css,scss,less",
+    "prefix": "clamp",
+    "body": [
+      "/* clamp(MIN, PREFERRED, MAX): scales with the viewport, never below MIN or above MAX.",
+      "   rem-based min/max keep user font-size preferences working. */",
+      "${1:h1} {",
+      "\tfont-size: clamp(${2:1.75rem}, ${3:1.2rem + 2.5vw}, ${4:3rem});${0}",
+      "}"
+    ],
+    "description": "Fluid typography with clamp() (guided)"
+  },
+  "Responsive grid (no media queries)": {
+    "scope": "css,scss,less",
+    "prefix": "grid",
+    "body": [
+      "/* auto-fit + minmax: as many columns as fit, each at least ${1:16rem} wide.",
+      "   The grid reflows from 1 column on phones to 3-4 on desktop by itself. */",
+      ".${2:grid} {",
+      "\tdisplay: grid;",
+      "\tgrid-template-columns: repeat(auto-fit, minmax(min(${1}, 100%), 1fr));",
+      "\tgap: ${3:1.5rem};${0}",
+      "}"
+    ],
+    "description": "Responsive grid (no media queries) (guided)"
+  },
+  "Flex center / row that wraps": {
+    "scope": "css,scss,less",
+    "prefix": "flexc",
+    "body": [
+      "/* Center anything horizontally and vertically */",
+      ".${1:center} {",
+      "\tdisplay: flex;",
+      "\talign-items: center;",
+      "\tjustify-content: center;",
+      "}",
+      "",
+      "/* A row that wraps onto new lines on small screens */",
+      ".${2:row} {",
+      "\tdisplay: flex;",
+      "\tflex-wrap: wrap;",
+      "\tgap: ${3:1rem};${0}",
+      "}"
+    ],
+    "description": "Flex center / row that wraps (guided)"
+  },
+  "Responsive page container": {
+    "scope": "css,scss,less",
+    "prefix": "container",
+    "body": [
+      "/* Centered, readable max width with side padding that grows on larger screens */",
+      ".${1:container} {",
+      "\twidth: min(100% - 2rem, ${2:72rem});",
+      "\tmargin-inline: auto;${0}",
+      "}"
+    ],
+    "description": "Responsive page container (guided)"
+  },
+  "Full-height section (mobile safe)": {
+    "scope": "css,scss,less",
+    "prefix": "vh",
+    "body": [
+      "/* 100vh is taller than the visible area on mobile (the URL bar). dvh tracks the real height. */",
+      ".${1:hero} {",
+      "\tmin-height: 100vh;   /* fallback for old browsers */",
+      "\tmin-height: 100dvh;${0}",
+      "}"
+    ],
+    "description": "Full-height section (mobile safe) (guided)"
+  },
+  "Visually hidden (screen-reader only)": {
+    "scope": "css,scss,less",
+    "prefix": "srtext",
+    "body": [
+      "/* Hidden visually but still read by screen readers (never use display:none for this) */",
+      ".visually-hidden {",
+      "\tposition: absolute !important;",
+      "\twidth: 1px;",
+      "\theight: 1px;",
+      "\tpadding: 0;",
+      "\tmargin: -1px;",
+      "\toverflow: hidden;",
+      "\tclip-path: inset(50%);",
+      "\twhite-space: nowrap;",
+      "\tborder: 0;",
+      "}${0}"
+    ],
+    "description": "Visually hidden (screen-reader only) (guided)"
+  },
+  "Design tokens (:root custom properties)": {
+    "scope": "css,scss,less",
+    "prefix": "tokens",
+    "body": [
+      "/* Design tokens: change the look of the whole site from one place */",
+      ":root {",
+      "\t--color-primary: ${1:#2563eb};",
+      "\t--color-text: #1f2937;",
+      "\t--color-muted: #6b7280;",
+      "\t--radius: ${2:0.5rem};",
+      "\t--space-1: 0.25rem;",
+      "\t--space-2: 0.5rem;",
+      "\t--space-4: 1rem;",
+      "\t--space-8: 2rem;",
+      "\t--font-sans: system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif;",
+      "\t--shadow: 0 1px 3px rgb(0 0 0 / 0.12);${0}",
+      "}"
+    ],
+    "description": "Design tokens (:root custom properties) (guided)"
+  },
+  "Modern CSS reset file": {
+    "scope": "css,scss,less",
+    "prefix": "reset",
+    "body": [
+      "/* reset.css: a small modern reset. Import before your own styles. */",
+      "*, *::before, *::after { box-sizing: border-box; }   /* width includes padding and border */",
+      "* { margin: 0; }",
+      "html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }",
+      "body { min-height: 100dvh; line-height: 1.5; -webkit-font-smoothing: antialiased; }",
+      "img, picture, video, canvas, svg { display: block; max-width: 100%; }   /* media never overflows */",
+      "input, button, textarea, select { font: inherit; }                       /* forms use the page font */",
+      "p, h1, h2, h3, h4, h5, h6 { overflow-wrap: break-word; }",
+      ":focus-visible { outline: 2px solid currentColor; outline-offset: 2px; } /* keyboard focus stays visible */",
+      "${0}"
+    ],
+    "description": "Modern CSS reset file (guided)",
+    "isFileTemplate": true
+  },
+  "Responsive stylesheet starter": {
+    "scope": "css,scss,less",
+    "prefix": "respfile",
+    "body": [
+      "/* ============================================================",
+      "   Breakpoint reference (mobile-first, Tailwind-compatible)",
+      "   ------------------------------------------------------------",
+      "   base   0-639px   phones portrait    iPhone SE 375x667, iPhone 15 393x852,",
+      "\t\t\t\t\t\t\t\t\t   Pixel 8 412x915, Galaxy S24 360x780",
+      "   sm   >= 640px    phones landscape / small tablets",
+      "   md   >= 768px    tablets portrait   iPad Mini 768x1024, iPad 820x1180",
+      "   lg   >= 1024px   tablets landscape, small laptops   iPad Pro 1024x1366",
+      "   xl   >= 1280px   laptops            1280x800, 1366x768, 1440x900",
+      "   2xl  >= 1536px   desktops           1536x864, 1920x1080, 2560x1440",
+      "   Design for content, not devices: add a breakpoint where the layout breaks.",
+      "   ============================================================ */",
+      "",
+      "@import url(\"reset.css\");",
+      "",
+      ":root {",
+      "\t--max-width: ${1:72rem};",
+      "\t--gutter: clamp(1rem, 4vw, 2rem);",
+      "}",
+      "",
+      ".container { width: min(100% - 2 * var(--gutter), var(--max-width)); margin-inline: auto; }",
+      "",
+      "/* ---- base: phones ---- */",
+      ".layout { display: grid; gap: var(--gutter); }",
+      "",
+      "/* ---- md: tablets ---- */",
+      "@media (min-width: 768px) {",
+      "\t.layout { grid-template-columns: 1fr 1fr; }",
+      "}",
+      "",
+      "/* ---- lg: laptops ---- */",
+      "@media (min-width: 1024px) {",
+      "\t.layout { grid-template-columns: 240px 1fr; }",
+      "}",
+      "${0}"
+    ],
+    "description": "Responsive stylesheet starter (guided)",
+    "isFileTemplate": true
+  }
+}

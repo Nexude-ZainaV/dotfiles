@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[// Escape everything you echo into HTML: this is what prevents XSS
+function e(?string \$value): string
+{
+	return htmlspecialchars(\$value ?? '', ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+}
+// <p><?= e(\$${1:comment}) ?></p>${0}]]></content>
+	<tabTrigger>esc</tabTrigger>
+	<scope>embedding.php, source.php</scope>
+	<description>HTML escape helper</description>
+</snippet>

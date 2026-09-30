@@ -1,0 +1,13 @@
+<snippet>
+	<content><![CDATA[// else-if chain: tested top to bottom, first true branch wins
+if (${1:score} >= ${2:90}) {
+	${3}
+} else if (${1} >= ${4:75}) {
+	${5}
+} else {
+	${0}
+}]]></content>
+	<tabTrigger>elif</tabTrigger>
+	<scope>source.c</scope>
+	<description>else-if chain</description>
+</snippet>

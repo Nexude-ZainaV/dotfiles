@@ -1,0 +1,15 @@
+<snippet>
+	<content><![CDATA[// Import order (industry convention, enforced by eslint-plugin-import / Biome):
+// 1. Node built-ins  2. external packages  3. internal aliases (@/...)  4. relative  5. styles
+import { ${1:readFile} } from "node:${2:fs/promises}";
+
+import ${3:React} from "${4:react}";
+
+import { ${5:helper} } from "@/${6:lib/helper}";
+
+import { ${7:thing} } from "./${8:thing}";
+${0}]]></content>
+	<tabTrigger>imp</tabTrigger>
+	<scope>source.js, source.ts, source.jsx, source.tsx</scope>
+	<description>Import block (ordered)</description>
+</snippet>

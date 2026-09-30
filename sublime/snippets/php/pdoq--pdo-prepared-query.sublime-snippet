@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[// Prepared statements keep data separate from SQL: this is what prevents SQL injection.
+// NEVER concatenate user input into a query string.
+\$stmt = \$pdo->prepare('SELECT ${1:id, name} FROM ${2:users} WHERE ${3:email} = :${3} LIMIT 1');
+\$stmt->execute(['${3}' => \$${4:email}]);
+\$${5:user} = \$stmt->fetch();   // false when no row matched${0}]]></content>
+	<tabTrigger>pdoq</tabTrigger>
+	<scope>embedding.php, source.php</scope>
+	<description>PDO prepared query</description>
+</snippet>

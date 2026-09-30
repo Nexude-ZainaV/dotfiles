@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[// foreach: read-only iteration over any IEnumerable
+foreach (var ${1:item} in ${2:items})
+{
+	${0}
+}]]></content>
+	<tabTrigger>fore</tabTrigger>
+	<scope>source.cs</scope>
+	<description>foreach loop</description>
+</snippet>

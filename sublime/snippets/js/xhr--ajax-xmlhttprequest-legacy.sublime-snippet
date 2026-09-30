@@ -1,0 +1,18 @@
+<snippet>
+	<content><![CDATA[// XMLHttpRequest: the original AJAX API. You will meet it in older codebases.
+const xhr = new XMLHttpRequest();
+xhr.open(${1:"GET"}, ${2:"/api/items"});
+xhr.responseType = "json";
+xhr.onload = () => {
+	if (xhr.status >= 200 && xhr.status < 300) {
+		${0}console.log(xhr.response);
+	} else {
+		console.error(`HTTP \${xhr.status}`);
+	}
+};
+xhr.onerror = () => console.error("network error");
+xhr.send();]]></content>
+	<tabTrigger>xhr</tabTrigger>
+	<scope>source.js, source.ts, source.jsx, source.tsx</scope>
+	<description>AJAX: XMLHttpRequest (legacy)</description>
+</snippet>

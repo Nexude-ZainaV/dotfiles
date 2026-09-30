@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[// do-while: body runs at least once
+do {
+	${0}
+} while (${1:condition});]]></content>
+	<tabTrigger>dowhile</tabTrigger>
+	<scope>source.c++</scope>
+	<description>do-while loop</description>
+</snippet>

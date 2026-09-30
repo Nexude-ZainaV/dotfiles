@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[// Chain: filter (keep), map (transform), reduce (combine to one value)
+const ${1:total} = ${2:orders}
+	.filter((o) => o.${3:paid})
+	.map((o) => o.${4:amount})
+	.reduce((sum, amount) => sum + amount, 0);${0}]]></content>
+	<tabTrigger>mfr</tabTrigger>
+	<scope>source.js, source.ts, source.jsx, source.tsx</scope>
+	<description>map / filter / reduce</description>
+</snippet>

@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[-- DELETE without WHERE empties the table. Inside a transaction you can still roll back.
+DELETE FROM ${1:sessions}
+WHERE ${2:expires_at < CURRENT_TIMESTAMP};${0}]]></content>
+	<tabTrigger>del</tabTrigger>
+	<scope>source.sql</scope>
+	<description>DELETE (safe)</description>
+</snippet>

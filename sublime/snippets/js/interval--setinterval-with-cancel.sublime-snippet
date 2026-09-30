@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[// setInterval repeats every N ms until cleared. Always clear it, or it leaks.
+const ${1:intervalId} = setInterval(() => {
+	${0}
+}, ${2:1000});
+// clearInterval(${1});]]></content>
+	<tabTrigger>interval</tabTrigger>
+	<scope>source.js, source.ts, source.jsx, source.tsx</scope>
+	<description>setInterval with cancel</description>
+</snippet>

@@ -1,0 +1,18 @@
+<snippet>
+	<content><![CDATA[/* Design tokens: change the look of the whole site from one place */
+:root {
+	--color-primary: ${1:#2563eb};
+	--color-text: #1f2937;
+	--color-muted: #6b7280;
+	--radius: ${2:0.5rem};
+	--space-1: 0.25rem;
+	--space-2: 0.5rem;
+	--space-4: 1rem;
+	--space-8: 2rem;
+	--font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+	--shadow: 0 1px 3px rgb(0 0 0 / 0.12);${0}
+}]]></content>
+	<tabTrigger>tokens</tabTrigger>
+	<scope>source.css, source.scss, source.less</scope>
+	<description>Design tokens (:root custom properties)</description>
+</snippet>

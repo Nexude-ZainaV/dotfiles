@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[// Arrow functions keep the outer `this`; implicit return when the body is one expression
+const ${1:name} = (${2:args}) => {
+	${0}
+};]]></content>
+	<tabTrigger>afn</tabTrigger>
+	<scope>source.js, source.ts, source.jsx, source.tsx</scope>
+	<description>arrow function</description>
+</snippet>

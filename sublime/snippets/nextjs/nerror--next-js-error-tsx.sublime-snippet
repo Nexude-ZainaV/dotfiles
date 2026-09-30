@@ -1,0 +1,16 @@
+<snippet>
+	<content><![CDATA["use client";
+// error.tsx must be a client component. It catches errors thrown while rendering this segment.
+export default function Error({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
+	return (
+		<div role="alert" className="p-8">
+			<h2>Something went wrong.</h2>
+			<button type="button" onClick={() => reset()}>Try again</button>
+			${0}
+		</div>
+	);
+}]]></content>
+	<tabTrigger>nerror</tabTrigger>
+	<scope>source.tsx, source.ts, source.jsx, source.js</scope>
+	<description>Next.js error.tsx</description>
+</snippet>

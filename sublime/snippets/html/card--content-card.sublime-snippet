@@ -1,0 +1,13 @@
+<snippet>
+	<content><![CDATA[<article class="card">
+	<img class="card__media" src="${1:image.jpg}" alt="" width="400" height="225" loading="lazy">
+	<div class="card__body">
+		<h3 class="card__title"><a href="${2:#}">${3:Card title}</a></h3>
+		<p>${4:Short summary of the content.}</p>
+		${0}
+	</div>
+</article>]]></content>
+	<tabTrigger>card</tabTrigger>
+	<scope>text.html</scope>
+	<description>Content card</description>
+</snippet>

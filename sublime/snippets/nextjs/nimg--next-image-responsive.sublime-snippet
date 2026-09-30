@@ -1,0 +1,16 @@
+<snippet>
+	<content><![CDATA[import Image from "next/image";
+
+{/* sizes tells the browser which width to download at each breakpoint */}
+<Image
+	src="${1:/hero.jpg}"
+	alt="${2:Describe the image for screen readers}"
+	width={${3:1200}}
+	height={${4:630}}
+	sizes="(min-width: 1024px) 960px, 100vw"
+	priority${0}
+/>]]></content>
+	<tabTrigger>nimg</tabTrigger>
+	<scope>source.tsx, source.ts, source.jsx, source.js</scope>
+	<description>next/image responsive</description>
+</snippet>

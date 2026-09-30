@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[/* Media Queries Level 4 range syntax (all modern browsers): reads like maths */
+@media (${1:768px} <= width < ${2:1024px}) {   /* tablets only */
+	${0}
+}]]></content>
+	<tabTrigger>mqrange</tabTrigger>
+	<scope>source.css, source.scss, source.less</scope>
+	<description>Media query: range syntax</description>
+</snippet>

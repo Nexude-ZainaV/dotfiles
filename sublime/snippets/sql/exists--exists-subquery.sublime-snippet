@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[-- EXISTS stops at the first matching row: efficient for "has at least one ..."
+SELECT c.*
+FROM ${1:customers} c
+WHERE EXISTS (
+	SELECT 1 FROM ${2:orders} o WHERE o.customer_id = c.id AND o.${3:status} = 'paid'
+);${0}]]></content>
+	<tabTrigger>exists</tabTrigger>
+	<scope>source.sql</scope>
+	<description>EXISTS subquery</description>
+</snippet>

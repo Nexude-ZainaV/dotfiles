@@ -1,0 +1,18 @@
+<snippet>
+	<content><![CDATA["use client";
+// "use client" marks the boundary: this file and its imports ship to the browser.
+// Needed for state, effects, event handlers and browser APIs. Keep these small.
+import { useState } from "react";
+
+export function ${1:Counter}() {
+	const [count, setCount] = useState(0);
+	return (
+		<button type="button" onClick={() => setCount((c) => c + 1)}>
+			${0}Clicked {count} times
+		</button>
+	);
+}]]></content>
+	<tabTrigger>nclient</tabTrigger>
+	<scope>source.tsx, source.ts, source.jsx, source.js</scope>
+	<description>Next.js client component</description>
+</snippet>

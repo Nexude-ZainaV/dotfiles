@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[// Range-for: const& avoids copying each element; drop const to modify in place
+for (const auto& ${1:item} : ${2:items}) {
+	${0}
+}]]></content>
+	<tabTrigger>forr</tabTrigger>
+	<scope>source.c++</scope>
+	<description>range-based for loop</description>
+</snippet>

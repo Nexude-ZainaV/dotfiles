@@ -1,0 +1,26 @@
+<snippet>
+	<content><![CDATA[// routes/${1:items}.js: group related endpoints, mount with app.use("/api/${1}", router)
+import { Router } from "express";
+
+const router = Router();
+
+router.get("/", async (req, res) => {
+	res.json([]);
+});
+
+router.get("/:id", async (req, res) => {
+	const id = Number(req.params.id);
+	if (!Number.isInteger(id)) return res.status(400).json({ error: "id must be an integer" });
+	${0}
+	res.status(404).json({ error: "Not found" });
+});
+
+router.post("/", async (req, res) => {
+	res.status(201).json(req.body);
+});
+
+export default router;]]></content>
+	<tabTrigger>router</tabTrigger>
+	<scope>source.js, source.ts</scope>
+	<description>Express router</description>
+</snippet>

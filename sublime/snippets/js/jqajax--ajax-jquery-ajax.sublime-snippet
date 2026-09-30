@@ -1,0 +1,17 @@
+<snippet>
+	<content><![CDATA[// jQuery AJAX (common in WordPress/legacy PHP sites). dataType "json" parses the reply.
+\$.ajax({
+	url: ${1:"/api/items"},
+	method: ${2:"POST"},
+	contentType: "application/json",
+	data: JSON.stringify(${3:payload}),
+	dataType: "json",
+})
+	.done((data) => {
+		${0}
+	})
+	.fail((xhr, status, error) => console.error(status, error));]]></content>
+	<tabTrigger>jqajax</tabTrigger>
+	<scope>source.js, source.ts, source.jsx, source.tsx</scope>
+	<description>AJAX: jQuery $.ajax</description>
+</snippet>

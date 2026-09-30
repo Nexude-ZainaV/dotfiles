@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[-- INNER JOIN keeps only matching rows; LEFT JOIN keeps every row from the left table
+-- and fills NULLs where the right side has no match.
+SELECT ${1:c}.name, ${2:o}.id AS order_id, ${2}.total
+FROM ${3:customers} AS ${1}
+${4:LEFT} JOIN ${5:orders} AS ${2} ON ${2}.${6:customer_id} = ${1}.id
+WHERE ${1}.${7:country} = '${8:US}';${0}]]></content>
+	<tabTrigger>join</tabTrigger>
+	<scope>source.sql</scope>
+	<description>INNER / LEFT JOIN</description>
+</snippet>

@@ -1,0 +1,22 @@
+<snippet>
+	<content><![CDATA[// app/${1:dashboard}/page.tsx: Server Component by default (runs on the server, no JS shipped)
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "${2:Dashboard}",
+	description: "${3:What this page is for}",
+};
+
+export default async function ${4:Dashboard}Page() {
+	// You can await data directly in a server component
+	${0}
+	return (
+		<main className="mx-auto max-w-5xl p-4 md:p-8">
+			<h1 className="text-2xl font-semibold md:text-3xl">${2}</h1>
+		</main>
+	);
+}]]></content>
+	<tabTrigger>npage</tabTrigger>
+	<scope>source.tsx, source.ts, source.jsx, source.js</scope>
+	<description>Next.js page (server component)</description>
+</snippet>

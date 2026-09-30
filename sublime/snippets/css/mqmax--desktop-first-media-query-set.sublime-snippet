@@ -1,0 +1,13 @@
+<snippet>
+	<content><![CDATA[/* Desktop-first: base styles target large screens, max-width queries override downward.
+   Mobile-first (min-width) is usually preferred; use this when retrofitting a desktop site. */
+${1:.selector} { ${0} }
+
+@media (max-width: 1279.98px) { ${1} { } }   /* below xl: laptops */
+@media (max-width: 1023.98px) { ${1} { } }   /* below lg: tablets */
+@media (max-width: 767.98px)  { ${1} { } }   /* below md: phones  */
+/* .98 avoids a 1px overlap with min-width queries at the exact breakpoint */]]></content>
+	<tabTrigger>mqmax</tabTrigger>
+	<scope>source.css, source.scss, source.less</scope>
+	<description>Desktop-first media query set</description>
+</snippet>

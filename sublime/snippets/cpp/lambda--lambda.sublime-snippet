@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[// [captures](params) -> return_type { body }. [&] captures by reference, [=] by copy.
+auto ${1:fn} = [${2:&}](${3:int x}) {
+	${0}
+};]]></content>
+	<tabTrigger>lambda</tabTrigger>
+	<scope>source.c++</scope>
+	<description>lambda</description>
+</snippet>

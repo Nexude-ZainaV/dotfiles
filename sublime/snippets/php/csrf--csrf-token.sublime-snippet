@@ -1,0 +1,15 @@
+<snippet>
+	<content><![CDATA[// CSRF protection: every state-changing form carries a secret token tied to the session
+session_start();
+\$_SESSION['csrf'] ??= bin2hex(random_bytes(32));
+
+// In the form:  <input type="hidden" name="csrf" value="<?= e(\$_SESSION['csrf']) ?>">
+// On submit: hash_equals is a constant-time compare (resists timing attacks)
+if (!hash_equals(\$_SESSION['csrf'], (string) (\$_POST['csrf'] ?? ''))) {
+	http_response_code(403);
+	exit('Invalid CSRF token');
+}${0}]]></content>
+	<tabTrigger>csrf</tabTrigger>
+	<scope>embedding.php, source.php</scope>
+	<description>CSRF token</description>
+</snippet>

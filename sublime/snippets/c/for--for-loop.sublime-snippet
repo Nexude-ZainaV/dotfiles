@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[// for: init; condition checked before each pass; step after each pass
+for (size_t ${1:i} = 0; ${1} < ${2:count}; ${1}++) {
+	${0}
+}]]></content>
+	<tabTrigger>for</tabTrigger>
+	<scope>source.c</scope>
+	<description>for loop</description>
+</snippet>

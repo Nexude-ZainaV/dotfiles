@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[// Interface: the contract a class promises to fulfil (great for testing with fakes)
+public interface I${1:Repository}<T>
+{
+	Task<T?> GetByIdAsync(int id, CancellationToken ct = default);
+	Task<IReadOnlyList<T>> ListAsync(CancellationToken ct = default);
+	${0}
+}]]></content>
+	<tabTrigger>iface</tabTrigger>
+	<scope>source.cs</scope>
+	<description>interface</description>
+</snippet>

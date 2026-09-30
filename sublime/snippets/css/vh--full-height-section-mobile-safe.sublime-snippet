@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[/* 100vh is taller than the visible area on mobile (the URL bar). dvh tracks the real height. */
+.${1:hero} {
+	min-height: 100vh;   /* fallback for old browsers */
+	min-height: 100dvh;${0}
+}]]></content>
+	<tabTrigger>vh</tabTrigger>
+	<scope>source.css, source.scss, source.less</scope>
+	<description>Full-height section (mobile safe)</description>
+</snippet>

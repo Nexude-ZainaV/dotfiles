@@ -1,0 +1,13 @@
+<snippet>
+	<content><![CDATA[// loading.tsx: shown instantly while the page's server data loads (a Suspense fallback)
+export default function Loading() {
+	return (
+		<div role="status" aria-live="polite" className="animate-pulse p-8">
+			${0}Loading...
+		</div>
+	);
+}]]></content>
+	<tabTrigger>nloading</tabTrigger>
+	<scope>source.tsx, source.ts, source.jsx, source.js</scope>
+	<description>Next.js loading.tsx</description>
+</snippet>

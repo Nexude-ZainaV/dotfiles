@@ -1,0 +1,20 @@
+<snippet>
+	<content><![CDATA[// ${1:Card}.tsx: one component per file, named after the file (PascalCase)
+type ${1}Props = {
+	${2:title}: string;
+	children?: React.ReactNode;
+};
+
+export function ${1}({ ${2}, children }: ${1}Props) {
+	return (
+		<section className="${3:card}">
+			<h2>{${2}}</h2>
+			{children}
+			${0}
+		</section>
+	);
+}]]></content>
+	<tabTrigger>rfc</tabTrigger>
+	<scope>source.jsx, source.tsx, source.js, source.ts</scope>
+	<description>React component (TSX)</description>
+</snippet>

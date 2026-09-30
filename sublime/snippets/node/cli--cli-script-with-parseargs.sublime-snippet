@@ -1,0 +1,25 @@
+<snippet>
+	<content><![CDATA[#!/usr/bin/env node
+// CLI entry point using the built-in argument parser (no dependency needed)
+import { parseArgs } from "node:util";
+
+const { values, positionals } = parseArgs({
+	options: {
+		${1:output}: { type: "string", short: "o" },
+		verbose: { type: "boolean", short: "v", default: false },
+	},
+	allowPositionals: true,
+});
+
+async function main() {
+	${0}
+}
+
+main().catch((err) => {
+	console.error(err.message);
+	process.exitCode = 1;   // set, do not call process.exit(), so pending output flushes
+});]]></content>
+	<tabTrigger>cli</tabTrigger>
+	<scope>source.js, source.ts</scope>
+	<description>CLI script with parseArgs</description>
+</snippet>

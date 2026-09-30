@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[// ternary: condition ? if_true : if_false
+var ${1:label} = ${2:count} > 0 ? "${3:has items}" : "${4:empty}";
+// ?? picks the right side when the left is null; ??= assigns only if null
+var ${5:name} = ${6:input} ?? "${7:default}";${0}]]></content>
+	<tabTrigger>tern</tabTrigger>
+	<scope>source.cs</scope>
+	<description>Ternary and null-coalescing</description>
+</snippet>

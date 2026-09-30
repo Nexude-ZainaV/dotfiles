@@ -1,0 +1,21 @@
+<snippet>
+	<content><![CDATA[import asyncio
+
+
+async def ${1:fetch_one}(i: int) -> int:
+	await asyncio.sleep(0.1)   # stands in for I/O: a request, a DB call
+	return i
+
+
+async def main() -> None:
+	# gather runs coroutines concurrently and returns results in order
+	results = await asyncio.gather(*(${1}(i) for i in range(${2:5})))
+	${0}
+
+
+if __name__ == "__main__":
+	asyncio.run(main())]]></content>
+	<tabTrigger>async</tabTrigger>
+	<scope>source.python</scope>
+	<description>asyncio entry point</description>
+</snippet>

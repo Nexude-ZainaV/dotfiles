@@ -1,0 +1,450 @@
+{
+  "Import block (PEP 8 order)": {
+    "scope": "python",
+    "prefix": "imp",
+    "body": [
+      "# PEP 8 import order, one blank line between groups (ruff/isort enforce this):",
+      "# 1. standard library",
+      "import json",
+      "import logging",
+      "from pathlib import Path",
+      "",
+      "# 2. third-party packages",
+      "import ${1:requests}",
+      "",
+      "# 3. local application modules",
+      "from ${2:app}.${3:services} import ${4:thing}",
+      "${0}"
+    ],
+    "description": "Import block (PEP 8 order) (guided)"
+  },
+  "Python script file": {
+    "scope": "python",
+    "prefix": "script",
+    "body": [
+      "\"\"\"${1:tool_name}: ${2:one line on what this script does}.",
+      "",
+      "Usage:",
+      "\tpython ${1}.py ${3:input.csv}",
+      "\"\"\"",
+      "",
+      "from __future__ import annotations",
+      "",
+      "import argparse",
+      "import logging",
+      "import sys",
+      "from pathlib import Path",
+      "",
+      "log = logging.getLogger(__name__)",
+      "",
+      "",
+      "def parse_args(argv: list[str] | None = None) -> argparse.Namespace:",
+      "\tparser = argparse.ArgumentParser(description=__doc__.splitlines()[0])",
+      "\tparser.add_argument(\"path\", type=Path, help=\"${4:file to process}\")",
+      "\tparser.add_argument(\"-v\", \"--verbose\", action=\"store_true\")",
+      "\treturn parser.parse_args(argv)",
+      "",
+      "",
+      "def main(argv: list[str] | None = None) -> int:",
+      "\targs = parse_args(argv)",
+      "\tlogging.basicConfig(level=logging.DEBUG if args.verbose else logging.INFO)",
+      "\t${0}",
+      "\treturn 0",
+      "",
+      "",
+      "# Only runs when executed directly, not when imported by tests or other modules",
+      "if __name__ == \"__main__\":",
+      "\tsys.exit(main())"
+    ],
+    "description": "Python script file (guided)",
+    "isFileTemplate": true
+  },
+  "main guard": {
+    "scope": "python",
+    "prefix": "main",
+    "body": [
+      "def main() -> None:",
+      "\t${0}",
+      "",
+      "",
+      "# True only when this file is run directly (python file.py), not when imported",
+      "if __name__ == \"__main__\":",
+      "\tmain()"
+    ],
+    "description": "main guard (guided)"
+  },
+  "if statement": {
+    "scope": "python",
+    "prefix": "if",
+    "body": [
+      "# if: runs when the condition is truthy (not False, None, 0, \"\", [], {})",
+      "if ${1:condition}:",
+      "\t${0}"
+    ],
+    "description": "if statement (guided)"
+  },
+  "if / else": {
+    "scope": "python",
+    "prefix": "ife",
+    "body": [
+      "# if / else: exactly one branch runs",
+      "if ${1:condition}:",
+      "\t${2:pass}",
+      "else:",
+      "\t${0}"
+    ],
+    "description": "if / else (guided)"
+  },
+  "if / elif / else chain": {
+    "scope": "python",
+    "prefix": "elif",
+    "body": [
+      "# elif chain: first true branch wins; order from most to least specific",
+      "if ${1:score} >= ${2:90}:",
+      "\t${3:grade = \"A\"}",
+      "elif ${1} >= ${4:75}:",
+      "\t${5:grade = \"B\"}",
+      "else:",
+      "\t${0}"
+    ],
+    "description": "if / elif / else chain (guided)"
+  },
+  "Nested if vs guard clause": {
+    "scope": "python",
+    "prefix": "ifn",
+    "body": [
+      "# Nested if: the inner check only runs when the outer one passed",
+      "if ${1:user} is not None:",
+      "\tif ${1}.${2:is_active}:",
+      "\t\t${0}",
+      "# Flatter alternative (guard clause) inside a function:",
+      "#     if ${1} is None or not ${1}.${2}:",
+      "#         return"
+    ],
+    "description": "Nested if vs guard clause (guided)"
+  },
+  "Conditional expression (ternary)": {
+    "scope": "python",
+    "prefix": "tern",
+    "body": [
+      "# Python's ternary: value_if_true if condition else value_if_false",
+      "${1:label} = ${2:\"adult\"} if ${3:age >= 18} else ${4:\"minor\"}${0}"
+    ],
+    "description": "Conditional expression (ternary) (guided)"
+  },
+  "match statement (switch)": {
+    "scope": "python",
+    "prefix": "match",
+    "body": [
+      "# match (3.10+): Python's switch, with structural pattern matching",
+      "match ${1:command}:",
+      "\tcase \"${2:start}\":",
+      "\t\t${3}",
+      "\tcase \"${4:stop}\" | \"${5:quit}\":   # | matches either value",
+      "\t\t${6}",
+      "\tcase {\"action\": action, \"id\": int(item_id)}:   # destructure a dict",
+      "\t\t${7:pass}",
+      "\tcase _:   # default: matches anything",
+      "\t\t${0}"
+    ],
+    "description": "match statement (switch) (guided)"
+  },
+  "for loop": {
+    "scope": "python",
+    "prefix": "for",
+    "body": [
+      "# for iterates over any iterable directly: no index needed",
+      "for ${1:item} in ${2:items}:",
+      "\t${0}"
+    ],
+    "description": "for loop (guided)"
+  },
+  "for with enumerate / zip": {
+    "scope": "python",
+    "prefix": "fore",
+    "body": [
+      "# enumerate gives (index, value); zip pairs up two iterables, strict=True catches length bugs",
+      "for ${1:i}, ${2:item} in enumerate(${3:items}, start=1):",
+      "\t${4}",
+      "for ${5:name}, ${6:score} in zip(${7:names}, ${8:scores}, strict=True):",
+      "\t${0}"
+    ],
+    "description": "for with enumerate / zip (guided)"
+  },
+  "for over range": {
+    "scope": "python",
+    "prefix": "forr",
+    "body": [
+      "# range(start, stop, step): stop is exclusive",
+      "for ${1:i} in range(${2:0}, ${3:10}):",
+      "\t${0}"
+    ],
+    "description": "for over range (guided)"
+  },
+  "while loop": {
+    "scope": "python",
+    "prefix": "while",
+    "body": [
+      "# while: checks before each pass; `break` exits, `continue` skips to the next pass",
+      "while ${1:condition}:",
+      "\t${0}"
+    ],
+    "description": "while loop (guided)"
+  },
+  "try / except / else / finally": {
+    "scope": "python",
+    "prefix": "try",
+    "body": [
+      "# except the narrowest exception you can handle; else runs only if nothing was raised",
+      "try:",
+      "\t${1}",
+      "except ${2:FileNotFoundError} as exc:",
+      "\tlog.warning(\"${3:file missing}: %s\", exc)",
+      "else:",
+      "\t${4:pass}",
+      "finally:",
+      "\t${0}"
+    ],
+    "description": "try / except / else / finally (guided)"
+  },
+  "with (context manager)": {
+    "scope": "python",
+    "prefix": "with",
+    "body": [
+      "# with: the resource is always closed, even if an exception is raised inside",
+      "with open(${1:path}, encoding=\"utf-8\") as ${2:fh}:",
+      "\t${0}"
+    ],
+    "description": "with (context manager) (guided)"
+  },
+  "typed function with docstring": {
+    "scope": "python",
+    "prefix": "def",
+    "body": [
+      "def ${1:name}(${2:value}: ${3:int}) -> ${4:bool}:",
+      "\t\"\"\"${5:One line on what it does.}",
+      "",
+      "\tArgs:",
+      "\t\t${2}: ${6:what it means}",
+      "",
+      "\tReturns:",
+      "\t\t${7:what comes back}",
+      "\t\"\"\"",
+      "\t${0}"
+    ],
+    "description": "typed function with docstring (guided)"
+  },
+  "class": {
+    "scope": "python",
+    "prefix": "cls",
+    "body": [
+      "class ${1:Account}:",
+      "\t\"\"\"${2:What this class represents.}\"\"\"",
+      "",
+      "\tdef __init__(self, ${3:owner}: str) -> None:",
+      "\t\tself.${3} = ${3}",
+      "\t\tself._balance = 0   # leading underscore: internal by convention",
+      "",
+      "\tdef __repr__(self) -> str:   # shown in the debugger and REPL",
+      "\t\treturn f\"${1}(${3}={self.${3}!r})\"",
+      "\t${0}"
+    ],
+    "description": "class (guided)"
+  },
+  "dataclass": {
+    "scope": "python",
+    "prefix": "dc",
+    "body": [
+      "from dataclasses import dataclass, field",
+      "",
+      "",
+      "@dataclass(slots=True)",
+      "class ${1:Item}:",
+      "\t\"\"\"${2:A plain data record: __init__, __repr__ and __eq__ are generated.}\"\"\"",
+      "",
+      "\t${3:name}: str",
+      "\t${4:price}: float = 0.0",
+      "\ttags: list[str] = field(default_factory=list)   # never use a mutable default directly",
+      "${0}"
+    ],
+    "description": "dataclass (guided)"
+  },
+  "comprehensions": {
+    "scope": "python",
+    "prefix": "lc",
+    "body": [
+      "# List comprehension: [expression for item in iterable if condition]",
+      "${1:squares} = [${2:x * x} for ${3:x} in ${4:numbers} if ${5:x % 2 == 0}]",
+      "# Dict comprehension",
+      "${6:by_id} = {${7:u}.id: ${7} for ${7} in ${8:users}}${0}"
+    ],
+    "description": "comprehensions (guided)"
+  },
+  "measure elapsed time": {
+    "scope": "python",
+    "prefix": "timer",
+    "body": [
+      "import time",
+      "",
+      "# perf_counter: the highest-resolution clock for measuring durations",
+      "${1:start} = time.perf_counter()",
+      "${0}",
+      "print(f\"elapsed: {(time.perf_counter() - ${1}) * 1000:.1f} ms\")"
+    ],
+    "description": "measure elapsed time (guided)"
+  },
+  "timing context manager": {
+    "scope": "python",
+    "prefix": "ctimer",
+    "body": [
+      "import time",
+      "from contextlib import contextmanager",
+      "",
+      "",
+      "@contextmanager",
+      "def timer(label: str):",
+      "\t\"\"\"Usage: with timer(\"load\"): do_work()\"\"\"",
+      "\tstart = time.perf_counter()",
+      "\ttry:",
+      "\t\tyield",
+      "\tfinally:",
+      "\t\tprint(f\"{label}: {(time.perf_counter() - start) * 1000:.1f} ms\")",
+      "${0}"
+    ],
+    "description": "timing context manager (guided)"
+  },
+  "asyncio entry point": {
+    "scope": "python",
+    "prefix": "async",
+    "body": [
+      "import asyncio",
+      "",
+      "",
+      "async def ${1:fetch_one}(i: int) -> int:",
+      "\tawait asyncio.sleep(0.1)   # stands in for I/O: a request, a DB call",
+      "\treturn i",
+      "",
+      "",
+      "async def main() -> None:",
+      "\t# gather runs coroutines concurrently and returns results in order",
+      "\tresults = await asyncio.gather(*(${1}(i) for i in range(${2:5})))",
+      "\t${0}",
+      "",
+      "",
+      "if __name__ == \"__main__\":",
+      "\tasyncio.run(main())"
+    ],
+    "description": "asyncio entry point (guided)"
+  },
+  "HTTP GET with requests": {
+    "scope": "python",
+    "prefix": "req",
+    "body": [
+      "import requests",
+      "",
+      "# Always set a timeout: without one a hung server blocks forever",
+      "resp = requests.get(${1:\"https://api.example.com/items\"}, params={${2:\"page\": 1}}, timeout=${3:10})",
+      "resp.raise_for_status()   # turn 4xx/5xx into an exception",
+      "${4:data} = resp.json()${0}"
+    ],
+    "description": "HTTP GET with requests (guided)"
+  },
+  "FastAPI app": {
+    "scope": "python",
+    "prefix": "fastapi",
+    "body": [
+      "\"\"\"FastAPI application: `uvicorn app.main:app --reload`, docs at /docs.\"\"\"",
+      "",
+      "from fastapi import FastAPI, HTTPException, status",
+      "from pydantic import BaseModel, Field",
+      "",
+      "app = FastAPI(title=\"${1:My API}\")",
+      "",
+      "",
+      "class ${2:Item}In(BaseModel):",
+      "\tname: str = Field(min_length=1, max_length=100)   # validated automatically",
+      "",
+      "",
+      "class ${2}Out(${2}In):",
+      "\tid: int",
+      "",
+      "",
+      "_db: dict[int, ${2}Out] = {}",
+      "",
+      "",
+      "@app.get(\"/health\")",
+      "def health() -> dict[str, str]:",
+      "\treturn {\"status\": \"ok\"}",
+      "",
+      "",
+      "@app.post(\"/${3:items}\", status_code=status.HTTP_201_CREATED)",
+      "def create(item: ${2}In) -> ${2}Out:",
+      "\tnew = ${2}Out(id=len(_db) + 1, **item.model_dump())",
+      "\t_db[new.id] = new",
+      "\treturn new",
+      "",
+      "",
+      "@app.get(\"/${3}/{item_id}\")",
+      "def read(item_id: int) -> ${2}Out:",
+      "\tif item_id not in _db:",
+      "\t\traise HTTPException(status_code=404, detail=\"Not found\")",
+      "\treturn _db[item_id]",
+      "${0}"
+    ],
+    "description": "FastAPI app (guided)",
+    "isFileTemplate": true
+  },
+  "pytest test file": {
+    "scope": "python",
+    "prefix": "pytest",
+    "body": [
+      "\"\"\"Tests for ${1:module}.\"\"\"",
+      "",
+      "import pytest",
+      "",
+      "from ${2:app}.${1} import ${3:function_under_test}",
+      "",
+      "",
+      "def test_${4:happy_path}() -> None:",
+      "\t# Arrange, act, assert",
+      "\tresult = ${3}(${5:2})",
+      "\tassert result == ${6:4}",
+      "",
+      "",
+      "@pytest.mark.parametrize((\"value\", \"expected\"), [(0, 0), (3, 9)])",
+      "def test_${4}_cases(value: int, expected: int) -> None:",
+      "\tassert ${3}(value) == expected",
+      "${0}"
+    ],
+    "description": "pytest test file (guided)",
+    "isFileTemplate": true
+  },
+  "logging setup": {
+    "scope": "python",
+    "prefix": "logging",
+    "body": [
+      "import logging",
+      "",
+      "# Configure once at startup; everywhere else just use logging.getLogger(__name__)",
+      "logging.basicConfig(",
+      "\tlevel=logging.${1:INFO},",
+      "\tformat=\"%(asctime)s %(levelname)-8s %(name)s: %(message)s\",",
+      ")",
+      "log = logging.getLogger(__name__)${0}"
+    ],
+    "description": "logging setup (guided)"
+  },
+  "read a CSV file": {
+    "scope": "python",
+    "prefix": "readcsv",
+    "body": [
+      "import csv",
+      "",
+      "# DictReader maps each row to {column_name: value}; newline=\"\" is required by the csv module",
+      "with open(${1:\"data.csv\"}, newline=\"\", encoding=\"utf-8\") as fh:",
+      "\tfor ${2:row} in csv.DictReader(fh):",
+      "\t\t${0}"
+    ],
+    "description": "read a CSV file (guided)"
+  }
+}

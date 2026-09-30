@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[// async Task: always accept a CancellationToken and pass it down
+public async Task<${1:string}> ${2:LoadAsync}(${3:int id}, CancellationToken ct = default)
+{
+	${0}
+	await Task.Delay(10, ct);
+	return default!;
+}]]></content>
+	<tabTrigger>async</tabTrigger>
+	<scope>source.cs</scope>
+	<description>async method</description>
+</snippet>

@@ -1,0 +1,13 @@
+<snippet>
+	<content><![CDATA[/// <summary>${2:What this type represents.}</summary>
+public class ${1:Customer}
+{
+	public int Id { get; init; }                     // init: settable only when constructing
+	public required string ${3:Name} { get; set; }    // required: must be set by the caller
+	public DateTime CreatedAt { get; } = DateTime.UtcNow;
+	${0}
+}]]></content>
+	<tabTrigger>cls</tabTrigger>
+	<scope>source.cs</scope>
+	<description>class with properties</description>
+</snippet>

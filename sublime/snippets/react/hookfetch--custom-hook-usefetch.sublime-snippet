@@ -1,0 +1,29 @@
+<snippet>
+	<content><![CDATA[import { useEffect, useState } from "react";
+
+// A custom hook is a function starting with `use` that reuses stateful logic
+export function useFetch<T>(url: string) {
+	const [data, setData] = useState<T | null>(null);
+	const [error, setError] = useState<string | null>(null);
+	const [loading, setLoading] = useState(true);
+
+	useEffect(() => {
+		const controller = new AbortController();
+		setLoading(true);
+		fetch(url, { signal: controller.signal })
+			.then((res) => {
+				if (!res.ok) throw new Error(`HTTP \${res.status}`);
+				return res.json() as Promise<T>;
+			})
+			.then(setData)
+			.catch((err) => err.name !== "AbortError" && setError(err.message))
+			.finally(() => setLoading(false));
+		return () => controller.abort();   // a new url cancels the old request
+	}, [url]);
+
+	return { data, error, loading };
+}${0}]]></content>
+	<tabTrigger>hookfetch</tabTrigger>
+	<scope>source.jsx, source.tsx, source.js, source.ts</scope>
+	<description>Custom hook: useFetch</description>
+</snippet>

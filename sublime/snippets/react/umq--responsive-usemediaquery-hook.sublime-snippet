@@ -1,0 +1,21 @@
+<snippet>
+	<content><![CDATA[import { useSyncExternalStore } from "react";
+
+// Subscribes to a CSS media query. Breakpoints match Tailwind: sm 640, md 768, lg 1024, xl 1280.
+export function useMediaQuery(query: string): boolean {
+	return useSyncExternalStore(
+		(onChange) => {
+			const mql = window.matchMedia(query);
+			mql.addEventListener("change", onChange);
+			return () => mql.removeEventListener("change", onChange);
+		},
+		() => window.matchMedia(query).matches,
+		() => false,   // server render: assume mobile-first (no match)
+	);
+}
+
+// const isDesktop = useMediaQuery("(min-width: ${1:1024}px)");${0}]]></content>
+	<tabTrigger>umq</tabTrigger>
+	<scope>source.jsx, source.tsx, source.js, source.ts</scope>
+	<description>Responsive: useMediaQuery hook</description>
+</snippet>

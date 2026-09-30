@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[# elif chain: first true branch wins; order from most to least specific
+if ${1:score} >= ${2:90}:
+	${3:grade = "A"}
+elif ${1} >= ${4:75}:
+	${5:grade = "B"}
+else:
+	${0}]]></content>
+	<tabTrigger>elif</tabTrigger>
+	<scope>source.python</scope>
+	<description>if / elif / else chain</description>
+</snippet>

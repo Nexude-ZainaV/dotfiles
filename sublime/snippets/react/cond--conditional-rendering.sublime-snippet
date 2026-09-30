@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[{/* && renders the right side only when the left is truthy. Careful: {0 && x} renders "0". */}
+{${1:isLoggedIn} && <${2:Dashboard} />}
+{/* ternary for either/or */}
+{${3:loading} ? <p>Loading...</p> : <${4:Content} />}${0}]]></content>
+	<tabTrigger>cond</tabTrigger>
+	<scope>source.jsx, source.tsx, source.js, source.ts</scope>
+	<description>Conditional rendering</description>
+</snippet>

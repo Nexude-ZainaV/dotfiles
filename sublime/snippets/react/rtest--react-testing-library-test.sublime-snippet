@@ -1,0 +1,18 @@
+<snippet>
+	<content><![CDATA[import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { describe, expect, it } from "vitest";
+import { ${1:Counter} } from "./${1}";
+
+// Test what the user sees and does, not implementation details
+describe("${1}", () => {
+	it("${2:increments when clicked}", async () => {
+		render(<${1} />);
+		await userEvent.click(screen.getByRole("button", { name: /${3:increment}/i }));
+		expect(screen.getByText(${4:"1"})).toBeInTheDocument();
+	});${0}
+});]]></content>
+	<tabTrigger>rtest</tabTrigger>
+	<scope>source.jsx, source.tsx, source.js, source.ts</scope>
+	<description>React Testing Library test</description>
+</snippet>

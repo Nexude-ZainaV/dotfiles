@@ -1,0 +1,13 @@
+<snippet>
+	<content><![CDATA[// else-if chain: first truthy branch wins; order from most to least specific
+if (${1:status} === ${2:"success"}) {
+	${3}
+} else if (${1} === ${4:"pending"}) {
+	${5}
+} else {
+	${0}
+}]]></content>
+	<tabTrigger>elif</tabTrigger>
+	<scope>source.js, source.ts, source.jsx, source.tsx</scope>
+	<description>else-if chain</description>
+</snippet>

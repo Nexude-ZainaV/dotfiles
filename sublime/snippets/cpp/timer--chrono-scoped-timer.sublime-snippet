@@ -1,0 +1,14 @@
+<snippet>
+	<content><![CDATA[#include <chrono>
+// steady_clock never jumps backwards, so it is the right clock for measuring durations
+const auto ${1:start} = std::chrono::steady_clock::now();
+
+${0}
+
+const auto ${2:ms} = std::chrono::duration_cast<std::chrono::milliseconds>(
+	std::chrono::steady_clock::now() - ${1}).count();
+std::cout << "elapsed: " << ${2} << " ms\\n";]]></content>
+	<tabTrigger>timer</tabTrigger>
+	<scope>source.c++</scope>
+	<description>chrono scoped timer</description>
+</snippet>

@@ -1,0 +1,22 @@
+<snippet>
+	<content><![CDATA[// Progressive enhancement: the form still works without JS; with JS it submits in place
+const ${1:form} = document.querySelector(${2:"#contact-form"});
+${1}.addEventListener("submit", async (event) => {
+	event.preventDefault();
+	const button = ${1}.querySelector("[type=submit]");
+	button.disabled = true;   // prevent double submits
+	try {
+		const res = await fetch(${1}.action, { method: ${1}.method, body: new FormData(${1}) });
+		if (!res.ok) throw new Error(`HTTP \${res.status}`);
+		${1}.reset();
+		${0}
+	} catch (err) {
+		console.error(err);
+	} finally {
+		button.disabled = false;
+	}
+});]]></content>
+	<tabTrigger>fetchform</tabTrigger>
+	<scope>source.js, source.ts, source.jsx, source.tsx</scope>
+	<description>AJAX: submit a form with fetch</description>
+</snippet>

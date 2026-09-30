@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[-- A view is a saved query: reuse it like a table, with the logic in one place
+CREATE VIEW ${1:customer_revenue} AS
+SELECT c.id, c.name, COALESCE(SUM(o.total), 0) AS revenue
+FROM customers c
+LEFT JOIN orders o ON o.customer_id = c.id AND o.status = 'paid'
+GROUP BY c.id, c.name;${0}]]></content>
+	<tabTrigger>view</tabTrigger>
+	<scope>source.sql</scope>
+	<description>CREATE VIEW</description>
+</snippet>

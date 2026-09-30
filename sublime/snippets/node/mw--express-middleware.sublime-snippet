@@ -1,0 +1,15 @@
+<snippet>
+	<content><![CDATA[// Middleware: (req, res, next). Call next() to continue, or send a response to stop.
+export function ${1:requestLogger}(req, res, next) {
+	const start = performance.now();
+	res.on("finish", () => {
+		const ms = (performance.now() - start).toFixed(1);
+		console.log(`\${req.method} \${req.originalUrl} \${res.statusCode} \${ms}ms`);
+	});
+	${0}
+	next();
+}]]></content>
+	<tabTrigger>mw</tabTrigger>
+	<scope>source.js, source.ts</scope>
+	<description>Express middleware</description>
+</snippet>

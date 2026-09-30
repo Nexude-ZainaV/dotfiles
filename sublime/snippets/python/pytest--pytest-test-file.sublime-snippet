@@ -1,0 +1,22 @@
+<snippet>
+	<content><![CDATA["""Tests for ${1:module}."""
+
+import pytest
+
+from ${2:app}.${1} import ${3:function_under_test}
+
+
+def test_${4:happy_path}() -> None:
+	# Arrange, act, assert
+	result = ${3}(${5:2})
+	assert result == ${6:4}
+
+
+@pytest.mark.parametrize(("value", "expected"), [(0, 0), (3, 9)])
+def test_${4}_cases(value: int, expected: int) -> None:
+	assert ${3}(value) == expected
+${0}]]></content>
+	<tabTrigger>pytest</tabTrigger>
+	<scope>source.python</scope>
+	<description>pytest test file</description>
+</snippet>

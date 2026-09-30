@@ -1,0 +1,7 @@
+<snippet>
+	<content><![CDATA[// %d int, %ld long, %zu size_t, %f double, %s string, %c char, %p pointer
+printf("${1:%s}\\n", ${2:value});${0}]]></content>
+	<tabTrigger>printf</tabTrigger>
+	<scope>source.c</scope>
+	<description>printf with format guide</description>
+</snippet>

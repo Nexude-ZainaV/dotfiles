@@ -1,0 +1,13 @@
+<snippet>
+	<content><![CDATA[import { readFile, writeFile, mkdir } from "node:fs/promises";
+import path from "node:path";
+
+// Promise-based fs: never block the event loop with the *Sync versions in a server
+const ${1:file} = path.join(import.meta.dirname, "${2:data.json}");
+const ${3:data} = JSON.parse(await readFile(${1}, "utf8"));
+await mkdir(path.dirname(${1}), { recursive: true });
+await writeFile(${1}, JSON.stringify(${3}, null, 2) + "\\n");${0}]]></content>
+	<tabTrigger>readfile</tabTrigger>
+	<scope>source.js, source.ts</scope>
+	<description>fs/promises read and write</description>
+</snippet>

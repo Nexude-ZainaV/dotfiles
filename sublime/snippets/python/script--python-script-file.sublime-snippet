@@ -1,0 +1,38 @@
+<snippet>
+	<content><![CDATA["""${1:tool_name}: ${2:one line on what this script does}.
+
+Usage:
+	python ${1}.py ${3:input.csv}
+"""
+
+from __future__ import annotations
+
+import argparse
+import logging
+import sys
+from pathlib import Path
+
+log = logging.getLogger(__name__)
+
+
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+	parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+	parser.add_argument("path", type=Path, help="${4:file to process}")
+	parser.add_argument("-v", "--verbose", action="store_true")
+	return parser.parse_args(argv)
+
+
+def main(argv: list[str] | None = None) -> int:
+	args = parse_args(argv)
+	logging.basicConfig(level=logging.DEBUG if args.verbose else logging.INFO)
+	${0}
+	return 0
+
+
+# Only runs when executed directly, not when imported by tests or other modules
+if __name__ == "__main__":
+	sys.exit(main())]]></content>
+	<tabTrigger>script</tabTrigger>
+	<scope>source.python</scope>
+	<description>Python script file</description>
+</snippet>

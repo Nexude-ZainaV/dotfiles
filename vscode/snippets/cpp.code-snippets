@@ -1,0 +1,350 @@
+{
+  "Common includes": {
+    "scope": "cpp",
+    "prefix": "inc",
+    "body": [
+      "// ---- Standard library headers ----",
+      "#include <iostream>       // std::cout, std::cerr",
+      "#include <string>         // std::string",
+      "#include <vector>         // std::vector (dynamic array)",
+      "#include <unordered_map>  // hash map, average O(1) lookup",
+      "#include <memory>         // std::unique_ptr, std::make_unique",
+      "#include <algorithm>      // std::sort, std::find_if, std::transform",
+      "#include <stdexcept>      // std::runtime_error, std::invalid_argument",
+      "${0}"
+    ],
+    "description": "Common includes (guided)"
+  },
+  "main function": {
+    "scope": "cpp",
+    "prefix": "main",
+    "body": [
+      "// Entry point. Return 0 on success; exceptions escaping main terminate the program.",
+      "int main(int argc, char* argv[])",
+      "{",
+      "\ttry {",
+      "\t\t${0}",
+      "\t} catch (const std::exception& e) {",
+      "\t\tstd::cerr << \"error: \" << e.what() << '\\\\n';",
+      "\t\treturn 1;",
+      "\t}",
+      "\treturn 0;",
+      "}"
+    ],
+    "description": "main function (guided)"
+  },
+  "C++ program file": {
+    "scope": "cpp",
+    "prefix": "cppfile",
+    "body": [
+      "// ${1:main}.cpp",
+      "// Purpose: ${2:one line on what this program does}",
+      "// Build:   g++ -std=c++20 -Wall -Wextra -O2 -o ${1} ${1}.cpp",
+      "#include <iostream>",
+      "#include <string>",
+      "#include <vector>",
+      "",
+      "int main()",
+      "{",
+      "\t${0}",
+      "\treturn 0;",
+      "}"
+    ],
+    "description": "C++ program file (guided)",
+    "isFileTemplate": true
+  },
+  "Class header (.hpp)": {
+    "scope": "cpp",
+    "prefix": "classh",
+    "body": [
+      "// #pragma once: include guard supported by every major compiler",
+      "#pragma once",
+      "",
+      "#include <string>",
+      "",
+      "// ${1:Account}: ${2:what this type represents}",
+      "class ${1} {",
+      "public:",
+      "\texplicit ${1}(std::string ${3:name});   // explicit: no silent conversions from string",
+      "",
+      "\t// Accessors are const: they promise not to modify the object",
+      "\t[[nodiscard]] const std::string& ${3}() const noexcept { return ${3}_; }",
+      "",
+      "private:",
+      "\tstd::string ${3}_;   // trailing underscore marks a member variable",
+      "};",
+      "${0}"
+    ],
+    "description": "Class header (.hpp) (guided)",
+    "isFileTemplate": true
+  },
+  "if statement": {
+    "scope": "cpp",
+    "prefix": "if",
+    "body": [
+      "// if: run the block only when the condition is true",
+      "if (${1:condition}) {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "if statement (guided)"
+  },
+  "if / else": {
+    "scope": "cpp",
+    "prefix": "ife",
+    "body": [
+      "// if / else: exactly one of the two blocks runs",
+      "if (${1:condition}) {",
+      "\t${2}",
+      "} else {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "if / else (guided)"
+  },
+  "else-if chain": {
+    "scope": "cpp",
+    "prefix": "elif",
+    "body": [
+      "// else-if chain: evaluated top to bottom, first match wins",
+      "if (${1:value} < ${2:0}) {",
+      "\t${3}",
+      "} else if (${1} == ${4:0}) {",
+      "\t${5}",
+      "} else {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "else-if chain (guided)"
+  },
+  "Nested if / if-with-initializer": {
+    "scope": "cpp",
+    "prefix": "ifn",
+    "body": [
+      "// C++17 if-with-initializer keeps `it` scoped to the if/else only",
+      "if (auto it = ${1:map}.find(${2:key}); it != ${1}.end()) {",
+      "\tif (${3:it->second > 0}) {   // nested: only checked when the key exists",
+      "\t\t${0}",
+      "\t}",
+      "}"
+    ],
+    "description": "Nested if / if-with-initializer (guided)"
+  },
+  "Ternary operator": {
+    "scope": "cpp",
+    "prefix": "tern",
+    "body": [
+      "// ternary: condition ? if_true : if_false (both branches should be the same type)",
+      "auto ${1:result} = (${2:a > b}) ? ${3:a} : ${4:b};${0}"
+    ],
+    "description": "Ternary operator (guided)"
+  },
+  "switch statement": {
+    "scope": "cpp",
+    "prefix": "sw",
+    "body": [
+      "// switch on an integral or enum value. [[fallthrough]] documents intentional fall-through.",
+      "switch (${1:value}) {",
+      "\tcase ${2:1}:",
+      "\t\t${3}",
+      "\t\tbreak;",
+      "\tcase ${4:2}:",
+      "\t\t${5}",
+      "\t\tbreak;",
+      "\tdefault:",
+      "\t\t${0}",
+      "\t\tbreak;",
+      "}"
+    ],
+    "description": "switch statement (guided)"
+  },
+  "index for loop": {
+    "scope": "cpp",
+    "prefix": "for",
+    "body": [
+      "// Index loop: use when you need the position, otherwise prefer range-for",
+      "for (std::size_t ${1:i} = 0; ${1} < ${2:items}.size(); ++${1}) {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "index for loop (guided)"
+  },
+  "range-based for loop": {
+    "scope": "cpp",
+    "prefix": "forr",
+    "body": [
+      "// Range-for: const& avoids copying each element; drop const to modify in place",
+      "for (const auto& ${1:item} : ${2:items}) {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "range-based for loop (guided)"
+  },
+  "while loop": {
+    "scope": "cpp",
+    "prefix": "while",
+    "body": [
+      "// while: condition checked before each iteration (body may run zero times)",
+      "while (${1:condition}) {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "while loop (guided)"
+  },
+  "do-while loop": {
+    "scope": "cpp",
+    "prefix": "dowhile",
+    "body": [
+      "// do-while: body runs at least once",
+      "do {",
+      "\t${0}",
+      "} while (${1:condition});"
+    ],
+    "description": "do-while loop (guided)"
+  },
+  "try / catch": {
+    "scope": "cpp",
+    "prefix": "try",
+    "body": [
+      "// Catch by const reference; most specific exception types first",
+      "try {",
+      "\t${1}",
+      "} catch (const std::invalid_argument& e) {",
+      "\tstd::cerr << \"bad input: \" << e.what() << '\\\\n';",
+      "} catch (const std::exception& e) {",
+      "\tstd::cerr << \"error: \" << e.what() << '\\\\n';",
+      "}${0}"
+    ],
+    "description": "try / catch (guided)"
+  },
+  "class (rule of zero)": {
+    "scope": "cpp",
+    "prefix": "cls",
+    "body": [
+      "// Rule of zero: members manage their own resources, so no custom copy/move/dtor needed",
+      "class ${1:Name} {",
+      "public:",
+      "\t${1}() = default;",
+      "\texplicit ${1}(${2:int} ${3:value}) : ${3}_{${3}} {}",
+      "",
+      "\t[[nodiscard]] ${2} ${3}() const noexcept { return ${3}_; }",
+      "\tvoid set_${3}(${2} v) { ${3}_ = v; }",
+      "",
+      "private:",
+      "\t${2} ${3}_{};   // brace-init guarantees a value, never garbage",
+      "};${0}"
+    ],
+    "description": "class (rule of zero) (guided)"
+  },
+  "abstract interface": {
+    "scope": "cpp",
+    "prefix": "iface",
+    "body": [
+      "// Abstract base: pure virtual methods + virtual destructor for safe polymorphic delete",
+      "class ${1:Shape} {",
+      "public:",
+      "\tvirtual ~${1}() = default;",
+      "\t[[nodiscard]] virtual double ${2:area}() const = 0;",
+      "};",
+      "",
+      "class ${3:Circle} final : public ${1} {",
+      "public:",
+      "\texplicit ${3}(double r) : r_{r} {}",
+      "\t[[nodiscard]] double ${2}() const override { return 3.14159265358979 * r_ * r_; }",
+      "",
+      "private:",
+      "\tdouble r_;",
+      "};${0}"
+    ],
+    "description": "abstract interface (guided)"
+  },
+  "unique_ptr ownership": {
+    "scope": "cpp",
+    "prefix": "uptr",
+    "body": [
+      "// unique_ptr: single owner, freed automatically when it goes out of scope (RAII)",
+      "auto ${1:obj} = std::make_unique<${2:Type}>(${3});",
+      "${0}",
+      "// Transfer ownership with std::move(${1}); never call delete yourself"
+    ],
+    "description": "unique_ptr ownership (guided)"
+  },
+  "sort with lambda comparator": {
+    "scope": "cpp",
+    "prefix": "sort",
+    "body": [
+      "// std::sort with a lambda: return true when a should come before b",
+      "std::sort(${1:items}.begin(), ${1}.end(), [](const auto& a, const auto& b) {",
+      "\treturn a.${2:score} > b.${2};   // > sorts descending",
+      "});${0}"
+    ],
+    "description": "sort with lambda comparator (guided)"
+  },
+  "find_if": {
+    "scope": "cpp",
+    "prefix": "findif",
+    "body": [
+      "// find_if returns end() when nothing matches: always compare before dereferencing",
+      "auto it = std::find_if(${1:items}.begin(), ${1}.end(), [&](const auto& x) {",
+      "\treturn x.${2:id} == ${3:target};",
+      "});",
+      "if (it != ${1}.end()) {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "find_if (guided)"
+  },
+  "unordered_map usage": {
+    "scope": "cpp",
+    "prefix": "umap",
+    "body": [
+      "// unordered_map: hash map. operator[] inserts a default value if the key is missing.",
+      "std::unordered_map<${1:std::string}, ${2:int}> ${3:counts};",
+      "${3}[${4:key}]++;                       // insert-or-increment",
+      "if (auto it = ${3}.find(${4}); it != ${3}.end()) {   // lookup without inserting",
+      "\t${0}",
+      "}"
+    ],
+    "description": "unordered_map usage (guided)"
+  },
+  "lambda": {
+    "scope": "cpp",
+    "prefix": "lambda",
+    "body": [
+      "// [captures](params) -> return_type { body }. [&] captures by reference, [=] by copy.",
+      "auto ${1:fn} = [${2:&}](${3:int x}) {",
+      "\t${0}",
+      "};"
+    ],
+    "description": "lambda (guided)"
+  },
+  "chrono scoped timer": {
+    "scope": "cpp",
+    "prefix": "timer",
+    "body": [
+      "#include <chrono>",
+      "// steady_clock never jumps backwards, so it is the right clock for measuring durations",
+      "const auto ${1:start} = std::chrono::steady_clock::now();",
+      "",
+      "${0}",
+      "",
+      "const auto ${2:ms} = std::chrono::duration_cast<std::chrono::milliseconds>(",
+      "\tstd::chrono::steady_clock::now() - ${1}).count();",
+      "std::cout << \"elapsed: \" << ${2} << \" ms\\\\n\";"
+    ],
+    "description": "chrono scoped timer (guided)"
+  },
+  "function template": {
+    "scope": "cpp",
+    "prefix": "tmpl",
+    "body": [
+      "// Function template: the compiler generates one version per type used",
+      "template <typename T>",
+      "[[nodiscard]] T ${1:clamp_value}(T v, T lo, T hi)",
+      "{",
+      "\treturn v < lo ? lo : (hi < v ? hi : v);",
+      "}${0}"
+    ],
+    "description": "function template (guided)"
+  }
+}

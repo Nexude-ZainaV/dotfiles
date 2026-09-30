@@ -1,0 +1,18 @@
+<snippet>
+	<content><![CDATA[-- Migration: create ${1:orders}. Constraints in the schema are the last line of defence
+-- for data integrity: the database enforces them even if application code has a bug.
+CREATE TABLE ${1} (
+	id           INTEGER PRIMARY KEY,                 -- MySQL: INT AUTO_INCREMENT, Postgres: GENERATED ALWAYS AS IDENTITY
+	${2:customer_id}  INTEGER NOT NULL REFERENCES ${3:customers}(id) ON DELETE CASCADE,
+	${4:status}       VARCHAR(20) NOT NULL DEFAULT 'pending'
+				 CHECK (${4} IN ('pending', 'paid', 'shipped', 'cancelled')),
+	total        DECIMAL(10, 2) NOT NULL CHECK (total >= 0),   -- DECIMAL for money, never FLOAT
+	created_at   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Index the foreign key: joins and ON DELETE CASCADE both look rows up by it
+CREATE INDEX idx_${1}_${2} ON ${1} (${2});${0}]]></content>
+	<tabTrigger>ct</tabTrigger>
+	<scope>source.sql</scope>
+	<description>CREATE TABLE (migration)</description>
+</snippet>
