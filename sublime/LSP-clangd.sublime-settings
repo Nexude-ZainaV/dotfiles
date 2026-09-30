@@ -1,0 +1,4 @@
+{
+	// Download a matching clangd automatically if none is on PATH
+	"binary": "auto"
+}

@@ -1,0 +1,10 @@
+{
+	"_comment": "Package Control installs these on the next Sublime Text start.",
+	"packages": [
+		"LSP", "LSP-typescript", "LSP-eslint", "LSP-pyright", "LSP-intelephense",
+		"LSP-clangd", "LSP-OmniSharp", "LSP-json", "LSP-css", "LSP-html", "LSP-tailwindcss",
+		"Emmet", "JsPrettier", "Babel", "SQLTools", "EditorConfig", "DocBlockr",
+		"Terminus", "GitGutter", "A File Icon", "SideBarEnhancements", "BracketHighlighter",
+		"AutoFileName", "ColorHelper"
+	]
+}

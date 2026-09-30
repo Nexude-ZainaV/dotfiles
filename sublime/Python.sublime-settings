@@ -1,0 +1,5 @@
+{
+	// PEP 8: 4-space indents, 88-column limit (the Black / Ruff default)
+	"tab_size": 4,
+	"rulers": [88]
+}
