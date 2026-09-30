@@ -1,0 +1,116 @@
+{
+    // =====================================================================
+    // VS Code user settings. Merged into the real settings.json by
+    // scripts/install.py: keys you already have are never overwritten.
+    // Machine-specific paths (compiler, PHP) are filled in by the installer.
+    // =====================================================================
+
+    // ---- Editor ----
+    "editor.fontFamily": "'Cascadia Code', 'JetBrains Mono', Consolas, monospace",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 14,
+    "editor.tabSize": 2,
+    "editor.rulers": [80, 120],
+    "editor.renderWhitespace": "boundary",
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": "active",
+    "editor.stickyScroll.enabled": true,
+    "editor.linkedEditing": true,
+    "editor.smoothScrolling": true,
+    "editor.cursorSmoothCaretAnimation": "on",
+    "editor.minimap.renderCharacters": false,
+
+    // ---- Formatting and fixes on save ----
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+    },
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "files.autoSave": "onFocusChange",
+
+    // ---- Suggestions and snippets ----
+    "editor.inlineSuggest.enabled": true,
+    "editor.suggest.preview": true,
+    "editor.snippetSuggestions": "top",
+    "editor.tabCompletion": "on",
+    "editor.suggestSelection": "first",
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact",
+        "php": "html"
+    },
+    "emmet.triggerExpansionOnTab": true,
+
+    // ---- Workbench ----
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.editor.enablePreview": false,
+    "workbench.startupEditor": "none",
+    "explorer.confirmDragAndDrop": false,
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.patterns": {
+        "package.json": "package-lock.json, pnpm-lock.yaml, yarn.lock, .npmrc",
+        "tsconfig.json": "tsconfig.*.json",
+        "*.ts": "${capture}.test.ts, ${capture}.spec.ts",
+        "*.tsx": "${capture}.test.tsx, ${capture}.module.css"
+    },
+
+    // ---- Git ----
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    "git.enableSmartCommit": true,
+    "gitlens.codeLens.enabled": false,
+
+    // ---- JavaScript / TypeScript ----
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "typescript.preferences.importModuleSpecifier": "non-relative",
+    "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+    "[javascriptreact]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+    "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+    "[typescriptreact]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+    "[json]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+    "[jsonc]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+    "[html]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+    "[css]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+    "[scss]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+    "[markdown]": { "editor.defaultFormatter": "esbenp.prettier-vscode", "editor.wordWrap": "on" },
+    "[yaml]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+
+    // ---- Python ----
+    "[python]": {
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.tabSize": 4,
+        "editor.rulers": [88],
+        "editor.codeActionsOnSave": {
+            "source.fixAll.ruff": "explicit",
+            "source.organizeImports.ruff": "explicit"
+        }
+    },
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.autoImportCompletions": true,
+
+    // ---- C / C++ ----
+    "[c]": { "editor.defaultFormatter": "ms-vscode.cpptools", "editor.tabSize": 4 },
+    "[cpp]": { "editor.defaultFormatter": "ms-vscode.cpptools", "editor.tabSize": 4 },
+    "C_Cpp.default.cStandard": "c17",
+    "C_Cpp.default.cppStandard": "c++20",
+    "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 100 }",
+    "cmake.configureOnOpen": true,
+
+    // ---- C# ----
+    "[csharp]": { "editor.defaultFormatter": "ms-dotnettools.csharp", "editor.tabSize": 4 },
+
+    // ---- PHP ----
+    "[php]": { "editor.defaultFormatter": "bmewburn.vscode-intelephense-client", "editor.tabSize": 4 },
+    "intelephense.environment.phpVersion": "8.2.0",
+
+    // ---- SQL ----
+    "[sql]": { "editor.defaultFormatter": "mtxr.sqltools", "editor.tabSize": 4 },
+
+    // ---- Extensions ----
+    "errorLens.enabledDiagnosticLevels": ["error", "warning"],
+    "todo-tree.general.tags": ["TODO", "FIXME", "HACK", "NOTE", "BUG"],
+    "liveServer.settings.donotShowInfoMsg": true,
+    "cSpell.userWords": ["Nexude", "HuniWhisp", "KinStation", "Trovio", "Lopena"]
+}

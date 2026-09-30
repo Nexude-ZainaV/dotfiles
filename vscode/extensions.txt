@@ -1,0 +1,41 @@
+# VS Code extensions. Install all with: python scripts/install.py --extensions
+# ---- languages ----
+ms-vscode.cpptools-extension-pack
+ms-dotnettools.csdevkit
+ms-python.python
+ms-python.vscode-pylance
+charliermarsh.ruff
+bmewburn.vscode-intelephense-client
+xdebug.php-debug
+prisma.prisma
+redhat.vscode-yaml
+# ---- JavaScript / TypeScript / React / Next.js ----
+dbaeumer.vscode-eslint
+esbenp.prettier-vscode
+dsznajder.es7-react-js-snippets
+bradlc.vscode-tailwindcss
+yoavbls.pretty-ts-errors
+vitest.explorer
+formulahendry.auto-rename-tag
+christian-kohler.path-intellisense
+christian-kohler.npm-intellisense
+# ---- HTML / CSS / APIs / databases ----
+ritwickdey.liveserver
+ecmel.vscode-html-css
+humao.rest-client
+mikestead.dotenv
+mtxr.sqltools
+mtxr.sqltools-driver-sqlite
+mtxr.sqltools-driver-mysql
+mtxr.sqltools-driver-pg
+# ---- workflow ----
+eamodio.gitlens
+github.vscode-pull-request-github
+github.vscode-github-actions
+ms-azuretools.vscode-containers
+usernamehw.errorlens
+editorconfig.editorconfig
+streetsidesoftware.code-spell-checker
+gruntfuggly.todo-tree
+aaron-bond.better-comments
+pkief.material-icon-theme
