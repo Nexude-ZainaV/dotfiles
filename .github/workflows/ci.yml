@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  snippets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - name: Rebuild snippets (validates every placeholder)
+        run: python snippets/build.py
+      - name: Generated files must match their sources
+        run: git diff --exit-code -- vscode/snippets sublime/snippets
+      - name: Settings files are valid JSON(C)
+        run: |
+          python - <<'PY'
+          import json, pathlib, re, sys
+          sys.path.insert(0, "scripts")
+          from install import strip_jsonc
+          for path in [*pathlib.Path("vscode").glob("*.json"), *pathlib.Path("sublime").glob("*.sublime-settings"), pathlib.Path("sublime/packages.json")]:
+              json.loads(strip_jsonc(path.read_text(encoding="utf-8")))
+              print("ok", path)
+          PY
