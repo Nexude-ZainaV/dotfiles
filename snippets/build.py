@@ -121,11 +121,12 @@ def build() -> int:
                 f"\t<description>{title}</description>\n"
                 "</snippet>\n"
             )
-            (sub_dir / f"{slug(prefix)}--{slug(title)}.sublime-snippet").write_text(xml, encoding="utf-8")
+            # newline="\n": identical bytes on every OS, so CI can diff the generated files.
+            (sub_dir / f"{slug(prefix)}--{slug(title)}.sublime-snippet").write_text(xml, encoding="utf-8", newline="\n")
             total += 1
 
         (VSCODE_OUT / f"{fam['key']}.code-snippets").write_text(
-            json.dumps(vscode, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+            json.dumps(vscode, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n"
         )
         print(f"  {fam['key']:<8} {len(mod.SNIPPETS):>3} snippets")
     print(f"built {total} snippets")
