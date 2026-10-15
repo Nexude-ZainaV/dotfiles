@@ -1,14 +1,12 @@
 """Apply these dotfiles to the current machine (Windows, macOS, Linux).
 
-What it does, in order:
-  1. Rebuilds the snippets from snippets/src.
-  2. VS Code: merges vscode/settings.json into your user settings (your existing
-     keys always win), fills in machine paths (C/C++ compiler, PHP) and copies
-     the snippets in as guided-<language>.code-snippets.
-  3. Sublime Text: merges preferences, adds packages for Package Control to
-     install on next start, un-sticks Package Control if an interrupted upgrade
-     left it disabled, and copies the snippets into Packages/User.
-Every file it changes is backed up next to itself first (*.bak-<timestamp>).
+Rebuilds the snippets, then for each editor it finds:
+  VS Code   merge settings (your existing keys win), fill in the compiler and
+            PHP paths, copy snippets in as guided-<language>.code-snippets.
+  Sublime   merge preferences, queue packages for Package Control, re-enable
+            Package Control if an interrupted upgrade left it disabled, copy
+            snippets into Packages/User.
+Every file it changes gets a *.bak-<timestamp> copy first.
 
 Usage:
     python scripts/install.py                # settings + snippets
@@ -29,11 +27,14 @@ from datetime import datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-STAMP = datetime.now().strftime("%Y%m%d-%H%M%S")
-sys.path.insert(0, str(ROOT / "snippets"))
+STAMP = datetime.now().strftime("%Y%m%d-%H%M%S")   # one stamp per run, shared by every backup
+sys.path.insert(0, str(ROOT / "snippets"))          # so main() can import build.py
 
 
 # ---------------------------------------------------------------- JSONC ----
+# VS Code and Sublime both allow comments and trailing commas in their settings,
+# which json.loads rejects. A small scanner is enough; it skips string contents
+# so a "//" inside a URL is left alone.
 def strip_jsonc(text: str) -> str:
     """Remove // and /* */ comments (outside strings) and trailing commas."""
     out, i, n = [], 0, len(text)
@@ -65,6 +66,7 @@ def strip_jsonc(text: str) -> str:
     return re.sub(r",(\s*[}\]])", r"\1", "".join(out))
 
 
+# Missing or blank settings files count as empty, which is what a fresh editor install has.
 def load_jsonc(path: Path) -> dict:
     if not path.exists() or not path.read_text(encoding="utf-8").strip():
         return {}
@@ -82,12 +84,14 @@ def merge_user_wins(user: dict, curated: dict) -> dict:
     return merged
 
 
+# Copy next to the original (settings.json.bak-20260101-120000) so undoing is a rename.
 def backup(path: Path) -> None:
     if path.exists():
         shutil.copy2(path, path.with_name(f"{path.name}.bak-{STAMP}"))
 
 
 # -------------------------------------------------------------- paths ----
+# Default per-user config folders on each OS.
 def vscode_user_dir() -> Path:
     system = platform.system()
     if system == "Windows":
@@ -106,6 +110,7 @@ def sublime_user_dir() -> Path:
     return Path.home() / ".config" / "sublime-text" / "Packages" / "User"
 
 
+# Used for C_Cpp.default.compilerPath, so IntelliSense finds the right headers.
 def find_compiler() -> str | None:
     found = shutil.which("g++") or shutil.which("clang++")
     if found:
@@ -117,6 +122,7 @@ def find_compiler() -> str | None:
     return None
 
 
+# PATH first, then the default XAMPP location on Windows.
 def find_php() -> str | None:
     found = shutil.which("php")
     if found:
@@ -144,6 +150,8 @@ def install_vscode(with_extensions: bool) -> None:
     settings_path.write_text(json.dumps(merged, indent=4) + "\n", encoding="utf-8")
     print(f"VS Code: merged {len(curated)} settings (compiler={compiler}, php={php})")
 
+    # Clear our previous guided-* files first so a snippet file removed here
+    # doesn't linger in the editor. The user's own snippet files are untouched.
     snip_dir = user_dir / "snippets"
     snip_dir.mkdir(exist_ok=True)
     for old in snip_dir.glob("guided-*.code-snippets"):
@@ -167,6 +175,8 @@ def install_vscode(with_extensions: bool) -> None:
 
 
 # -------------------------------------------------------- Sublime Text ----
+# Writes tab-indented JSON like Sublime does. json.dumps drops comments, so the
+# user's commented-out lines are appended at the end of the object instead of lost.
 def _write_sublime(path: Path, data: dict, preserved_comments: list[str] | None = None) -> None:
     body = json.dumps(data, indent="\t")
     if preserved_comments:
@@ -212,7 +222,7 @@ def install_sublime() -> None:
     _write_sublime(pc_path, pc)
     print(f"Sublime Text: {len(wanted)} packages queued (installed on next start)")
 
-    # Snippets
+    # Snippets: our own folder, replaced whole so removed snippets go away too
     dest = user_dir / "Guided Snippets"
     if dest.exists():
         shutil.rmtree(dest)
@@ -225,7 +235,7 @@ def main() -> int:
     parser.add_argument("--extensions", action="store_true", help="also install VS Code extensions")
     args = parser.parse_args()
 
-    import build   # snippets/build.py
+    import build   # snippets/build.py, importable via the sys.path line at the top
 
     build.build()
     install_vscode(args.extensions)

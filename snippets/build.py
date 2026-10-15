@@ -1,8 +1,7 @@
 """Generate VS Code and Sublime Text snippets from one source of truth.
 
-Why one source: the same guided snippet (an if/else, a fetch call, a
-responsive media-query set) should behave identically in both editors, and
-maintaining two hand-written copies drifts within a week.
+One source because the same snippet should behave the same in both editors,
+and two hand-maintained copies drift apart quickly.
 
 Authoring notation (escape-free, so code reads like code):
     «1:name»   tab stop 1 with default text "name"
@@ -32,7 +31,9 @@ SRC = Path(__file__).resolve().parent / "src"
 VSCODE_OUT = ROOT / "vscode" / "snippets"
 SUBLIME_OUT = ROOT / "sublime" / "snippets"
 
+# «n» or «n:default text»; a default can't span lines or contain ».
 TOKEN = re.compile(r"«(\d+)(?::([^»\n]*))?»")
+# Leading indentation in whole groups of 4 spaces.
 INDENT = re.compile(r"^((?:    )+)")
 
 
@@ -63,6 +64,7 @@ def to_snippet_syntax(body: str) -> str:
     return "\n".join(lines)
 
 
+# Each snippets/src/<lang>.py is a plain module with FAMILY (ids and scopes) and SNIPPETS.
 def load_families() -> list:
     families = []
     for path in sorted(SRC.glob("*.py")):
@@ -73,11 +75,13 @@ def load_families() -> list:
     return families
 
 
+# File-name-safe form of a prefix or title, used for the .sublime-snippet names.
 def slug(text: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")
 
 
 def build() -> int:
+    # Output folders are fully generated: wipe them so renamed snippets leave no stale files.
     for out in (VSCODE_OUT, SUBLIME_OUT):
         if out.exists():
             shutil.rmtree(out)
@@ -98,6 +102,7 @@ def build() -> int:
             seen_titles.add(title)
             body = body.strip("\n")
             converted = to_snippet_syntax(body)
+            # Fail the build on a body that would give a broken snippet in either editor.
             if "«" in converted or "»" in converted:
                 raise ValueError(f"{fam['key']}/{prefix}: unclosed «tab stop» in {title!r}")
             if "]]>" in converted:
@@ -113,6 +118,8 @@ def build() -> int:
                 item["isFileTemplate"] = True
             vscode[title] = item
 
+            # Sublime: one XML file per snippet. CDATA keeps < and & in code literal,
+            # which is why "]]>" is rejected above.
             xml = (
                 "<snippet>\n"
                 f"\t<content><![CDATA[{converted}]]></content>\n"
